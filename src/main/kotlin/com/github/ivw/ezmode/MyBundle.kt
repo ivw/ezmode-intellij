@@ -1,4 +1,4 @@
-package com.github.ivw.ezmodeintellij
+package com.github.ivw.ezmode
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
