@@ -9,7 +9,7 @@ object Mode {
   const val TYPE = "type"
   const val EZ = "ez"
   const val SELECT = "select"
-  const val VCS = "vcs"
+  // This is not an exhaustive list.
 }
 
 class EzModeEditorData(
@@ -30,6 +30,7 @@ fun Editor.setMode(mode: String) {
       leadSelectionOffset = selectionModel.leadSelectionOffset
     )
   )
+  updateEditorColors(mode)
   modeChangedFlow.tryEmit(Unit)
 }
 
