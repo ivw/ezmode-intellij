@@ -4,10 +4,9 @@ import com.intellij.*
 import org.jetbrains.annotations.*
 
 @NonNls
-private const val BUNDLE = "messages.MyBundle"
+private const val BUNDLE = "messages.EzModeBundle"
 
-object MyBundle : DynamicBundle(BUNDLE) {
-
+object EzModeBundle : DynamicBundle(BUNDLE) {
   @JvmStatic
   fun message(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg params: Any) =
     getMessage(key, *params)

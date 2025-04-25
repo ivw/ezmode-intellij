@@ -9,7 +9,7 @@
 
   <depends>com.intellij.modules.platform</depends>
 
-  <resource-bundle>messages.MyBundle</resource-bundle>
+  <resource-bundle>messages.EzModeBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
     <postStartupActivity implementation="com.github.ivw.ezmode.EzModeStartupActivity"/>
@@ -21,19 +21,19 @@
   </extensions>
 
   <actions>
-    <action id="ezmode.EnterEzMode" text="Enter Ez Mode"
+    <action id="ezmode.EnterEzMode"
             class="com.github.ivw.ezmode.actions.EnterEzModeAction">
       <keyboard-shortcut keymap="$default" first-keystroke="shift SPACE"/>
     </action>
     <action id="ezmode.DeleteSelection"
-            class="com.github.ivw.ezmode.actions.DeleteSelectionAction" text="Delete Selection"/>
-    <action id="ezmode.Unselect" text="Unselect"
+            class="com.github.ivw.ezmode.actions.DeleteSelectionAction"/>
+    <action id="ezmode.Unselect"
             class="com.github.ivw.ezmode.actions.UnselectAction"/>
-    <action id="ezmode.InsideTextObject" text="Select Inside Text Object"
+    <action id="ezmode.InsideTextObject"
             class="com.github.ivw.ezmode.actions.InsideTextObjectAction"/>
-    <action id="ezmode.AroundTextObject" text="Select Around Text Object"
+    <action id="ezmode.AroundTextObject"
             class="com.github.ivw.ezmode.actions.AroundTextObjectAction"/>
-    <action id="ezmode.DeleteDelimsTextObject" text="Delete Delimiters Around Text Object"
+    <action id="ezmode.DeleteDelimsTextObject"
             class="com.github.ivw.ezmode.actions.DeleteDelimsTextObjectAction"/>
   </actions>
 </idea-plugin>

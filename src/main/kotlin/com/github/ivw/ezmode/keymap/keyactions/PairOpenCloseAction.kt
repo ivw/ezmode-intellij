@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.keymap.keyactions
 
+import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.keymap.*
 
 /**
@@ -24,6 +25,8 @@ data class PairOpenCloseAction(
     }
   }
 
-  override fun toNiceString(): String =
-    "Move caret to ${if (isTargetOpen) pair.openChar else pair.closeChar}"
+  override fun toNiceString() = EzModeBundle.message(
+    "ezmode.PairOpenCloseAction",
+    if (isTargetOpen) pair.openChar else pair.closeChar
+  )
 }

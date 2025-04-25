@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.widget
 
+import com.github.ivw.ezmode.EzModeBundle
 import com.intellij.openapi.util.*
 import com.intellij.openapi.wm.*
 import kotlinx.coroutines.*
@@ -10,7 +11,7 @@ class ModeStatusBarWidgetFactory : StatusBarWidgetFactory, WidgetPresentationFac
   override fun getId(): @NonNls String = ID
 
   override fun getDisplayName(): @NlsContexts.ConfigurableName String =
-    "Ezmode Active Mode"
+    EzModeBundle.message("ezmode.ModeStatusBarWidget.name")
 
   override fun createPresentation(context: WidgetPresentationDataContext, scope: CoroutineScope) =
     ModeStatusBarWidget(context)

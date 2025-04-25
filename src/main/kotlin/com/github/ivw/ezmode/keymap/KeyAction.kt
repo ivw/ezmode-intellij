@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.keymap
 
+import com.github.ivw.ezmode.EzModeBundle
 import com.github.ivw.ezmode.editor.*
 
 abstract class KeyAction {
@@ -12,7 +13,7 @@ abstract class KeyAction {
       e.nativeHandler.execute(e.editor, e.char, e.dataContext)
     }
 
-    override fun toNiceString(): String = "Native"
+    override fun toNiceString() = EzModeBundle.message("ezmode.KeyAction.Native")
   }
 
   data class NativeOf(val keyChar: Char) : KeyAction() {
@@ -20,7 +21,7 @@ abstract class KeyAction {
       e.nativeHandler.execute(e.editor, keyChar, e.dataContext)
     }
 
-    override fun toNiceString(): String = "Native $keyChar"
+    override fun toNiceString() = EzModeBundle.message("ezmode.KeyAction.NativeOf", keyChar)
   }
 
   data class Composite(val actions: List<KeyAction>) : KeyAction() {
@@ -38,7 +39,7 @@ abstract class KeyAction {
       e.editor.setMode(mode)
     }
 
-    override fun toNiceString(): String = "Change mode to $mode"
+    override fun toNiceString() = EzModeBundle.message("ezmode.KeyAction.ChangeMode", mode)
   }
 
   data class OfMode(val mode: String) : KeyAction() {
@@ -46,7 +47,7 @@ abstract class KeyAction {
       e.keyMap.perform(mode, e.char, e.dataContext, e.editor, e.nativeHandler)
     }
 
-    override fun toNiceString(): String = "Action of mode $mode"
+    override fun toNiceString(): String = EzModeBundle.message("ezmode.KeyAction.OfMode", mode)
   }
 
   data object Nop : KeyAction() {
@@ -54,6 +55,6 @@ abstract class KeyAction {
       // Does nothing.
     }
 
-    override fun toNiceString(): String = "Do nothing"
+    override fun toNiceString(): String = EzModeBundle.message("ezmode.KeyAction.Nop")
   }
 }

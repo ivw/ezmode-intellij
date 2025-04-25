@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.keymap.keyactions
 
+import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.keymap.*
 import com.intellij.openapi.command.*
 
@@ -18,5 +19,5 @@ data class InsertStringAction(val text: String) : KeyAction() {
     }
   }
 
-  override fun toNiceString(): String = "Type $text"
+  override fun toNiceString(): String = EzModeBundle.message("ezmode.InsertStringAction", text)
 }

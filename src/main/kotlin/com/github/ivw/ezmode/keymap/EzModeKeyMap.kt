@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.keymap
 
+import com.github.ivw.ezmode.*
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
@@ -44,7 +45,7 @@ fun EzModeKeyMap.perform(
 
 fun EzModeKeyMap.toNiceString(mode: String) =
   values.filter { it.mode == mode }.joinToString(separator = "\n") { keyBinding ->
-    "${keyBinding.keyChar ?: "Default"}: ${keyBinding.action.toNiceString()}"
+    "${keyBinding.keyChar ?: EzModeBundle.message("ezmode.EzModeKeyMap.defaultKey")}: ${keyBinding.action.toNiceString()}"
   }
 
 data class KeyBinding(
