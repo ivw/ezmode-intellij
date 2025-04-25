@@ -1,0 +1,120 @@
+map type <default> <native>
+
+map ez ` <native>
+map ez 1 <idea SelectInProjectView>
+map ez 2 <idea ActivateCommitToolWindow>
+map ez 3 <idea ActivateTerminalToolWindow>
+map ez 4 <idea HideAllWindows>
+map ez 8 <idea GotoDeclaration>
+map ez 9 <idea UnselectPreviousOccurrence>
+map ez ( <pair open ()>
+map ez 0 <idea SelectNextOccurrence>
+map ez ) <pair close ()>
+map ez - <idea ezmode.InsideTextObject>
+map ez = <idea ezmode.AroundTextObject>
+map ez _ <idea ezmode.DeleteDelimsTextObject>
+
+map ez q <idea NextSplitter>
+map ez Q <idea Unsplit>
+map ez w <idea CloseContent>
+map ez W <idea CloseAllEditorsButActive>
+map ez e <mode select>
+map ez E <idea EditorUnSelectWord>
+map ez r <idea Replace>
+map ez R <idea ReplaceInPath>
+map ez t <idea ezmode.DeleteSelection><mode type>
+map ez y <idea $Redo>
+map ez u <idea EditorPreviousWord>
+map ez U <idea EditorDeleteToWordStart>
+map ez i <idea EditorUp>
+map ez I <idea EditorPageUp>
+map ez o <idea EditorNextWord>
+map ez O <idea EditorDeleteToWordEnd>
+map ez p <idea SearchEverywhere>
+map ez P <idea GotoAction>
+map ez [ <pair open []>
+map ez { <pair open {}>
+map ez ] <pair close []>
+map ez } <pair close {}>
+map ez \ <idea MoveTabRight>
+map ez | <idea SplitVertically>
+
+map ez a <idea $SelectAll>
+map ez A <idea EditorSelectLine>
+map ez s <idea SaveAll>
+map ez d <idea $Delete>
+map ez D <idea EditorBackSpace>
+map ez f <idea Find>
+map ez F <idea FindInPath>
+map ez g <mode git>
+map ez h <idea EditorLineStart>
+map ez H <idea EditorTextStart>
+map ez j <idea EditorLeft>
+map ez J <idea Back>
+map ez k <idea EditorDown>
+map ez K <idea EditorPageDown>
+map ez l <idea EditorRight>
+map ez L <idea Forward>
+map ez ; <idea EditorLineEnd>
+map ez : <idea EditorTextEnd>
+map ez ' <native>
+map ez " <native>
+
+map ez z <idea $Undo>
+map ez x <idea $Cut>
+map ez c <idea $Copy><idea ezmode.Unselect>
+map ez v <idea $Paste>
+map ez b <idea EditorJoinLines>
+# map ez B <idea EditorJoinLinesBefore>
+map ez n <idea EditorStartNewLine>
+map ez N <idea EditorStartNewLineBefore>
+map ez m <idea EditorDeleteLine>
+# map ez M <idea EditorBackspaceLine>
+map ez , <idea ShowSettings>
+map ez . <idea CodeCompletion>
+map ez > <idea ParameterInfo>
+map ez / <idea CommentByLineComment>
+
+# TODO: space
+
+map select <default> <ofmode ez>
+
+map select ` <native><mode ez>
+map select ( <native><mode ez>
+map select ) <native><mode ez>
+map select - <idea ezmode.InsideTextObject>
+map select = <idea ezmode.AroundTextObject>
+map select _ <idea ezmode.DeleteDelimsTextObject>
+
+map select e <idea EditorSelectWord>
+map select u <idea EditorPreviousWordWithSelection>
+map select U <ofmode ez><mode ez>
+map select i <idea EditorUpWithSelection>
+map select I <idea EditorPageUpWithSelection>
+map select o <idea EditorNextWordWithSelection>
+map select O <ofmode ez><mode ez>
+map select [ <native><mode ez>
+map select { <native><mode ez>
+map select ] <native><mode ez>
+map select } <native><mode ez>
+
+map select d <ofmode ez><mode ez>
+map select D <ofmode ez><mode ez>
+map select h <idea EditorLineStartWithSelection>
+map select H <idea EditorTextStartWithSelection>
+map select j <idea EditorLeftWithSelection>
+map select k <idea EditorDownWithSelection>
+map select K <idea EditorPageDownWithSelection>
+map select l <idea EditorRightWithSelection>
+map select ; <idea EditorLineEndWithSelection>
+map select : <idea EditorTextEndWithSelection>
+map select ' <native><mode ez>
+map select " <native><mode ez>
+
+map select x <ofmode ez><mode ez>
+map select c <ofmode ez><mode ez>
+map select v <ofmode ez><mode ez>
+map select m <ofmode ez><mode ez>
+map select M <ofmode ez><mode ez>
+map select < <native><mode ez>
+map select > <native><mode ez>
