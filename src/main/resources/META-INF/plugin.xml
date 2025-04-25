@@ -13,6 +13,11 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <postStartupActivity implementation="com.github.ivw.ezmode.EzModeStartupActivity"/>
+
+    <statusBarWidgetFactory implementation="com.github.ivw.ezmode.widget.ModeStatusBarWidgetFactory"
+                            id="ezmode.ModeStatusBarWidget"
+                            order="before Position"
+    />
   </extensions>
 
   <actions>
