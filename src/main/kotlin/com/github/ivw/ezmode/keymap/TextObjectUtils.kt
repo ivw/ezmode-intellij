@@ -53,7 +53,9 @@ data class DelimPair(
 fun findQuoteLeft(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? {
   for (i in caretOffset - 2 downTo 0) {
     val char = chars[i]
-    if (char == quoteChar) return i + 1
+    if (char == quoteChar && !isCharEscaped(chars, i)) {
+      return i + 1
+    }
   }
   return null
 }
@@ -61,10 +63,15 @@ fun findQuoteLeft(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? 
 fun findQuoteRight(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? {
   for (i in caretOffset + 1 until chars.length) {
     val char = chars[i]
-    if (char == quoteChar) return i
+    if (char == quoteChar && !isCharEscaped(chars, i)) {
+      return i
+    }
   }
   return null
 }
+
+fun isCharEscaped(chars: CharSequence, offset: Int) =
+  offset > 0 && chars[offset - 1] == '\\'
 
 fun findQuoteAuto(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? =
   if (caretOffset > 1 && chars[caretOffset - 1] != quoteChar) {
