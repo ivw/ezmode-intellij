@@ -131,6 +131,11 @@ object EzModeRcParser {
         PairOpenCloseAction(isTargetOpen, DelimPair(pairChars[0], pairChars[1]))
       }
 
+      "quote" -> {
+        val quoteChar = scanner.next().single()
+        QuoteAction(quoteChar)
+      }
+
       else -> {
         throw LineParseError("unknown action keyword: $keyword")
       }

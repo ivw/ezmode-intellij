@@ -1,7 +1,7 @@
 map type <default> <native>
 
 
-map ez ` <native>
+map ez ` <quote `>
 map ez 1 <idea SelectInProjectView>
 map ez 2 <idea ActivateCommitToolWindow>
 map ez 3 <idea ActivateTerminalToolWindow>
@@ -58,8 +58,8 @@ map ez l <idea EditorRight>
 map ez L <idea Forward>
 map ez ; <idea EditorLineEnd>
 map ez : <idea EditorTextEnd>
-map ez ' <native>
-map ez " <native>
+map ez ' <quote '>
+map ez " <quote ">
 
 map ez z <idea $Undo>
 map ez x <idea $Cut>

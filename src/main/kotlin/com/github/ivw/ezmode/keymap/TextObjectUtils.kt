@@ -50,12 +50,37 @@ data class DelimPair(
   }
 }
 
+fun findQuoteLeft(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? {
+  for (i in caretOffset - 2 downTo 0) {
+    val char = chars[i]
+    if (char == quoteChar) return i + 1
+  }
+  return null
+}
+
+fun findQuoteRight(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? {
+  for (i in caretOffset + 1 until chars.length) {
+    val char = chars[i]
+    if (char == quoteChar) return i
+  }
+  return null
+}
+
+fun findQuoteAuto(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? =
+  if (caretOffset > 1 && chars[caretOffset - 1] != quoteChar) {
+    findQuoteLeft(chars, caretOffset, quoteChar)
+  } else {
+    findQuoteRight(chars, caretOffset, quoteChar)
+  }
+
 val delimPairs: List<DelimPair> = listOf(
   DelimPair('(', ')'),
   DelimPair('{', '}'),
   DelimPair('[', ']'),
   DelimPair('<', '>'),
 )
+
+val quoteChars: List<Char> = listOf('"', '\'', '`')
 
 val Char.isWordChar get() = isLetterOrDigit() || this == '_'
 
@@ -88,22 +113,26 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   val chars = caret.editor.document.charsSequence
   if (caret.selectionStart > 0) {
     val charLeft = chars[caret.selectionStart - 1]
-    delimPairs.firstOrNull { it.openChar == charLeft }?.let { pair ->
-      pair.findClosingDelim(chars, caret.offset)
-        ?.let { delim ->
-          selectTextObject(caret.selectionStart, delim, caret, around, deleteDelims)
-          return@selectTextObject
-        }
+    val rightDelimOffset: Int? = delimPairs.firstOrNull { it.openChar == charLeft }
+      ?.findClosingDelim(chars, caret.offset)
+      ?: quoteChars.firstOrNull { it == charLeft }?.let {
+        findQuoteRight(chars, caret.offset, it)
+      }
+    if (rightDelimOffset != null) {
+      selectTextObject(caret.selectionStart, rightDelimOffset, caret, around, deleteDelims)
+      return
     }
   }
   if (caret.selectionEnd < chars.length) {
     val charRight = chars[caret.selectionEnd]
-    delimPairs.firstOrNull { it.closeChar == charRight }?.let { pair ->
-      pair.findOpeningDelim(chars, caret.offset)
-        ?.let { delim ->
-          selectTextObject(delim, caret.selectionEnd, caret, around, deleteDelims)
-          return@selectTextObject
-        }
+    val leftDelimOffset: Int? = delimPairs.firstOrNull { it.openChar == charRight }
+      ?.findOpeningDelim(chars, caret.offset)
+      ?: quoteChars.firstOrNull { it == charRight }?.let {
+        findQuoteLeft(chars, caret.offset, it)
+      }
+    if (leftDelimOffset != null) {
+      selectTextObject(leftDelimOffset, caret.selectionEnd, caret, around, deleteDelims)
+      return
     }
   }
   selectWord(caret, chars, around)
