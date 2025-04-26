@@ -66,11 +66,11 @@ map ez x <idea $Cut>
 map ez c <idea $Copy><idea ezmode.Unselect>
 map ez v <idea $Paste>
 map ez b <idea EditorJoinLines>
-# map ez B <idea EditorJoinLinesBefore>
+map ez B <idea EditorUp><idea EditorJoinLines>
 map ez n <idea EditorStartNewLine>
 map ez N <idea EditorStartNewLineBefore>
 map ez m <idea EditorDeleteLine>
-# map ez M <idea EditorBackspaceLine>
+map ez M <idea EditorDeleteLine><idea EditorUp>
 map ez , <idea ShowSettings>
 map ez . <idea CodeCompletion>
 map ez > <idea ParameterInfo>
@@ -84,9 +84,6 @@ map select <default> <ofmode ez>
 map select ` <native><mode ez>
 map select ( <native><mode ez>
 map select ) <native><mode ez>
-map select - <idea ezmode.InsideTextObject>
-map select = <idea ezmode.AroundTextObject>
-map select _ <idea ezmode.DeleteDelimsTextObject>
 
 map select e <idea EditorSelectWord>
 map select u <idea EditorPreviousWordWithSelection>
