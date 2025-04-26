@@ -2,8 +2,8 @@ package com.github.ivw.ezmode.editor
 
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.util.*
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.flow.*
 
 object Mode {
   const val TYPE = "type"
@@ -14,6 +14,10 @@ object Mode {
 
 class EzModeEditorData(
   val mode: String,
+
+  /**
+   * Used in select mode to track where the selection started.
+   */
   val leadSelectionOffset: Int,
 )
 
@@ -24,15 +28,21 @@ fun Editor.getEzModeData(): EzModeEditorData? = getUserData(EZMODE_KEY)
 fun Editor.getMode(): String = getEzModeData()?.mode ?: Mode.TYPE
 
 fun Editor.setMode(mode: String) {
+  val modeBasedOnSelection = if (mode == Mode.EZ && selectionModel.hasSelection()) {
+    Mode.SELECT
+  } else mode
   putUserData(
     EZMODE_KEY, EzModeEditorData(
-      mode = mode,
+      mode = modeBasedOnSelection,
       leadSelectionOffset = selectionModel.leadSelectionOffset
     )
   )
-  updateEditorColors(mode)
+  updateEditorColors(modeBasedOnSelection)
   modeChangedFlow.tryEmit(Unit)
 }
 
+/**
+ * Emits whenever the mode changes.
+ */
 val modeChangedFlow = MutableSharedFlow<Unit>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
   .also { it.tryEmit(Unit) }

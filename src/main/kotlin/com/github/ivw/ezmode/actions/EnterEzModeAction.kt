@@ -8,11 +8,7 @@ import com.intellij.openapi.editor.actionSystem.*
 class EnterEzModeAction : EditorAction(Handler()) {
   class Handler : EditorActionHandler() {
     override fun doExecute(editor: Editor, caret: Caret?, dataContext: DataContext?) {
-      if (editor.selectionModel.hasSelection()) {
-        editor.setMode(Mode.SELECT)
-      } else {
-        editor.setMode(Mode.EZ)
-      }
+      editor.setMode(Mode.EZ)
     }
   }
 }
