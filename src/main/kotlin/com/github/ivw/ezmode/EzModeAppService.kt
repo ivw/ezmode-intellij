@@ -34,16 +34,8 @@ class EzModeAppService : Disposable {
     TypedAction.getInstance().ensureEzModeUnloaded()
   }
 
-  fun loadKeymap(): MutableEzModeKeyMap {
-    LOG.info("Loading keymap")
-
-    val keyMap = MutableEzModeKeyMap()
-    EzModeRcFileUtils.readResourceRcFile().let { lines ->
-      EzModeRcParser.parse(keyMap, lines, null)
-    }
-    this.keyMap = keyMap
-    return keyMap
-  }
+  fun loadKeymap(): MutableEzModeKeyMap =
+    EzModeRcFileUtils.getKeyMap().also { keyMap = it }
 
   fun getKeyMap(): MutableEzModeKeyMap = keyMap ?: loadKeymap()
 

@@ -29,6 +29,8 @@ fun MutableEzModeKeyMap.addBinding(binding: KeyBinding) {
   put(getHashKey(binding.mode, binding.keyChar), binding)
 }
 
+fun MutableEzModeKeyMap.copy() = MutableEzModeKeyMap(this)
+
 fun EzModeKeyMap.perform(
   mode: String,
   char: Char,
