@@ -1,5 +1,8 @@
 package com.github.ivw.ezmode.keymap
 
+import com.github.ivw.ezmode.*
+import com.github.ivw.ezmode.notificiation.*
+import com.intellij.notification.*
 import com.intellij.openapi.diagnostic.*
 import java.io.*
 
@@ -30,6 +33,15 @@ object EzModeRcFileUtils {
         EzModeRcParser.parse(dest, file.bufferedReader().readLines(), dest.copy())
       } catch (e: Throwable) {
         LOG.info(e)
+        val title = EzModeBundle.message("notificationGroup.ezmode.parser.failed.title", fileName)
+        val content: String = if (e is EzModeRcParser.ParseError) {
+          e.toNiceString()
+        } else {
+          e.message ?: e.javaClass.name
+        }
+        EzModeNotificationGroups.parser?.createNotification(
+          title, content, NotificationType.WARNING
+        )?.notify(null)
       }
     }
   }

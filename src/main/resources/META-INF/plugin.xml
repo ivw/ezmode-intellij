@@ -18,6 +18,10 @@
                             id="ezmode.ModeStatusBarWidget"
                             order="before Position"
     />
+
+    <notificationGroup id="ezmode.parser"
+                       displayType="STICKY_BALLOON"
+                       key="notificationGroup.ezmode.parser"/>
   </extensions>
 
   <actions>

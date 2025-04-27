@@ -1,12 +1,20 @@
 package com.github.ivw.ezmode.keymap
 
+import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.keymap.keyactions.*
 import java.util.*
 
 object EzModeRcParser {
-  class ParseError(val lineIndex: Int, cause: Throwable) : RuntimeException(
-    "line ${lineIndex + 1}", cause
-  )
+  class ParseError(val lineIndex: Int, val c: Throwable) : RuntimeException(
+    "line ${lineIndex + 1}: ${c.message ?: c.javaClass.name}", c
+  ) {
+    fun toNiceString(): String =
+      EzModeBundle.message(
+        "ezmode.ParseError.message",
+        lineIndex + 1,
+        c.message ?: c.javaClass.name
+      )
+  }
 
   class LineParseError(message: String) : RuntimeException(message)
 
