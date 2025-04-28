@@ -1,5 +1,4 @@
-package com.github.ivw.ezmode.notificiation
-// TODO fix package name
+package com.github.ivw.ezmode.notification
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.actions.*

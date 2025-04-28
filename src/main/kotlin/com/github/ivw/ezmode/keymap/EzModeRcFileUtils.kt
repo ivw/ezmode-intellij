@@ -1,6 +1,6 @@
 package com.github.ivw.ezmode.keymap
 
-import com.github.ivw.ezmode.notificiation.*
+import com.github.ivw.ezmode.notification.*
 import com.intellij.openapi.diagnostic.*
 import java.io.*
 
