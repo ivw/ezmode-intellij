@@ -1,6 +1,8 @@
 package com.github.ivw.ezmode.notificiation
+// TODO fix package name
 
 import com.github.ivw.ezmode.*
+import com.github.ivw.ezmode.actions.*
 import com.github.ivw.ezmode.keymap.*
 import com.intellij.notification.*
 import java.io.*
@@ -20,6 +22,8 @@ object ParserNotifications {
     }
     group.createNotification(
       title, content, NotificationType.WARNING
-    ).notify(null)
+    ).also {
+      it.addAction(OpenEzModeRcAction(file))
+    }.notify(null)
   }
 }

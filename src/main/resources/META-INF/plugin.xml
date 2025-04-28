@@ -39,5 +39,7 @@
             class="com.github.ivw.ezmode.actions.AroundTextObjectAction"/>
     <action id="ezmode.DeleteDelimsTextObject"
             class="com.github.ivw.ezmode.actions.DeleteDelimsTextObjectAction"/>
+    <action id="ezmode.OpenEzModeRcAction"
+      class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"/>
   </actions>
 </idea-plugin>
