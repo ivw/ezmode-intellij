@@ -10,5 +10,11 @@ class ExitEzModeAction : EditorAction(Handler()) {
     override fun doExecute(editor: Editor, caret: Caret?, dataContext: DataContext?) {
       editor.setMode(Mode.TYPE)
     }
+
+    override fun isEnabledForCaret(
+      editor: Editor,
+      caret: Caret,
+      dataContext: DataContext?,
+    ): Boolean = editor.getMode() != Mode.TYPE
   }
 }
