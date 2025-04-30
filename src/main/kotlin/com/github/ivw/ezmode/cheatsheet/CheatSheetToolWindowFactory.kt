@@ -9,6 +9,7 @@ import com.intellij.openapi.project.*
 import com.intellij.openapi.wm.*
 import com.intellij.ui.components.*
 import com.intellij.ui.content.*
+import com.intellij.util.ui.*
 import javax.swing.*
 
 class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
@@ -20,6 +21,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
       lineWrap = true
       wrapStyleWord = true
       font = editorFont
+      margin = JBUI.insets(5)
     }
 
     fun updateText() {
