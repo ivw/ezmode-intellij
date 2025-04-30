@@ -24,5 +24,7 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
   }
 
   override fun toNiceString(): String =
-    anAction?.templatePresentation?.description ?: anAction?.templateText ?: actionId
+    anAction?.templatePresentation?.description
+      ?: anAction?.templateText
+      ?: actionId
 }
