@@ -1,6 +1,5 @@
 package com.github.ivw.ezmode.cheatsheet
 
-import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.editor.*
 import com.github.ivw.ezmode.keymap.*
 import com.intellij.openapi.components.*
@@ -14,7 +13,7 @@ import javax.swing.*
 
 class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
   override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-    val appService = service<EzModeAppService>()
+    val keyMapService = service<EzModeKeyMapAppService>()
     val editorFont = EditorColorsManager.getInstance().globalScheme.getFont(EditorFontType.PLAIN)
     val textArea = JTextArea().apply {
       isEditable = false
@@ -25,7 +24,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
     }
 
     fun updateText() {
-      textArea.text = appService.getKeyMap().toNiceString(Mode.EZ)
+      textArea.text = keyMapService.getKeyMap().toNiceString(Mode.EZ)
     }
     updateText()
 
@@ -37,7 +36,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
     )
     toolWindow.contentManager.addContent(content)
 
-    appService.subscribeToKeyMap(content) { _ ->
+    keyMapService.subscribeToKeyMap(content) { _ ->
       updateText()
     }
   }

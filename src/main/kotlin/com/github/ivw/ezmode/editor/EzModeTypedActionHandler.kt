@@ -1,6 +1,5 @@
 package com.github.ivw.ezmode.editor
 
-import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.keymap.*
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.components.*
@@ -18,7 +17,7 @@ class EzModeTypedActionHandler(
   val originalHandler: TypedActionHandler,
 ) : TypedActionHandler {
   override fun execute(editor: Editor, charTyped: Char, dataContext: DataContext) {
-    val keyMap = service<EzModeAppService>().getKeyMap()
+    val keyMap = service<EzModeKeyMapAppService>().getKeyMap()
 
     keyMap.perform(editor.getMode(), charTyped, dataContext, editor, originalHandler)
   }
