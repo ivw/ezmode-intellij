@@ -43,9 +43,9 @@
             class="com.github.ivw.ezmode.actions.DeleteDelimsTextObjectAction"/>
     <group id="ezmode.EzModeActionGroup"
            class="com.github.ivw.ezmode.actions.EzModeActionGroup">
-      <action id="ezmode.OpenEzModeRcAction"
+      <action id="ezmode.OpenEzModeRc"
               class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"/>
-      <action id="ezmode.ReloadEzModeRcAction"
+      <action id="ezmode.ReloadEzModeRc"
               class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"/>
       <action id="ezmode.OpenCheatSheet"
               class="com.github.ivw.ezmode.actions.OpenCheatSheetAction"/>

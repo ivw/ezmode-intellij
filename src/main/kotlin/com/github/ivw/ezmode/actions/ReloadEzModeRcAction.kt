@@ -7,7 +7,7 @@ import com.intellij.openapi.components.*
 import com.intellij.openapi.project.*
 
 class ReloadEzModeRcAction : DumbAwareAction(
-  EzModeBundle.messagePointer("action.ezmode.ReloadEzModeRcAction.text")
+  EzModeBundle.messagePointer("action.ezmode.ReloadEzModeRc.text")
 ) {
   override fun actionPerformed(e: AnActionEvent) {
     service<EzModeKeyMapAppService>().loadKeymap()
