@@ -14,9 +14,4 @@ class EzModeActionGroup : DefaultActionGroup() {
       false,
     ).showInBestPositionFor(e.dataContext)
   }
-
-  override fun getChildren(e: AnActionEvent?): Array<out AnAction> = arrayOf(
-    OpenEzModeRcAction(),
-    ReloadEzModeRcAction(),
-  )
 }

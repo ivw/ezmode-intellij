@@ -25,10 +25,6 @@
   </extensions>
 
   <actions>
-    <action id="ezmode.EnterEzMode"
-            class="com.github.ivw.ezmode.actions.EnterEzModeAction">
-      <keyboard-shortcut keymap="$default" first-keystroke="shift SPACE"/>
-    </action>
     <action id="ezmode.DeleteSelection"
             class="com.github.ivw.ezmode.actions.DeleteSelectionAction"/>
     <action id="ezmode.Unselect"
@@ -39,12 +35,18 @@
             class="com.github.ivw.ezmode.actions.AroundTextObjectAction"/>
     <action id="ezmode.DeleteDelimsTextObject"
             class="com.github.ivw.ezmode.actions.DeleteDelimsTextObjectAction"/>
-    <action id="ezmode.OpenEzModeRcAction"
-            class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"/>
-    <action id="ezmode.ReloadEzModeRcAction"
-            class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"/>
     <group id="ezmode.EzModeActionGroup"
            class="com.github.ivw.ezmode.actions.EzModeActionGroup">
+      <action id="ezmode.OpenEzModeRcAction"
+              class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"/>
+      <action id="ezmode.ReloadEzModeRcAction"
+              class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"/>
+      <action id="ezmode.EnterEzMode"
+              class="com.github.ivw.ezmode.actions.EnterEzModeAction">
+        <keyboard-shortcut keymap="$default" first-keystroke="shift SPACE"/>
+      </action>
+      <action id="ezmode.ExitEzMode"
+              class="com.github.ivw.ezmode.actions.ExitEzModeAction"/>
     </group>
   </actions>
 </idea-plugin>
