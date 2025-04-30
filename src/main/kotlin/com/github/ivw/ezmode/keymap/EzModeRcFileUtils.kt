@@ -13,7 +13,7 @@ object EzModeRcFileUtils {
     # .ezmoderc lets you define custom key mappings for ezmode.
     
     # map {mode} {key} {actions}
-    map ez 6 <type Hello world><mode type>
+    map ez 6 <write Hello world><mode type>
   """.trimIndent()
 
   private val homePathName: String by lazy {

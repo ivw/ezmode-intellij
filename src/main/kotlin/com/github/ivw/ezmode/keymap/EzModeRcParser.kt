@@ -106,7 +106,7 @@ object EzModeRcParser {
     val scanner = Scanner(specialActionString)
     val keyword = scanner.next()
     return when (keyword) {
-      "type" -> InsertStringAction(scanner.restOfLine())
+      "write" -> WriteAction(scanner.restOfLine())
       "mode" -> KeyAction.ChangeMode(scanner.restOfLine())
       "idea" -> IdeKeyAction(scanner.restOfLine())
       "native" -> {

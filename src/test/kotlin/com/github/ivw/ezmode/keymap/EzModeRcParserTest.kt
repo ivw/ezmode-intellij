@@ -15,13 +15,13 @@ class EzModeRcParserTest {
       # This line is a comment.
       map ez A <idea EditorSelectLine>
       map ez t <mode type>
-      map ez g <type git abc>
+      map ez g <write git abc>
       map ez d <native>
       map ez D <native q>
     """.lines().let { lines ->
       EzModeRcParser.parse(keyMap, lines, null)
     }
-    val gAction = InsertStringAction("git abc")
+    val gAction = WriteAction("git abc")
     keyMap.values.shouldContainExactly(
       KeyBinding("ez", 'A', IdeKeyAction("EditorSelectLine")),
       KeyBinding("ez", 't', KeyAction.ChangeMode("type")),

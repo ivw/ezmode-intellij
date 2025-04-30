@@ -4,7 +4,7 @@ import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.keymap.*
 import com.intellij.openapi.command.*
 
-data class InsertStringAction(val text: String) : KeyAction() {
+data class WriteAction(val text: String) : KeyAction() {
   override fun perform(e: EzModeKeyEvent) {
     WriteCommandAction.runWriteCommandAction(e.project) {
       e.editor.caretModel.runForEachCaret { caret ->
