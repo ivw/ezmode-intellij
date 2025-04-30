@@ -1,11 +1,13 @@
 package com.github.ivw.ezmode.widget
 
+import com.github.ivw.ezmode.actions.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.actionSystem.impl.*
 import com.intellij.openapi.fileEditor.*
 import com.intellij.openapi.util.*
 import com.intellij.openapi.wm.*
+import com.intellij.vcsUtil.*
 import kotlinx.coroutines.flow.*
 import java.awt.*
 import java.awt.event.*
@@ -29,18 +31,17 @@ class ModeStatusBarWidget(
 
   override fun getClickConsumer(): ((MouseEvent) -> Unit)? {
     return { mouseEvent ->
-      val dataContext: DataContext = getEditor()?.let { editor ->
-        SimpleDataContext.builder()
-          .add(CommonDataKeys.PROJECT, editor.project)
-          .add(CommonDataKeys.EDITOR, editor)
-          .build()
-      } ?: DataContext.EMPTY_CONTEXT
-      ActionManager.getInstance().getAction("ezmode.EzModeActionGroup").actionPerformed(
-        AnActionEvent.createFromInputEvent(
-          mouseEvent, "ezmode.ModeStatusBarWidget", null,
-          dataContext
-        )
-      )
+      (ActionManager.getInstance().getAction("ezmode.EzModeActionGroup") as? EzModeActionGroup)?.let { actionGroup ->
+        val dataContext: DataContext = getEditor()?.let { editor ->
+          SimpleDataContext.builder()
+            .add(CommonDataKeys.PROJECT, editor.project)
+            .add(CommonDataKeys.EDITOR, editor)
+            .build()
+        } ?: DataContext.EMPTY_CONTEXT
+
+        actionGroup.createPopup(dataContext)
+          .showAbove(mouseEvent.component)
+      }
     }
   }
 }
