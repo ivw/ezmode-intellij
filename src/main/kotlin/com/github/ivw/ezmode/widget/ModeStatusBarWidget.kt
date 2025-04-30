@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.widget
 
+import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.actions.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.actionSystem.*
@@ -25,6 +26,9 @@ class ModeStatusBarWidget(
     combine(modeChangedFlow, dataContext.currentFileEditor) { _, fileEditor ->
       fileEditor?.getEditor()?.getMode()
     }
+
+  override suspend fun getTooltipText() =
+    EzModeBundle.message("ezmode.ModeStatusBarWidget.name")
 
   override val alignment: Float
     get() = Component.CENTER_ALIGNMENT
