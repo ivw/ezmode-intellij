@@ -2,6 +2,7 @@ package com.github.ivw.ezmode.editor
 
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.util.*
+import com.intellij.util.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 
@@ -39,6 +40,8 @@ fun Editor.setMode(mode: String) {
   )
   updateEditorColors(modeBasedOnSelection)
   modeChangedFlow.tryEmit(Unit)
+  application.messageBus.syncPublisher(ModeChangeNotifier.TOPIC)
+    .onChanged(mode, this)
 }
 
 fun Editor.clearEzModeData() {

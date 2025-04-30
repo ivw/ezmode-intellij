@@ -20,12 +20,12 @@ class EzModeKeyMapAppService {
 
   fun getKeyMap(): MutableEzModeKeyMap = keyMap ?: loadKeymap()
 
-  fun subscribeToKeyMap(parentDisposable: Disposable, onChange: (MutableEzModeKeyMap) -> Unit) {
+  fun subscribeToKeyMap(parentDisposable: Disposable, onChanged: (MutableEzModeKeyMap) -> Unit) {
     application.messageBus.connect(parentDisposable).subscribe(
       KEYMAP_CHANGE_TOPIC,
       object : KeyMapChangeNotifier {
         override fun onChanged(keyMap: MutableEzModeKeyMap) {
-          onChange(keyMap)
+          onChanged(keyMap)
         }
       }
     )
