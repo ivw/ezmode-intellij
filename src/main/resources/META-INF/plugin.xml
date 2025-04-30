@@ -22,6 +22,12 @@
     <notificationGroup id="ezmode.parser"
                        displayType="STICKY_BALLOON"
                        key="notificationGroup.ezmode.parser"/>
+
+    <toolWindow id="ezmode.cheatSheet"
+                factoryClass="com.github.ivw.ezmode.cheatsheet.CheatSheetToolWindowFactory"
+                anchor="right"
+                secondary="false"
+    />
   </extensions>
 
   <actions>
