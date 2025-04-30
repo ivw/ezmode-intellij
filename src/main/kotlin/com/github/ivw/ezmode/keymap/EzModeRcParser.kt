@@ -120,30 +120,30 @@ object EzModeRcParser {
       "ofmode" -> KeyAction.OfMode(scanner.restOfLine())
       "nop" -> KeyAction.Nop
       "pair" -> {
-        val direction = scanner.next()
-        val isTargetOpen: Boolean = when (direction) {
+        val isTargetOpen: Boolean = when (scanner.next()) {
           "open" -> true
           "close" -> false
           else -> {
             throw LineParseError("first argument of `pair` must be open or close")
           }
         }
-
-        val pairChars = scanner.next()
-        if (pairChars.length != 2) {
-          throw LineParseError("pair argument must have 2 chars: $pairChars")
+        val delimPair: DelimPair = scanner.next().let { pairChars ->
+          if (pairChars == "angle") {
+            DelimPair('<', '>')
+          } else {
+            if (pairChars.length != 2) {
+              throw LineParseError("pair argument must have 2 chars: $pairChars")
+            }
+            if (pairChars[0] == pairChars[1]) {
+              throw LineParseError("pair chars must be different: $pairChars")
+            }
+            DelimPair(pairChars[0], pairChars[1])
+          }
         }
-        if (pairChars[0] == pairChars[1]) {
-          throw LineParseError("pair chars must be different: $pairChars")
-        }
-        PairOpenCloseAction(isTargetOpen, DelimPair(pairChars[0], pairChars[1]))
+        PairOpenCloseAction(isTargetOpen, delimPair)
       }
 
-      "quote" -> {
-        val quoteChar = scanner.next().single()
-        QuoteAction(quoteChar)
-      }
-
+      "quote" -> QuoteAction(scanner.next().single())
       else -> {
         throw LineParseError("unknown action keyword: $keyword")
       }

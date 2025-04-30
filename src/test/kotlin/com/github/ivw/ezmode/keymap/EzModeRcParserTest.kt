@@ -56,17 +56,26 @@ class EzModeRcParserTest {
     val keyMap = MutableEzModeKeyMap()
     """
       map ez { <pair open {}>
+      map ez > <pair close angle>
     """.lines().let { lines ->
       EzModeRcParser.parse(keyMap, lines, null)
     }
 
     keyMap.values.shouldContainExactly(
       KeyBinding(
-        "ez", '{', PairOpenCloseAction(
+        "ez", '{',
+        PairOpenCloseAction(
           isTargetOpen = true,
           DelimPair('{', '}')
-        )
+        ),
       ),
+      KeyBinding(
+        "ez", '>',
+        PairOpenCloseAction(
+          isTargetOpen = false,
+          DelimPair('<', '>')
+        ),
+      )
     )
 
     """
