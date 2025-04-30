@@ -72,7 +72,7 @@ map ez N <idea EditorStartNewLineBefore>
 map ez m <idea EditorDeleteLine>
 map ez M <idea EditorDeleteLine><idea EditorUp>
 map ez , <idea ShowSettings>
-map ez < <idea ezmode.OpenEzModeRcAction>
+map ez < <idea ezmode.EzModeActionGroup>
 map ez . <idea CodeCompletion>
 map ez > <idea ParameterInfo>
 map ez / <idea CommentByLineComment>

@@ -40,6 +40,11 @@
     <action id="ezmode.DeleteDelimsTextObject"
             class="com.github.ivw.ezmode.actions.DeleteDelimsTextObjectAction"/>
     <action id="ezmode.OpenEzModeRcAction"
-      class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"/>
+            class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"/>
+    <action id="ezmode.ReloadEzModeRcAction"
+            class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"/>
+    <group id="ezmode.EzModeActionGroup"
+           class="com.github.ivw.ezmode.actions.EzModeActionGroup">
+    </group>
   </actions>
 </idea-plugin>
