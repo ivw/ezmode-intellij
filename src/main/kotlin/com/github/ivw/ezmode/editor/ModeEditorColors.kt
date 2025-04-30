@@ -23,3 +23,10 @@ fun Editor.updateEditorColors(mode: String) {
     }
   )
 }
+
+fun Editor.restoreEditorColors() {
+  getUserData(ORIGINAL_CARET_COLOR_KEY)?.let { originalColor ->
+    colorsScheme.setColor(EditorColors.CARET_COLOR, originalColor)
+    putUserData(ORIGINAL_CARET_COLOR_KEY, null)
+  }
+}

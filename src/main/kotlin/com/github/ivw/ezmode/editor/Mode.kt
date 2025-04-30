@@ -41,6 +41,15 @@ fun Editor.setMode(mode: String) {
   modeChangedFlow.tryEmit(Unit)
 }
 
+fun Editor.clearEzModeData() {
+  putUserData(EZMODE_KEY, null)
+  restoreEditorColors()
+}
+
+fun clearAllEditorsEzModeData() {
+  EditorFactory.getInstance().allEditors.forEach { it.clearEzModeData() }
+}
+
 /**
  * Emits whenever the mode changes.
  */

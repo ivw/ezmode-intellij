@@ -25,6 +25,8 @@ class EzModeAppService : Disposable {
 
   fun ensureUnloaded() {
     TypedAction.getInstance().ensureEzModeUnloaded()
+
+    clearAllEditorsEzModeData()
   }
 
   companion object {
