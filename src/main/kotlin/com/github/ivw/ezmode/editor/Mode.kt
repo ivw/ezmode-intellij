@@ -28,20 +28,33 @@ fun Editor.getEzModeData(): EzModeEditorData? = getUserData(EZMODE_KEY)
 
 fun Editor.getMode(): String = getEzModeData()?.mode ?: Mode.TYPE
 
-fun Editor.setMode(mode: String) {
-  val modeBasedOnSelection = if (mode == Mode.EZ && selectionModel.hasSelection()) {
-    Mode.SELECT
-  } else mode
+fun Editor.setModeActually(mode: String) {
   putUserData(
     EZMODE_KEY, EzModeEditorData(
-      mode = modeBasedOnSelection,
+      mode = mode,
       leadSelectionOffset = selectionModel.leadSelectionOffset
     )
   )
-  updateEditorColors(modeBasedOnSelection)
+  updateEditorColors(mode)
   modeChangedFlow.tryEmit(Unit)
   application.messageBus.syncPublisher(ModeChangeNotifier.TOPIC)
     .onChanged(mode, this)
+}
+
+/**
+ * Automatically sets `select` mode if the editor has a selection.
+ */
+fun Editor.setMode(mode: String) {
+  setModeActually(
+    if (mode == Mode.EZ && selectionModel.hasSelection()) {
+      if (getMode() == Mode.SELECT) {
+        selectionModel.removeSelection()
+        mode
+      } else {
+        Mode.SELECT
+      }
+    } else mode
+  )
 }
 
 fun Editor.clearEzModeData() {
