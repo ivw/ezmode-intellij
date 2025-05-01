@@ -16,7 +16,7 @@ import javax.swing.*
 
 class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
   override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-    val keyMapService = service<EzModeKeyMapAppService>()
+    val configService = service<EzModeConfigAppService>()
     var currentMode = Mode.EZ
 
     val textArea = JTextArea().apply {
@@ -28,7 +28,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
     }
 
     fun updateText() {
-      textArea.text = getText(currentMode, keyMapService.getKeyMap())
+      textArea.text = getText(currentMode, configService.getConfig())
     }
     updateText()
 
@@ -40,7 +40,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
     )
     toolWindow.contentManager.addContent(content)
 
-    keyMapService.subscribeToKeyMap(content) { _ ->
+    configService.subscribeToConfig(content) { _ ->
       updateText()
     }
 
@@ -54,7 +54,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
     }
   }
 
-  fun getText(mode: String, keyMap: EzModeKeyMap): String =
+  fun getText(mode: String, config: EzModeConfig): String =
     StringBuilder().apply {
       appendLine(EzModeBundle.getMessage("ezmode.CheatSheet.mode", mode))
       if (mode == Mode.TYPE) {
@@ -69,7 +69,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
           }
       }
       appendLine()
-      keyMap.values.forEach { keyBinding ->
+      config.keyMap.values.forEach { keyBinding ->
         if (keyBinding.mode == mode) {
           append(keyBinding.keyChar ?: EzModeBundle.message("ezmode.EzModeKeyMap.defaultAction"))
           append(": ")

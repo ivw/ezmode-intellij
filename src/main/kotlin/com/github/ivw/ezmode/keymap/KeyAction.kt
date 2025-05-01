@@ -1,6 +1,6 @@
 package com.github.ivw.ezmode.keymap
 
-import com.github.ivw.ezmode.EzModeBundle
+import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.editor.*
 
 abstract class KeyAction {
@@ -44,7 +44,7 @@ abstract class KeyAction {
 
   data class OfMode(val mode: String) : KeyAction() {
     override fun perform(e: EzModeKeyEvent) {
-      e.keyMap.perform(mode, e.char, e.dataContext, e.editor, e.nativeHandler)
+      e.config.performKeyAction(mode, e.char, e.dataContext, e.editor, e.nativeHandler)
     }
 
     override fun toNiceString(): String = EzModeBundle.message("ezmode.KeyAction.OfMode", mode)

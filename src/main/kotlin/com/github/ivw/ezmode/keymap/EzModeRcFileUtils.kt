@@ -22,7 +22,7 @@ object EzModeRcFileUtils {
 
   class BaseRcResourceMissingError(message: String) : RuntimeException(message)
 
-  fun parseBaseRcFile(dest: MutableEzModeKeyMap) {
+  fun parseBaseRcFile(dest: EzModeConfig) {
     (javaClass.getResourceAsStream(BASE_RC_RESOURCE_NAME)
       ?: throw BaseRcResourceMissingError(BASE_RC_RESOURCE_NAME))
       .let { inputStream ->
@@ -43,7 +43,7 @@ object EzModeRcFileUtils {
     return file
   }
 
-  fun parseUserRcFile(fileName: String, dest: MutableEzModeKeyMap) {
+  fun parseUserRcFile(fileName: String, dest: EzModeConfig) {
     getUserRcFile(fileName).takeIf { it.exists() }?.let { file ->
       LOG.info("Parsing $file")
       try {
@@ -55,12 +55,12 @@ object EzModeRcFileUtils {
     }
   }
 
-  fun getKeyMap(): MutableEzModeKeyMap {
-    val keyMap = MutableEzModeKeyMap()
-    parseBaseRcFile(keyMap)
-    parseUserRcFile(USER_RC_NAME, keyMap)
-    parseUserRcFile(USER_IDEA_RC_NAME, keyMap)
-    return keyMap
+  fun getConfig(): EzModeConfig {
+    val config = EzModeConfig()
+    parseBaseRcFile(config)
+    parseUserRcFile(USER_RC_NAME, config)
+    parseUserRcFile(USER_IDEA_RC_NAME, config)
+    return config
   }
 
   private val LOG = logger<EzModeRcFileUtils>()

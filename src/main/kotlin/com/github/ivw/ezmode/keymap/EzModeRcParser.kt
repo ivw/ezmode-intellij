@@ -19,13 +19,12 @@ object EzModeRcParser {
   class LineParseError(message: String) : RuntimeException(message)
 
   /**
-   * @param dest The destination key map for all key binding changes.
+   * @param dest The destination config.
    * @param lines The string input.
-   * @param src A key map from which keys can be mapped.
-   * @return a `MutableEzModeKeyMap` populated with the given input.
+   * @param src A config from which keys can be mapped.
    * @throws ParseError
    */
-  fun parse(dest: MutableEzModeKeyMap, lines: List<String>, src: EzModeKeyMap?) =
+  fun parse(dest: EzModeConfig, lines: List<String>, src: EzModeConfig?) =
     lines.forEachIndexed { lineIndex, line ->
       line.trim().takeIf { it.isNotEmpty() }?.let { line ->
         try {
@@ -37,12 +36,12 @@ object EzModeRcParser {
     }
 
   /**
-   * @param dest The destination key map for all key binding changes.
+   * @param dest The destination config.
    * @param line The string input.
    * @param src A key map from which keys can be mapped.
    * @throws LineParseError or another kind of exception.
    */
-  fun parseLine(dest: MutableEzModeKeyMap, line: String, src: EzModeKeyMap?) {
+  fun parseLine(dest: EzModeConfig, line: String, src: EzModeConfig?) {
     if (line[0] == '#') {
       // Line is a comment.
       return
@@ -55,7 +54,7 @@ object EzModeRcParser {
         val mode = scanner.next()
         val char = parseChar(scanner)
         parseActionChain(scanner.restOfLine(), src, mode)?.let { action ->
-          dest.addBinding(KeyBinding(mode, char, action))
+          dest.keyMap.addBinding(KeyBinding(mode, char, action))
         }
       }
 
@@ -74,7 +73,7 @@ object EzModeRcParser {
 
   fun parseActionChain(
     actionChainString: String,
-    src: EzModeKeyMap?,
+    src: EzModeConfig?,
     mode: String,
   ): KeyAction? {
     var charIndex = 0
@@ -88,7 +87,7 @@ object EzModeRcParser {
         actions.add(parseSpecialAction(actionChainString.substring(charIndex + 1, closingIndex)))
         charIndex = closingIndex + 1
       } else {
-        src?.getBindingOrDefault(mode, actionChainString[charIndex])?.action?.let {
+        src?.keyMap?.getBindingOrDefault(mode, actionChainString[charIndex])?.action?.let {
           actions.add(it)
         }
         charIndex++

@@ -9,17 +9,15 @@ import com.intellij.openapi.editor.actionSystem.*
 
 /**
  * Application-wide TypedActionHandler replacement.
- * In non-type modes, every character typed should call the EzModeKeyMap
- * instead of actually typing.
  * TypedActionHandler does not affect non-typing actions such as control/alt keys.
  */
 class EzModeTypedActionHandler(
   val originalHandler: TypedActionHandler,
 ) : TypedActionHandler {
   override fun execute(editor: Editor, charTyped: Char, dataContext: DataContext) {
-    val keyMap = service<EzModeKeyMapAppService>().getKeyMap()
+    val config = service<EzModeConfigAppService>().getConfig()
 
-    keyMap.perform(editor.getMode(), charTyped, dataContext, editor, originalHandler)
+    config.performKeyAction(editor.getMode(), charTyped, dataContext, editor, originalHandler)
   }
 
   companion object {

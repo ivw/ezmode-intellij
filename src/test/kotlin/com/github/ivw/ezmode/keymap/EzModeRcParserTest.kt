@@ -10,7 +10,7 @@ import org.junit.*
 class EzModeRcParserTest {
   @Test
   fun parse() {
-    val keyMap = MutableEzModeKeyMap()
+    val config = EzModeConfig()
     """
       # This line is a comment.
       map ez A <idea EditorSelectLine>
@@ -19,10 +19,10 @@ class EzModeRcParserTest {
       map ez d <native>
       map ez D <native q>
     """.lines().let { lines ->
-      EzModeRcParser.parse(keyMap, lines, null)
+      EzModeRcParser.parse(config, lines, null)
     }
     val gAction = WriteAction("git abc")
-    keyMap.values.shouldContainExactly(
+    config.keyMap.values.shouldContainExactly(
       KeyBinding("ez", 'A', IdeKeyAction("EditorSelectLine")),
       KeyBinding("ez", 't', KeyAction.ChangeMode("type")),
       KeyBinding("ez", 'g', gAction),
@@ -30,14 +30,14 @@ class EzModeRcParserTest {
       KeyBinding("ez", 'D', KeyAction.NativeOf('q')),
     )
 
-    val childKeyMap = MutableEzModeKeyMap()
+    val childConfig = EzModeConfig()
     """
       map ez m <idea ${"$"}SelectAll>gg
       map ez <space> g
     """.lines().let { lines ->
-      EzModeRcParser.parse(childKeyMap, lines, keyMap)
+      EzModeRcParser.parse(childConfig, lines, config)
     }
-    childKeyMap.values.shouldContainExactly(
+    childConfig.keyMap.values.shouldContainExactly(
       KeyBinding(
         "ez", 'm', KeyAction.Composite(
           listOf(
@@ -53,15 +53,15 @@ class EzModeRcParserTest {
 
   @Test
   fun parsePairAction() {
-    val keyMap = MutableEzModeKeyMap()
+    val config = EzModeConfig()
     """
       map ez { <pair open {}>
       map ez > <pair close angle>
     """.lines().let { lines ->
-      EzModeRcParser.parse(keyMap, lines, null)
+      EzModeRcParser.parse(config, lines, null)
     }
 
-    keyMap.values.shouldContainExactly(
+    config.keyMap.values.shouldContainExactly(
       KeyBinding(
         "ez", '{',
         PairOpenCloseAction(
@@ -82,7 +82,7 @@ class EzModeRcParserTest {
       map ez { <pair hello {}>
     """.lines().let { lines ->
       shouldThrow<EzModeRcParser.ParseError> {
-        EzModeRcParser.parse(keyMap, lines, null)
+        EzModeRcParser.parse(config, lines, null)
       }.cause.shouldNotBeNull().message.shouldBe(
         "first argument of `pair` must be open or close"
       )
@@ -92,7 +92,7 @@ class EzModeRcParserTest {
       map ez [ <pair open [[]]>
     """.lines().let { lines ->
       shouldThrow<EzModeRcParser.ParseError> {
-        EzModeRcParser.parse(keyMap, lines, null)
+        EzModeRcParser.parse(config, lines, null)
       }.cause.shouldNotBeNull().message.shouldBe(
         "pair argument must have 2 chars: [[]]"
       )
@@ -102,7 +102,7 @@ class EzModeRcParserTest {
       map ez " <pair open "">
     """.lines().let { lines ->
       shouldThrow<EzModeRcParser.ParseError> {
-        EzModeRcParser.parse(keyMap, lines, null)
+        EzModeRcParser.parse(config, lines, null)
       }.cause.shouldNotBeNull().message.shouldBe(
         "pair chars must be different: \"\""
       )

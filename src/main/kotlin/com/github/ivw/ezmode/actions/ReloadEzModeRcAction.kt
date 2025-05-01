@@ -10,6 +10,6 @@ class ReloadEzModeRcAction : DumbAwareAction(
   EzModeBundle.messagePointer("action.ezmode.ReloadEzModeRc.text")
 ) {
   override fun actionPerformed(e: AnActionEvent) {
-    service<EzModeKeyMapAppService>().loadKeymap()
+    service<EzModeConfigAppService>().loadConfig()
   }
 }
