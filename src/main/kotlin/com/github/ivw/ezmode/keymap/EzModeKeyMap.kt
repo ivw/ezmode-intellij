@@ -16,16 +16,16 @@ class EzModeKeyEvent(
   val project: Project? get() = editor.project
 }
 
-typealias EzModeKeyMap = Map<String, KeyBinding>
-typealias MutableEzModeKeyMap = LinkedHashMap<String, KeyBinding>
+typealias EzModeKeyMap = Map<ModeAndChar, KeyBinding>
+typealias MutableEzModeKeyMap = LinkedHashMap<ModeAndChar, KeyBinding>
 
-private fun getHashKey(mode: String, keyChar: Char?) = "${mode}:${keyChar}"
+data class ModeAndChar(val mode: String, val keyChar: Char?)
 
 fun EzModeKeyMap.getBindingOrDefault(mode: String, char: Char): KeyBinding? =
-  this[getHashKey(mode, char)] ?: this[getHashKey(mode, null)]
+  this[ModeAndChar(mode, char)] ?: this[ModeAndChar(mode, null)]
 
 fun MutableEzModeKeyMap.addBinding(binding: KeyBinding) {
-  put(getHashKey(binding.mode, binding.keyChar), binding)
+  put(ModeAndChar(binding.mode, binding.keyChar), binding)
 }
 
 fun MutableEzModeKeyMap.copy() = MutableEzModeKeyMap(this)
