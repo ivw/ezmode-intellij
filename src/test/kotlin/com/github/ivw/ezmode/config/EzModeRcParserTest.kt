@@ -1,6 +1,7 @@
 package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.config.keyactions.*
+import com.github.ivw.ezmode.editor.*
 import io.kotest.assertions.throwables.*
 import io.kotest.matchers.*
 import io.kotest.matchers.collections.*
@@ -107,5 +108,18 @@ class EzModeRcParserTest {
         "pair chars must be different: \"\""
       )
     }
+  }
+
+  @Test
+  fun parseVar() {
+    val config = EzModeConfig()
+    """
+      set defaultmode ez
+      set myvar This var has multiple words
+    """.lines().let { lines ->
+      EzModeRcParser.parse(config, lines, null)
+    }
+    config.defaultMode.shouldBe(Mode.EZ)
+    config.vars["myvar"].shouldBe("This var has multiple words")
   }
 }

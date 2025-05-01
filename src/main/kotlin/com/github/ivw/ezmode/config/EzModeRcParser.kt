@@ -50,6 +50,12 @@ object EzModeRcParser {
     val scanner = Scanner(line)
     val keyword = scanner.next()
     when (keyword) {
+      "set" -> {
+        val varName = scanner.next()
+        val varValue = scanner.restOfLine()
+        dest.vars[varName] = varValue
+      }
+
       "map" -> {
         val mode = scanner.next()
         val char = parseChar(scanner)
