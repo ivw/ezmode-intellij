@@ -1,4 +1,4 @@
-package com.github.ivw.ezmode.keymap
+package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.editor.*

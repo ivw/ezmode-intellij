@@ -1,7 +1,7 @@
-package com.github.ivw.ezmode.keymap.keyactions
+package com.github.ivw.ezmode.config.keyactions
 
 import com.github.ivw.ezmode.*
-import com.github.ivw.ezmode.keymap.*
+import com.github.ivw.ezmode.config.*
 
 /**
  * An action to jump to an opening/closing delimiter such as { or }.

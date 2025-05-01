@@ -1,4 +1,4 @@
-package com.github.ivw.ezmode.keymap
+package com.github.ivw.ezmode.config
 
 import com.intellij.openapi.command.*
 import com.intellij.openapi.editor.*

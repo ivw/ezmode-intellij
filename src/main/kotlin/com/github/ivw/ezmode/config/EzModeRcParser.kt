@@ -1,7 +1,7 @@
-package com.github.ivw.ezmode.keymap
+package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.*
-import com.github.ivw.ezmode.keymap.keyactions.*
+import com.github.ivw.ezmode.config.keyactions.*
 import java.util.*
 
 object EzModeRcParser {

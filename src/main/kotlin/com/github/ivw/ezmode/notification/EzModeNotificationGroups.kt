@@ -2,7 +2,7 @@ package com.github.ivw.ezmode.notification
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.actions.*
-import com.github.ivw.ezmode.keymap.*
+import com.github.ivw.ezmode.config.*
 import com.intellij.notification.*
 import java.io.*
 

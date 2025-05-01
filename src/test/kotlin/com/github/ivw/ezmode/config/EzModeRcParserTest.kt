@@ -1,6 +1,6 @@
-package com.github.ivw.ezmode.keymap
+package com.github.ivw.ezmode.config
 
-import com.github.ivw.ezmode.keymap.keyactions.*
+import com.github.ivw.ezmode.config.keyactions.*
 import io.kotest.assertions.throwables.*
 import io.kotest.matchers.*
 import io.kotest.matchers.collections.*

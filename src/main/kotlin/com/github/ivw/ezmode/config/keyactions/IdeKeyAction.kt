@@ -1,6 +1,6 @@
-package com.github.ivw.ezmode.keymap.keyactions
+package com.github.ivw.ezmode.config.keyactions
 
-import com.github.ivw.ezmode.keymap.*
+import com.github.ivw.ezmode.config.*
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.diagnostic.*
 
