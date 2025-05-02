@@ -1,6 +1,6 @@
 package com.github.ivw.ezmode.widget
 
-import com.github.ivw.ezmode.EzModeBundle
+import com.github.ivw.ezmode.*
 import com.intellij.openapi.util.*
 import com.intellij.openapi.wm.*
 import kotlinx.coroutines.*

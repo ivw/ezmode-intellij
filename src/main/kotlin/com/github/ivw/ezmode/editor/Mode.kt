@@ -1,7 +1,7 @@
 package com.github.ivw.ezmode.editor
 
 import com.github.ivw.ezmode.config.*
-import com.intellij.openapi.Disposable
+import com.intellij.openapi.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.ex.*

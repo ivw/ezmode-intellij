@@ -1,8 +1,8 @@
 package com.github.ivw.ezmode.cheatsheet
 
 import com.github.ivw.ezmode.*
-import com.github.ivw.ezmode.editor.*
 import com.github.ivw.ezmode.config.*
+import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.application.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.colors.*
