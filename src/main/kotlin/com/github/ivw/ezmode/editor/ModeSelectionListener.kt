@@ -10,11 +10,11 @@ object ModeSelectionListener : SelectionListener {
     e.editor.getEzModeData()?.let { ezModeData ->
       if (ezModeData.mode == Mode.SELECT) {
         if (e.newRange.isEmpty && e.newRange.startOffset != ezModeData.leadSelectionOffset) {
-          e.editor.setMode(Mode.EZ)
+          e.editor.setModeActually(Mode.EZ)
         }
       } else if (ezModeData.mode != Mode.TYPE) {
         if (!e.newRange.isEmpty) {
-          e.editor.setMode(Mode.SELECT)
+          e.editor.setModeActually(Mode.SELECT)
         }
       }
     }

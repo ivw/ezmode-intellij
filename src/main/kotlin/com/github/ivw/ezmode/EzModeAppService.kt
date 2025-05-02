@@ -10,12 +10,17 @@ import com.intellij.openapi.editor.actionSystem.*
 
 @Service
 class EzModeAppService : Disposable {
+  private var isLoaded = false
+
   override fun dispose() {
     LOG.info("App dispose")
     ensureUnloaded()
   }
 
   fun ensureLoaded() {
+    if (isLoaded) return
+    isLoaded = true
+
     TypedAction.getInstance().ensureEzModeLoaded()
 
     EditorFactory.getInstance().eventMulticaster.addSelectionListener(
@@ -32,6 +37,8 @@ class EzModeAppService : Disposable {
     TypedAction.getInstance().ensureEzModeUnloaded()
 
     clearAllEditorsEzModeData()
+
+    isLoaded = false
   }
 
   companion object {
