@@ -2,6 +2,7 @@ package com.github.ivw.ezmode
 
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.*
+import com.intellij.openapi.application.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.diagnostic.*
 import com.intellij.openapi.editor.*
@@ -21,6 +22,10 @@ class EzModeAppService : Disposable {
       ModeSelectionListener,
       this,
     )
+
+    ApplicationManager.getApplication().invokeLater {
+      initAllEditors(this)
+    }
   }
 
   fun ensureUnloaded() {

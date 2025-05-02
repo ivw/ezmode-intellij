@@ -1,10 +1,15 @@
 package com.github.ivw.ezmode.editor
 
+import com.github.ivw.ezmode.config.*
+import com.intellij.openapi.Disposable
+import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.*
+import com.intellij.openapi.editor.ex.*
 import com.intellij.openapi.util.*
 import com.intellij.util.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
+import java.awt.event.*
 
 object Mode {
   const val TYPE = "type"
@@ -55,6 +60,28 @@ fun Editor.setMode(mode: String) {
       }
     } else mode
   )
+}
+
+fun Editor.initEzModeData() {
+  if (getEzModeData() == null) {
+    setMode(service<EzModeConfigAppService>().getConfig().defaultMode ?: Mode.TYPE)
+  }
+}
+
+fun initAllEditors(parentDisposable: Disposable) {
+  EditorFactory.getInstance().apply {
+    allEditors.forEach { it.initEzModeData() }
+
+    // Also init any editors that are opened later:
+    (eventMulticaster as? EditorEventMulticasterEx)?.addFocusChangeListener(
+      object : FocusChangeListener {
+        override fun focusGained(editor: Editor, event: FocusEvent) {
+          editor.initEzModeData()
+        }
+      },
+      parentDisposable,
+    )
+  }
 }
 
 fun Editor.clearEzModeData() {
