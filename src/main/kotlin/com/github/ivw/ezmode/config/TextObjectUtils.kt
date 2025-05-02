@@ -130,7 +130,7 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   }
   if (caret.selectionEnd < chars.length) {
     val charRight = chars[caret.selectionEnd]
-    val leftDelimOffset: Int? = delimPairs.firstOrNull { it.openChar == charRight }
+    val leftDelimOffset: Int? = delimPairs.firstOrNull { it.closeChar == charRight }
       ?.findOpeningDelim(chars, caret.offset)
       ?: quoteChars.firstOrNull { it == charRight }?.let {
         findQuoteLeft(chars, caret.offset, it)
