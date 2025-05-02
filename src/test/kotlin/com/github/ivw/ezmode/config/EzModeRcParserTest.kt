@@ -115,11 +115,24 @@ class EzModeRcParserTest {
     val config = EzModeConfig()
     """
       set defaultmode ez
+      set caretcolor #abcdef
       set myvar This var has multiple words
     """.lines().let { lines ->
       EzModeRcParser.parse(config, lines, null)
     }
     config.defaultMode.shouldBe(Mode.EZ)
+    config.caretColor.shouldNotBeNull().red.shouldBe(0xAB)
     config.vars["myvar"].shouldBe("This var has multiple words")
+  }
+
+  @Test
+  fun parseInvalidCaretColor() {
+    val config = EzModeConfig()
+    """
+      set caretcolor wrong
+    """.lines().let { lines ->
+      EzModeRcParser.parse(config, lines, null)
+    }
+    config.caretColor.shouldBe(null)
   }
 }
