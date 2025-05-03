@@ -71,7 +71,13 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
       appendLine()
       config.keyMap.values.forEach { keyBinding ->
         if (keyBinding.mode == mode) {
-          append(keyBinding.keyChar ?: EzModeBundle.message("ezmode.EzModeKeyMap.defaultAction"))
+          append(
+            when (keyBinding.keyChar) {
+              ' ' -> EzModeBundle.message("ezmode.EzModeKeyMap.space")
+              null -> EzModeBundle.message("ezmode.EzModeKeyMap.defaultAction")
+              else -> keyBinding.keyChar.toString()
+            }
+          )
           append(": ")
           appendLine(keyBinding.action.toNiceString())
         }
