@@ -3,9 +3,6 @@
   <id>com.github.ivw.ezmode</id>
   <name>Ezmode</name>
   <vendor url="https://github.com/ivw">ivw</vendor>
-  <description><![CDATA[
-    Mouse-free editing without the learning curve.
-  ]]></description>
 
   <depends>com.intellij.modules.platform</depends>
 
