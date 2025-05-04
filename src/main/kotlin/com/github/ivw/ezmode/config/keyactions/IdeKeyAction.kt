@@ -7,7 +7,7 @@ import com.intellij.openapi.diagnostic.*
 data class IdeKeyAction(val actionId: String) : KeyAction() {
   val anAction: AnAction? by lazy {
     ActionManager.getInstance().getAction(actionId)
-      .also { if (it == null) thisLogger().info("Action $actionId not found") }
+      .also { if (it == null) LOG.info("Action not found: $actionId") }
   }
 
   override fun perform(e: EzModeKeyEvent) {
@@ -19,6 +19,8 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
       anAction.update(anActionEvent)
       if (presentation.isEnabled) {
         anAction.actionPerformed(anActionEvent)
+      } else {
+        LOG.info("Action not enabled: $actionId")
       }
     }
   }
@@ -27,4 +29,8 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
     anAction?.templatePresentation?.description
       ?: anAction?.templateText
       ?: actionId
+
+  companion object {
+    val LOG = logger<IdeKeyAction>()
+  }
 }
