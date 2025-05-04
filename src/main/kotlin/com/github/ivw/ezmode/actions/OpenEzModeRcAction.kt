@@ -2,8 +2,8 @@ package com.github.ivw.ezmode.actions
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
+import com.intellij.ide.actions.*
 import com.intellij.openapi.actionSystem.*
-import com.intellij.openapi.fileEditor.*
 import com.intellij.openapi.project.*
 import com.intellij.openapi.vfs.*
 import java.io.*
@@ -17,7 +17,7 @@ class OpenEzModeRcAction(val file: File? = null) : DumbAwareAction(
         EzModeRcFileUtils.USER_IDEA_RC_NAME
       )
       LocalFileSystem.getInstance().refreshAndFindFileByIoFile(file)?.let { virtualFile ->
-        FileEditorManager.getInstance(project).openFile(virtualFile, true)
+        OpenFileAction.openFile(virtualFile, project)
       }
     }
   }
