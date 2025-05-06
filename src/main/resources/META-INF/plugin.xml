@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
   <id>com.github.ivw.ezmode</id>
-  <name>Ezmode</name>
+  <name>EzMode</name>
   <vendor url="https://github.com/ivw">ivw</vendor>
 
   <depends>com.intellij.modules.platform</depends>
@@ -48,7 +48,8 @@
               class="com.github.ivw.ezmode.actions.OpenCheatSheetAction"/>
       <action id="ezmode.EnterEzMode"
               class="com.github.ivw.ezmode.actions.EnterEzModeAction">
-        <keyboard-shortcut keymap="$default" first-keystroke="shift SPACE"/>
+        <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON"/>
+        <keyboard-shortcut keymap="$default" first-keystroke="alt X"/>
       </action>
       <action id="ezmode.ExitEzMode"
               class="com.github.ivw.ezmode.actions.ExitEzModeAction"/>
