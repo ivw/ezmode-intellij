@@ -5,6 +5,8 @@ import com.github.ivw.ezmode.config.keyactions.*
 import java.util.*
 
 object EzModeRcParser {
+  const val COMMENT_PREFIX = '#'
+
   class ParseError(val lineIndex: Int, val c: Throwable) : RuntimeException(
     "line ${lineIndex + 1}: ${c.message ?: c.javaClass.name}", c
   ) {
@@ -42,8 +44,7 @@ object EzModeRcParser {
    * @throws LineParseError or another kind of exception.
    */
   fun parseLine(dest: EzModeConfig, line: String, src: EzModeConfig?) {
-    if (line[0] == '#') {
-      // Line is a comment.
+    if (line[0] == COMMENT_PREFIX) {
       return
     }
 
