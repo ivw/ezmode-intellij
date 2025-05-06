@@ -79,7 +79,7 @@ map ez > <idea ParameterInfo>
 map ez / <idea CommentByLineComment>
 map ez ? <idea CommentByBlockComment>
 
-# TODO: space
+map ez <space> <idea AceWordAction>
 
 
 map select <default> <ofmode ez>
@@ -125,11 +125,15 @@ map select > <native><mode ez>
 map git <default> <mode ez>
 
 map git u <idea Vcs.UpdateProject><mode ez>
+map git i <idea PreviousDiff>
 map git p <idea Vcs.Push><mode ez>
 
 map git a <idea Annotate><mode ez>
+map git g <idea Vcs.Show.Log><mode ez>
 map git h <idea Vcs.ShowTabbedFileHistory><mode ez>
-map git l <idea Vcs.Show.Log><mode ez>
+map git j <idea Diff.PrevChange>
+map git k <idea NextDiff>
+map git l <idea Diff.NextChange>
 
 map git c <idea CheckinProject><mode ez>
 map git b <idea Git.Branches><mode ez>
