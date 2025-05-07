@@ -7,9 +7,9 @@ data class DelimPair(
   val openChar: Char,
   val closeChar: Char,
 ) {
-  fun findOpeningDelim(chars: CharSequence, caretOffset: Int): Int? {
+  fun findOpeningDelim(chars: CharSequence, caretOffset: Int, skip: Int = 1): Int? {
     var oppositeDelimCount = 0
-    for (i in caretOffset - 2 downTo 0) {
+    for (i in caretOffset - 1 - skip downTo 0) {
       val char = chars[i]
       when (char) {
         openChar -> {
@@ -28,9 +28,9 @@ data class DelimPair(
     return null
   }
 
-  fun findClosingDelim(chars: CharSequence, caretOffset: Int): Int? {
+  fun findClosingDelim(chars: CharSequence, caretOffset: Int, skip: Int = 1): Int? {
     var oppositeDelimCount = 0
-    for (i in caretOffset + 1 until chars.length) {
+    for (i in caretOffset + skip until chars.length) {
       val char = chars[i]
       when (char) {
         closeChar -> {
@@ -50,8 +50,8 @@ data class DelimPair(
   }
 }
 
-fun findQuoteLeft(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? {
-  for (i in caretOffset - 2 downTo 0) {
+fun findQuoteLeft(chars: CharSequence, caretOffset: Int, quoteChar: Char, skip: Int = 1): Int? {
+  for (i in caretOffset - 1 - skip downTo 0) {
     if (chars[i] == quoteChar && !isCharEscaped(chars, i)) {
       return i + 1
     }
@@ -59,8 +59,8 @@ fun findQuoteLeft(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? 
   return null
 }
 
-fun findQuoteRight(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? {
-  for (i in caretOffset + 1 until chars.length) {
+fun findQuoteRight(chars: CharSequence, caretOffset: Int, quoteChar: Char, skip: Int = 1): Int? {
+  for (i in caretOffset + skip until chars.length) {
     if (chars[i] == quoteChar && !isCharEscaped(chars, i)) {
       return i
     }
@@ -68,8 +68,8 @@ fun findQuoteRight(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int?
   return null
 }
 
-fun findQuoteAuto(chars: CharSequence, caretOffset: Int, quoteChar: Char): Int? =
-  if (caretOffset > 1 && chars[caretOffset - 1] != quoteChar) {
+fun findQuoteAuto(chars: CharSequence, caretOffset: Int, quoteChar: Char, skip: Int = 1): Int? =
+  if (caretOffset > skip && chars[caretOffset - skip] != quoteChar) {
     findQuoteLeft(chars, caretOffset, quoteChar)
   } else {
     findQuoteRight(chars, caretOffset, quoteChar)
@@ -90,6 +90,7 @@ val quoteChars: List<Char> = listOf('"', '\'', '`')
 val Char.isWordChar get() = isLetterOrDigit() || this == '_'
 
 fun selectWord(caret: Caret, chars: CharSequence, around: Boolean) {
+  // TODO deleteDelims
   var start = caret.offset
   var end = caret.offset
   while (start > 0 && chars[start - 1].isWordChar) {
@@ -119,31 +120,31 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   if (caret.selectionStart > 0) {
     val charLeft = chars[caret.selectionStart - 1]
     val rightDelimOffset: Int? = delimPairs.firstOrNull { it.openChar == charLeft }
-      ?.findClosingDelim(chars, caret.offset)
+      ?.findClosingDelim(chars, caret.offset, 0)
       ?: quoteChars.firstOrNull { it == charLeft }?.let {
-        findQuoteRight(chars, caret.offset, it)
+        findQuoteRight(chars, caret.offset, it, 0)
       }
     if (rightDelimOffset != null) {
-      selectTextObject(caret.selectionStart, rightDelimOffset, caret, around, deleteDelims)
+      selectRange(caret.selectionStart, rightDelimOffset, caret, around, deleteDelims)
       return
     }
   }
   if (caret.selectionEnd < chars.length) {
     val charRight = chars[caret.selectionEnd]
     val leftDelimOffset: Int? = delimPairs.firstOrNull { it.closeChar == charRight }
-      ?.findOpeningDelim(chars, caret.offset)
+      ?.findOpeningDelim(chars, caret.offset, 0)
       ?: quoteChars.firstOrNull { it == charRight }?.let {
-        findQuoteLeft(chars, caret.offset, it)
+        findQuoteLeft(chars, caret.offset, it, 0)
       }
     if (leftDelimOffset != null) {
-      selectTextObject(leftDelimOffset, caret.selectionEnd, caret, around, deleteDelims)
+      selectRange(leftDelimOffset, caret.selectionEnd, caret, around, deleteDelims)
       return
     }
   }
   selectWord(caret, chars, around)
 }
 
-fun selectTextObject(start: Int, end: Int, caret: Caret, around: Boolean, deleteDelims: Boolean) {
+fun selectRange(start: Int, end: Int, caret: Caret, around: Boolean, deleteDelims: Boolean) {
   val aroundOffset = if (around && !deleteDelims) 1 else 0
   caret.setSelection(start - aroundOffset, end + aroundOffset)
   if (deleteDelims) {
