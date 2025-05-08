@@ -3,7 +3,6 @@ package com.github.ivw.ezmode.cheatsheet
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
 import com.github.ivw.ezmode.editor.*
-import com.intellij.openapi.application.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.colors.*
 import com.intellij.openapi.keymap.*
@@ -17,7 +16,8 @@ import javax.swing.*
 class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
   override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
     val configService = service<EzModeConfigAppService>()
-    var currentMode = Mode.EZ
+    val modeService = project.service<ModeService>()
+    var currentMode = modeService.getMode()
 
     val textArea = JTextArea().apply {
       isEditable = false
@@ -44,10 +44,8 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
       updateText()
     }
 
-    ApplicationManager.getApplication().subscribeToFocusedEditorModeChange(
-      content,
-    ) { mode, editor ->
-      if (currentMode != mode && editor.project == project) {
+    project.subscribeToFocusOrModeChange(content) { mode, editor ->
+      if (currentMode != mode) {
         currentMode = mode
         updateText()
       }

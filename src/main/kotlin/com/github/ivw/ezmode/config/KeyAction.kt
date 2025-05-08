@@ -2,6 +2,7 @@ package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.editor.*
+import com.intellij.openapi.components.service
 
 abstract class KeyAction {
   abstract fun perform(e: EzModeKeyEvent)
@@ -36,7 +37,7 @@ abstract class KeyAction {
 
   data class ChangeMode(val mode: String) : KeyAction() {
     override fun perform(e: EzModeKeyEvent) {
-      e.editor.setMode(mode)
+      e.editor.project?.service<ModeService>()?.setMode(mode)
     }
 
     override fun toNiceString() = EzModeBundle.message("ezmode.KeyAction.ChangeMode", mode)

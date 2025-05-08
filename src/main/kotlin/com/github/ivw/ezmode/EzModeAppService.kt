@@ -2,12 +2,13 @@ package com.github.ivw.ezmode
 
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.*
-import com.intellij.openapi.application.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.diagnostic.*
-import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
 
+/**
+ * Handles the loading/unloading of the plugin.
+ */
 @Service
 class EzModeAppService : Disposable {
   private var isLoaded = false
@@ -22,23 +23,15 @@ class EzModeAppService : Disposable {
     isLoaded = true
 
     TypedAction.getInstance().ensureEzModeLoaded()
-
-    EditorFactory.getInstance().eventMulticaster.addSelectionListener(
-      ModeSelectionListener,
-      this,
-    )
-
-    ApplicationManager.getApplication().invokeLater {
-      initAllEditors(this)
-    }
   }
 
   fun ensureUnloaded() {
+    if (!isLoaded) return
+    isLoaded = false
+
     TypedAction.getInstance().ensureEzModeUnloaded()
 
     clearAllEditorsEzModeData()
-
-    isLoaded = false
   }
 
   companion object {

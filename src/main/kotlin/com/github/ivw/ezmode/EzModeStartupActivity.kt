@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode
 
+import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.diagnostic.*
 import com.intellij.openapi.project.*
@@ -13,6 +14,8 @@ class EzModeStartupActivity : ProjectActivity {
     LOG.info("Loaded project: ${project.name}")
 
     service<EzModeAppService>().ensureLoaded()
+
+    project.service<ModeService>().init()
   }
 
   companion object {

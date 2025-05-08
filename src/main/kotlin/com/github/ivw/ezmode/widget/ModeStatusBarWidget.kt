@@ -23,7 +23,7 @@ class ModeStatusBarWidget(
   private fun getEditor() = dataContext.currentFileEditor.value?.getEditor()
 
   override fun text(): Flow<@NlsContexts.Label String?> =
-    combine(modeChangedFlow, dataContext.currentFileEditor) { _, fileEditor ->
+    combine(focusOrModeChangedFlow, dataContext.currentFileEditor) { _, fileEditor ->
       fileEditor?.getEditor()?.getMode()
     }
 
