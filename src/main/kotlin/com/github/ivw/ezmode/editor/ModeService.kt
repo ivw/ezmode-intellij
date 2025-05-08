@@ -21,6 +21,8 @@ class ModeService(val project: Project) : Disposable {
 
   private var focusedEditor: Editor? = null
 
+  private val ezModeCaretColor = service<EzModeConfigAppService>().getConfig().caretColor
+
   fun init() {
     service<EzModeConfigAppService>().getConfig().defaultMode?.let { projectMode = it }
     FileEditorManager.getInstance(project).selectedTextEditor?.let(::focusEditor)
@@ -42,7 +44,7 @@ class ModeService(val project: Project) : Disposable {
 
   private fun handleFocusOrModeChange(editor: Editor) {
     val editorMode = getMode(editor)
-    editor.updateEditorColors(editorMode)
+    editor.updateEditorColors(editorMode, ezModeCaretColor)
     project.messageBus.syncPublisher(FocusOrModeChangeNotifier.TOPIC)
       .onChanged(editorMode, editor)
     focusOrModeChangedFlow.tryEmit(Unit)
