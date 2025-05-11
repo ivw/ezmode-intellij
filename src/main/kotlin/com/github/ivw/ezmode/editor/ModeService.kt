@@ -20,9 +20,11 @@ class ModeService(val project: Project) : Disposable {
   var projectMode: String = Mode.TYPE
     private set
 
-  private var focusedEditor: Editor? = null
+  var focusedEditor: Editor? = null
+    private set
 
-  private var ezModeCaretColor: JBColor? = null
+  var ezModeCaretColor: JBColor? = null
+    private set
 
   fun init() {
     val configService = service<EzModeConfigAppService>()

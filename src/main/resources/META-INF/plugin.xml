@@ -5,6 +5,7 @@
   <vendor url="https://github.com/ivw">ivw</vendor>
 
   <depends>com.intellij.modules.platform</depends>
+  <depends>AceJump</depends>
 
   <resource-bundle>messages.EzModeBundle</resource-bundle>
 

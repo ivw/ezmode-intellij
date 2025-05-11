@@ -1,9 +1,15 @@
 package com.github.ivw.ezmode.config.keyactions
 
 import com.github.ivw.ezmode.config.*
+import com.github.ivw.ezmode.editor.*
 import com.intellij.ide.*
 import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.application.*
+import com.intellij.openapi.components.*
 import com.intellij.openapi.diagnostic.*
+import com.intellij.openapi.editor.*
+import org.acejump.action.*
+import org.acejump.session.*
 import java.awt.event.*
 import javax.swing.*
 
@@ -25,9 +31,36 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
         anAction.update(anActionEvent)
         if (presentation.isEnabled) {
           anAction.actionPerformed(anActionEvent)
+          afterActionPerformed(anAction, e.editor)
         } else {
           LOG.info("Action not enabled: $actionId")
         }
+      }
+    }
+  }
+
+  /**
+   * After an AceJump action, we want to update the selection (if select mode),
+   * and recalculate the editor colors.
+   */
+  fun afterActionPerformed(action: AnAction, editor: Editor) {
+    if (action is AceAction) {
+      editor.project?.service<ModeService>()?.apply {
+        val mode = getMode(editor)
+        val offsetBeforeJumping = editor.selectionModel.leadSelectionOffset
+        SessionManager[editor]?.addAceJumpListener(object : AceJumpListener {
+          override fun finished(mark: String?, query: String?) {
+            if (focusedEditor == editor) {
+              if (mode == Mode.SELECT) {
+                editor.selectionModel.setSelection(offsetBeforeJumping, editor.caretModel.offset)
+              }
+
+              ApplicationManager.getApplication().invokeLater {
+                editor.updateEditorColors(mode, ezModeCaretColor)
+              }
+            }
+          }
+        })
       }
     }
   }

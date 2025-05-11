@@ -79,7 +79,7 @@ map ez > <idea ParameterInfo>
 map ez / <idea CommentByLineComment>
 map ez ? <idea CommentByBlockComment>
 
-map ez <space> <idea AceWordAction>
+map ez <space> <idea AceAction>
 
 
 map select <default> <ofmode ez>
