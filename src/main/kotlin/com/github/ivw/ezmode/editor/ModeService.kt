@@ -52,8 +52,12 @@ class ModeService(val project: Project) : Disposable {
   }
 
   private fun focusEditor(editor: Editor) {
-    focusedEditor = editor
-    handleFocusOrModeChange(editor)
+    if (editor.editorKind == EditorKind.MAIN_EDITOR ||
+      editor.editorKind == EditorKind.DIFF
+    ) {
+      focusedEditor = editor
+      handleFocusOrModeChange(editor)
+    }
   }
 
   private fun handleFocusOrModeChange(editor: Editor) {
