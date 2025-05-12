@@ -171,6 +171,10 @@ jobs:
   verify:
     name: Verify plugin
     needs: [ build ]
+
+    # Disabled. Has a false positive related to the dependency on the AceJump plugin. Also, expensive.
+    if: false
+
     runs-on: ubuntu-latest
     steps:
 
