@@ -25,8 +25,12 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
         handleEmptyAction(anAction, e)
       } else {
         val presentation = Presentation()
-        val anActionEvent = AnActionEvent.createFromDataContext(
-          "ezmode", presentation, e.dataContext
+        val anActionEvent = AnActionEvent.createEvent(
+          e.dataContext,
+          presentation,
+          "ezmode",
+          ActionUiKind.NONE,
+          null,
         )
         anAction.update(anActionEvent)
         if (presentation.isEnabled) {

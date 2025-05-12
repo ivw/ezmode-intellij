@@ -46,8 +46,6 @@ dependencies {
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file for plugin from JetBrains Marketplace.
     plugins(providers.gradleProperty("platformPlugins").map { it.split(',') })
 
-    plugin("AceJump:3.8.22")
-
     testFramework(TestFrameworkType.Platform)
   }
 }
