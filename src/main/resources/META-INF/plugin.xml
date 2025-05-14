@@ -42,9 +42,11 @@
     <group id="ezmode.EzModeActionGroup"
            class="com.github.ivw.ezmode.actions.EzModeActionGroup">
       <action id="ezmode.OpenEzModeRc"
-              class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"/>
+              class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"
+              icon="AllIcons.General.Settings"/>
       <action id="ezmode.ReloadEzModeRc"
-              class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"/>
+              class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"
+              icon="AllIcons.Actions.Refresh"/>
       <action id="ezmode.ToggleCheatSheet"
               class="com.github.ivw.ezmode.actions.ToggleCheatSheetAction"/>
       <action id="ezmode.EnterEzMode"
@@ -53,6 +55,9 @@
       </action>
       <action id="ezmode.ExitEzMode"
               class="com.github.ivw.ezmode.actions.ExitEzModeAction"/>
+      <action id="ezmode.OpenGithubPage"
+              class="com.github.ivw.ezmode.actions.OpenEzModeGithubAction"
+              icon="AllIcons.Vcs.Vendors.Github"/>
     </group>
   </actions>
 </idea-plugin>
