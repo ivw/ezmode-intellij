@@ -44,7 +44,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
       updateText()
     }
 
-    project.subscribeToFocusOrModeChange(content) { mode, editor ->
+    project.subscribeToFocusOrModeChange(content) { mode, _ ->
       if (currentMode != mode) {
         currentMode = mode
         updateText()

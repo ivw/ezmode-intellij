@@ -3,8 +3,6 @@ package com.github.ivw.ezmode.editor
 import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.util.*
-import kotlinx.coroutines.channels.*
-import kotlinx.coroutines.flow.*
 
 object Mode {
   const val TYPE = "type"
@@ -33,9 +31,3 @@ fun Editor.clearEzModeData() {
 fun clearAllEditorsEzModeData() {
   EditorFactory.getInstance().allEditors.forEach { it.clearEzModeData() }
 }
-
-/**
- * Emits whenever the focused editor or its mode changes.
- */
-val focusOrModeChangedFlow = MutableSharedFlow<Unit>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-  .also { it.tryEmit(Unit) }

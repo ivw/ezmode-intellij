@@ -69,7 +69,6 @@ class ModeService(val project: Project) : Disposable {
     editor.updateEditorColors(editorMode, ezModeCaretColor)
     project.messageBus.syncPublisher(FocusOrModeChangeNotifier.TOPIC)
       .onChanged(editorMode, editor)
-    focusOrModeChangedFlow.tryEmit(Unit)
   }
 
   fun setMode(mode: String) {

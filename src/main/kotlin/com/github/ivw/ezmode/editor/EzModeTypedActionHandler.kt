@@ -34,7 +34,6 @@ fun TypedAction.ensureEzModeLoaded() {
   }
 }
 
-
 fun TypedAction.ensureEzModeUnloaded() {
   val rawHandler = rawHandler
   if (rawHandler is EzModeTypedActionHandler) {
