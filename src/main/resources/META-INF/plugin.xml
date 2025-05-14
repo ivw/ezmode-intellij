@@ -45,8 +45,8 @@
               class="com.github.ivw.ezmode.actions.OpenEzModeRcAction"/>
       <action id="ezmode.ReloadEzModeRc"
               class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"/>
-      <action id="ezmode.OpenCheatSheet"
-              class="com.github.ivw.ezmode.actions.OpenCheatSheetAction"/>
+      <action id="ezmode.ToggleCheatSheet"
+              class="com.github.ivw.ezmode.actions.ToggleCheatSheetAction"/>
       <action id="ezmode.EnterEzMode"
               class="com.github.ivw.ezmode.actions.EnterEzModeAction">
         <keyboard-shortcut keymap="$default" first-keystroke="alt X"/>

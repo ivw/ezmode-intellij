@@ -6,6 +6,7 @@ map ez 1 <idea SelectInProjectView>
 map ez 2 <idea ActivateCommitToolWindow>
 map ez 3 <idea ActivateTerminalToolWindow>
 map ez 4 <idea HideActiveWindow>
+map ez 5 <idea ezmode.ToggleCheatSheet>
 map ez $ <idea HideAllWindows>
 map ez 8 <idea GotoDeclaration>
 map ez 9 <idea UnselectPreviousOccurrence>

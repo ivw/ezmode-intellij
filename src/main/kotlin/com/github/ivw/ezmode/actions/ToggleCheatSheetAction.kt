@@ -5,13 +5,15 @@ import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.project.*
 import com.intellij.openapi.wm.*
 
-class OpenCheatSheetAction : DumbAwareAction(
-  EzModeBundle.messagePointer("action.ezmode.OpenCheatSheet.text")
+class ToggleCheatSheetAction : DumbAwareAction(
+  EzModeBundle.messagePointer("action.ezmode.ToggleCheatSheet.text")
 ) {
   override fun actionPerformed(e: AnActionEvent) {
     e.project?.let { project ->
       ToolWindowManager.getInstance(project).getToolWindow("ezmode.cheatSheet")
-        ?.show()
+        ?.toggle()
     }
   }
 }
+
+fun ToolWindow.toggle() = if (isVisible) hide() else show()
