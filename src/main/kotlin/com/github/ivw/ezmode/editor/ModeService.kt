@@ -39,7 +39,7 @@ class ModeService(val project: Project) : Disposable {
       }
     }
 
-    FileEditorManager.getInstance(project).selectedTextEditor?.let(::focusEditor)
+    FileEditorManager.getInstance(project).selectedTextEditor?.let(::focusEditorIfValid)
     EditorFactory.getInstance().apply {
       (eventMulticaster as? EditorEventMulticasterEx)?.addFocusChangeListener(
         MyFocusChangeListener(), this@ModeService,
@@ -51,10 +51,14 @@ class ModeService(val project: Project) : Disposable {
   override fun dispose() {
   }
 
-  private fun focusEditor(editor: Editor) {
-    if (editor.editorKind == EditorKind.MAIN_EDITOR ||
-      editor.editorKind == EditorKind.DIFF
-    ) {
+  private fun isValidEditor(editor: Editor) =
+    editor.project == project && (
+      editor.editorKind == EditorKind.MAIN_EDITOR ||
+        editor.editorKind == EditorKind.DIFF
+      )
+
+  private fun focusEditorIfValid(editor: Editor) {
+    if (isValidEditor(editor)) {
       focusedEditor = editor
       handleFocusOrModeChange(editor)
     }
@@ -85,22 +89,22 @@ class ModeService(val project: Project) : Disposable {
   }
 
   fun getMode(editor: Editor): String =
-    if (projectMode == Mode.EZ && editor.getSelectModeLeadOffset() != null) {
-      Mode.SELECT
-    } else projectMode
+    if (isValidEditor(editor)) {
+      if (projectMode == Mode.EZ && editor.getSelectModeLeadOffset() != null) {
+        Mode.SELECT
+      } else projectMode
+    } else Mode.TYPE
 
   fun getMode(): String =
     focusedEditor?.let { getMode(it) } ?: projectMode
 
   private inner class MyFocusChangeListener : FocusChangeListener {
     override fun focusGained(editor: Editor, event: FocusEvent) {
-      if (editor.project == project) {
-        focusEditor(editor)
-      }
+      focusEditorIfValid(editor)
     }
 
     override fun focusLost(editor: Editor, event: FocusEvent) {
-      if (editor.project == project) {
+      if (isValidEditor(editor)) {
         focusedEditor = null
       }
     }
@@ -108,7 +112,7 @@ class ModeService(val project: Project) : Disposable {
 
   private inner class MySelectionListener : SelectionListener {
     override fun selectionChanged(e: SelectionEvent) {
-      if (e.editor.project == project) {
+      if (isValidEditor(e.editor)) {
         if (e.newRange.isEmpty) {
           if (e.newRange.startOffset != e.editor.getSelectModeLeadOffset()) {
             e.editor.setSelectModeLeadOffset(null)
