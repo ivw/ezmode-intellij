@@ -49,7 +49,6 @@
               class="com.github.ivw.ezmode.actions.OpenCheatSheetAction"/>
       <action id="ezmode.EnterEzMode"
               class="com.github.ivw.ezmode.actions.EnterEzModeAction">
-        <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON"/>
         <keyboard-shortcut keymap="$default" first-keystroke="alt X"/>
       </action>
       <action id="ezmode.ExitEzMode"
