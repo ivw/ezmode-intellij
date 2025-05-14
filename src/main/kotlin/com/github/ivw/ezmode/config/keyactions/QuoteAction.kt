@@ -2,6 +2,7 @@ package com.github.ivw.ezmode.config.keyactions
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
+import com.intellij.openapi.editor.*
 
 /**
  * An action to jump to a quote.
@@ -15,6 +16,7 @@ data class QuoteAction(
       findQuoteAuto(chars, caret.offset, quoteChar)?.let { offset ->
         caret.removeSelection()
         caret.moveToOffset(offset)
+        e.editor.scrollingModel.scrollToCaret(ScrollType.RELATIVE)
       }
     }
   }
