@@ -27,23 +27,20 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
       margin = JBUI.insets(5)
     }
 
-    fun updateText() {
-      textArea.text = getText(currentMode, configService.getConfig())
-    }
-    updateText()
-
     val component = JBScrollPane(textArea)
     val content = ContentFactory.getInstance().createContent(
-      component,
-      null,
-      true,
+      component, null, true,
     )
     toolWindow.contentManager.addContent(content)
 
+    fun updateText() {
+      textArea.text = getText(currentMode, configService.getConfig())
+      textArea.caretPosition = 0
+    }
+    updateText()
     configService.subscribeToConfig(content) { _ ->
       updateText()
     }
-
     project.subscribeToFocusOrModeChange(content) { mode, _ ->
       if (currentMode != mode) {
         currentMode = mode
