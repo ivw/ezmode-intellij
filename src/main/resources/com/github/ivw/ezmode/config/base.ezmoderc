@@ -39,8 +39,8 @@ map ez [ <pair open []>
 map ez { <pair open {}>
 map ez ] <pair close []>
 map ez } <pair close {}>
-map ez \ <idea MoveTabRight>
-map ez | <idea SplitVertically>
+map ez \ <idea SplitVertically>
+map ez | <idea MoveTabRight>
 
 map ez a <idea $SelectAll>
 map ez A <idea EditorSelectLine>
