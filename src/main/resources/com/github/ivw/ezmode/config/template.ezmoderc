@@ -1,0 +1,19 @@
+# .ezmoderc lets you define custom key mappings for ezmode.
+
+# Set default mode when starting up:
+set defaultmode ez
+
+# Example: change the EzMode caret color:
+# set caretcolor #ff0000
+
+# Key mappings are in this format:
+# map {mode} {keychar} {actions}
+
+# Example: upper case C selects the whole file:
+# map ez C ac
+
+# Example: Do not unselect after copying:
+# map select c <idea $Copy>
+
+# Example: Delete selection before going to type mode:
+# map ez t <idea ezmode.DeleteSelection><mode type>

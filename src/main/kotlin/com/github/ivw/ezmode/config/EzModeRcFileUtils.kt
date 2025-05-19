@@ -6,15 +6,9 @@ import java.io.*
 
 object EzModeRcFileUtils {
   const val BASE_RC_RESOURCE_NAME = "base.ezmoderc"
+  const val TEMPLATE_RC_RESOURCE_NAME = "template.ezmoderc"
   const val USER_RC_NAME = ".ezmoderc"
   const val USER_IDEA_RC_NAME = ".idea.ezmoderc"
-
-  val RC_FILE_TEMPLATE: String = """
-    # .ezmoderc lets you define custom key mappings for ezmode.
-    
-    # map {mode} {key} {actions}
-    map ez 6 <write Hello world><mode type>
-  """.trimIndent()
 
   private val homePathName: String by lazy {
     System.getProperty("user.home")
@@ -31,6 +25,10 @@ object EzModeRcFileUtils {
       }
   }
 
+  fun getRcFileTemplate(): String? =
+    javaClass.getResourceAsStream(TEMPLATE_RC_RESOURCE_NAME)
+      ?.bufferedReader()?.use { it.readText() }
+
   fun getUserRcFile(fileName: String): File =
     File(homePathName, fileName)
 
@@ -38,7 +36,7 @@ object EzModeRcFileUtils {
     val file = getUserRcFile(fileName)
     if (!file.exists()) {
       file.createNewFile()
-      file.writeText(RC_FILE_TEMPLATE)
+      getRcFileTemplate()?.let(file::writeText)
     }
     return file
   }

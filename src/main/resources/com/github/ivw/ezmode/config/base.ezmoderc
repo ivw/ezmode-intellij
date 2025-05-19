@@ -25,7 +25,7 @@ map ez e <mode select>
 map ez E <idea EditorUnSelectWord>
 map ez r <idea Replace>
 map ez R <idea ReplaceInPath>
-map ez t <idea ezmode.DeleteSelection><mode type>
+map ez t <mode type>
 map ez y <idea $Redo>
 map ez u <idea EditorPreviousWord>
 map ez U <idea EditorDeleteToWordStart>
