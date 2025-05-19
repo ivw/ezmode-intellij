@@ -90,7 +90,6 @@ val quoteChars: List<Char> = listOf('"', '\'', '`')
 val Char.isWordChar get() = isLetterOrDigit() || this == '_'
 
 fun selectWord(caret: Caret, chars: CharSequence, around: Boolean) {
-  // TODO deleteDelims
   var start = caret.offset
   var end = caret.offset
   while (start > 0 && chars[start - 1].isWordChar) {
@@ -112,6 +111,7 @@ fun selectWord(caret: Caret, chars: CharSequence, around: Boolean) {
       }
     }
   }
+  caret.moveToOffset(end)
   caret.setSelection(start, end)
 }
 
@@ -141,7 +141,6 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
       return
     }
   }
-  selectWord(caret, chars, around)
 }
 
 fun selectRange(start: Int, end: Int, caret: Caret, around: Boolean, deleteDelims: Boolean) {

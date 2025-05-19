@@ -22,7 +22,7 @@ map ez Q <idea Unsplit>
 map ez w <idea CloseContent>
 map ez W <idea CloseAllEditorsButActive>
 map ez e <mode select>
-map ez E <idea EditorUnSelectWord>
+map ez E <idea EditorSelectLine>
 map ez r <idea Replace>
 map ez R <idea ReplaceInPath>
 map ez t <mode type>
@@ -42,8 +42,8 @@ map ez } <pair close {}>
 map ez \ <idea SplitVertically>
 map ez | <idea MoveTabRight>
 
-map ez a <idea $SelectAll>
-map ez A <idea EditorSelectLine>
+map ez a <idea ezmode.SelectWord>
+map ez A <idea $SelectAll>
 map ez s <idea SaveAll>
 map ez d <idea $Delete>
 map ez D <idea EditorBackSpace>
@@ -89,7 +89,6 @@ map select ` <native><mode ez>
 map select ( <native><mode ez>
 map select ) <native><mode ez>
 
-map select e <idea EditorSelectWord>
 map select u <idea EditorPreviousWordWithSelection>
 map select U <ofmode ez><mode ez>
 map select i <idea EditorUpWithSelection>

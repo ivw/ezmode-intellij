@@ -33,6 +33,8 @@
             class="com.github.ivw.ezmode.actions.DeleteSelectionAction"/>
     <action id="ezmode.Unselect"
             class="com.github.ivw.ezmode.actions.UnselectAction"/>
+    <action id="ezmode.SelectWord"
+            class="com.github.ivw.ezmode.actions.SelectWordAction"/>
     <action id="ezmode.InsideTextObject"
             class="com.github.ivw.ezmode.actions.InsideTextObjectAction"/>
     <action id="ezmode.AroundTextObject"
