@@ -18,7 +18,7 @@ fun moveTabShortcuts() {
   val newTabShortcut = KeyboardShortcut.fromString("alt T")
 
   val ezModeUsesTab = keymap.getShortcuts("ezmode.EnterEzMode").contains(tabShortcut)
-  if (ezModeUsesTab && keymap.getActionIdList(newTabShortcut).isEmpty()) {
+  if (ezModeUsesTab) {
     keymap.removeShortcut("EditorTab", tabShortcut)
     keymap.removeShortcut("EditorIndentSelection", tabShortcut)
     keymap.addShortcut("EditorTab", newTabShortcut)
