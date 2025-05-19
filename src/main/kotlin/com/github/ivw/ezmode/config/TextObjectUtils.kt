@@ -120,9 +120,9 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   if (caret.selectionStart > 0) {
     val charLeft = chars[caret.selectionStart - 1]
     val rightDelimOffset: Int? = delimPairs.firstOrNull { it.openChar == charLeft }
-      ?.findClosingDelim(chars, caret.offset, 0)
+      ?.findClosingDelim(chars, caret.selectionStart, 0)
       ?: quoteChars.firstOrNull { it == charLeft }?.let {
-        findQuoteRight(chars, caret.offset, it, 0)
+        findQuoteRight(chars, caret.selectionStart, it, 0)
       }
     if (rightDelimOffset != null) {
       selectRange(caret.selectionStart, rightDelimOffset, caret, around, deleteDelims)
@@ -132,9 +132,9 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   if (caret.selectionEnd < chars.length) {
     val charRight = chars[caret.selectionEnd]
     val leftDelimOffset: Int? = delimPairs.firstOrNull { it.closeChar == charRight }
-      ?.findOpeningDelim(chars, caret.offset, 0)
+      ?.findOpeningDelim(chars, caret.selectionEnd, 0)
       ?: quoteChars.firstOrNull { it == charRight }?.let {
-        findQuoteLeft(chars, caret.offset, it, 0)
+        findQuoteLeft(chars, caret.selectionEnd, it, 0)
       }
     if (leftDelimOffset != null) {
       selectRange(leftDelimOffset, caret.selectionEnd, caret, around, deleteDelims)

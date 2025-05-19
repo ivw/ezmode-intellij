@@ -100,4 +100,18 @@ class TextObjectUtilsTest {
     selectTextObject(caret, around = false, deleteDelims = false)
     verify { selectRange(1, 1, caret, around = false, deleteDelims = false) }
   }
+
+  @Test
+  fun selectTextObjectWithSelectionRange() {
+    val chars: CharSequence = "(foo())"
+    val caret = mockk<Caret>(relaxed = true)
+    every { caret.editor.document.charsSequence } returns chars
+    every { caret.offset } returns 5
+    every { caret.selectionStart } returns 4
+    every { caret.selectionEnd } returns 6
+    mockkStatic(::selectTextObject)
+
+    selectTextObject(caret, around = false, deleteDelims = false)
+    verify { selectRange(1, 6, caret, around = false, deleteDelims = false) }
+  }
 }
