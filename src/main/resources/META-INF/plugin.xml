@@ -51,7 +51,7 @@
               class="com.github.ivw.ezmode.actions.ToggleCheatSheetAction"/>
       <action id="ezmode.EnterEzMode"
               class="com.github.ivw.ezmode.actions.EnterEzModeAction">
-        <keyboard-shortcut keymap="$default" first-keystroke="alt X"/>
+        <keyboard-shortcut keymap="$default" first-keystroke="TAB"/>
       </action>
       <action id="ezmode.ExitEzMode"
               class="com.github.ivw.ezmode.actions.ExitEzModeAction"/>

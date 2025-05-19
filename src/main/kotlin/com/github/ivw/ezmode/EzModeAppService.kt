@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode
 
+import com.github.ivw.ezmode.config.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.*
 import com.intellij.openapi.components.*
@@ -23,6 +24,8 @@ class EzModeAppService : Disposable {
     isLoaded = true
 
     TypedAction.getInstance().ensureEzModeLoaded()
+
+    moveTabShortcuts()
   }
 
   fun ensureUnloaded() {
