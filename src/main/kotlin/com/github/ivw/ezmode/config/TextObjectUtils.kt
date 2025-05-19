@@ -102,12 +102,12 @@ fun selectWord(caret: Caret, chars: CharSequence, around: Boolean) {
   if (around) {
     // Include whitespace at the end.
     val endBeforeAround = end
-    while (end < chars.length && chars[end].isWhitespace()) {
+    while (end < chars.length && chars[end] == ' ') {
       end++
     }
     // If no whitespace at the end, add whitespace at the start.
     if (endBeforeAround == end) {
-      while (start > 0 && chars[start - 1].isWhitespace()) {
+      while (start > 0 && chars[start - 1] == ' ') {
         start--
       }
     }
