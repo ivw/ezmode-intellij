@@ -85,20 +85,12 @@ map ez <space> <idea AceAction>
 
 map select <default> <ofmode ez>
 
-map select ` <native><mode ez>
-map select ( <native><mode ez>
-map select ) <native><mode ez>
-
 map select u <idea EditorPreviousWordWithSelection>
 map select U <ofmode ez><mode ez>
 map select i <idea EditorUpWithSelection>
 map select I <idea EditorBackwardParagraphWithSelection>
 map select o <idea EditorNextWordWithSelection>
 map select O <ofmode ez><mode ez>
-map select [ <native><mode ez>
-map select { <native><mode ez>
-map select ] <native><mode ez>
-map select } <native><mode ez>
 
 map select d <ofmode ez><mode ez>
 map select D <ofmode ez><mode ez>
@@ -110,16 +102,12 @@ map select K <idea EditorForwardParagraphWithSelection>
 map select l <idea EditorRightWithSelection>
 map select ; <idea EditorLineEndWithSelection>
 map select : <idea EditorTextEndWithSelection>
-map select ' <native><mode ez>
-map select " <native><mode ez>
 
 map select x <ofmode ez><mode ez>
 map select c <ofmode ez><mode ez>
 map select v <ofmode ez><mode ez>
 map select m <ofmode ez><mode ez>
 map select M <ofmode ez><mode ez>
-map select < <native><mode ez>
-map select > <native><mode ez>
 
 
 map git <default> <mode ez>

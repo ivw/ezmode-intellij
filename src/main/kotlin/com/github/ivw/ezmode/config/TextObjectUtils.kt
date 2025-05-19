@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.config
 
+import com.github.ivw.ezmode.editor.Mode
 import com.intellij.openapi.command.*
 import com.intellij.openapi.editor.*
 
@@ -152,4 +153,14 @@ fun selectRange(start: Int, end: Int, caret: Caret, around: Boolean, deleteDelim
       caret.editor.document.deleteString(start - 1, start)
     }
   }
+}
+
+fun moveCaretWithOptionalSelection(caret: Caret, offset: Int, mode: String) {
+  if (mode == Mode.SELECT) {
+    caret.setSelection(caret.leadSelectionOffset, offset)
+  } else {
+    caret.removeSelection()
+  }
+  caret.moveToOffset(offset)
+  caret.editor.scrollingModel.scrollToCaret(ScrollType.RELATIVE)
 }

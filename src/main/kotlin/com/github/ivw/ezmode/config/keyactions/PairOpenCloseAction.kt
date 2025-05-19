@@ -2,7 +2,6 @@ package com.github.ivw.ezmode.config.keyactions
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
-import com.intellij.openapi.editor.*
 
 /**
  * An action to jump to an opening/closing delimiter such as { or }.
@@ -20,9 +19,7 @@ data class PairOpenCloseAction(
         pair.findClosingDelim(chars, caret.offset)
       }
       delim?.let {
-        caret.removeSelection()
-        caret.moveToOffset(it)
-        e.editor.scrollingModel.scrollToCaret(ScrollType.RELATIVE)
+        moveCaretWithOptionalSelection(caret, it, e.mode)
       }
     }
   }

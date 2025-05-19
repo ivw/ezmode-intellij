@@ -48,7 +48,7 @@ abstract class KeyAction {
 
   data class OfMode(val mode: String) : KeyAction() {
     override fun perform(e: EzModeKeyEvent) {
-      e.config.performKeyAction(mode, e.char, e.dataContext, e.editor, e.nativeHandler)
+      e.config.keyMap.getBindingOrDefault(mode, e.char)?.action?.perform(e)
     }
 
     override fun toNiceString(): String = EzModeBundle.message("ezmode.KeyAction.OfMode", mode)
