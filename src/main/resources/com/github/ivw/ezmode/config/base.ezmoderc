@@ -117,7 +117,7 @@ map git i <idea PreviousDiff>
 map git p <idea Vcs.Push><mode ez>
 
 map git a <idea Annotate><mode ez>
-map git g <idea Vcs.Show.Log><mode ez>
+map git s <idea Vcs.Show.Log><mode ez>
 map git h <idea Vcs.ShowTabbedFileHistory><mode ez>
 map git j <idea Diff.PrevChange>
 map git k <idea NextDiff>
