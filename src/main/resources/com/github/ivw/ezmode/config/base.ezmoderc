@@ -1,4 +1,5 @@
 map type <default> <native>
+map typeonce <default> <native><mode ez>
 
 
 map ez ` <quote `>
@@ -26,6 +27,7 @@ map ez E <idea EditorSelectLine>
 map ez r <idea Replace>
 map ez R <idea ReplaceInPath>
 map ez t <mode type>
+map ez T <mode typeonce>
 map ez y <idea $Redo>
 map ez u <idea EditorPreviousWord>
 map ez U <idea EditorDeleteToWordStart>
