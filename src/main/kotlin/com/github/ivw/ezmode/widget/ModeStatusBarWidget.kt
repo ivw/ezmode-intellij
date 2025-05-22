@@ -42,5 +42,15 @@ class ModeStatusBarWidget(val project: Project) : CustomStatusBarWidget {
     project.subscribeToFocusOrModeChange(this) { mode, _ ->
       label.text = mode
     }
+
+    GotItTooltip(
+      id = "com.github.ivw.ezmode.tutorial",
+      text = EzModeBundle.message("ezmode.gotItTooltip.tutorial.text"),
+      parentDisposable = this,
+    )
+      .withLink(EzModeBundle.message("action.ezmode.OpenTutorial.text")) {
+        EzModeTutorialAction.openTutorial(project)
+      }
+      .show(label, GotItTooltip.TOP_MIDDLE)
   }
 }
