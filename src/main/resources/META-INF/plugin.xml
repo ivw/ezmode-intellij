@@ -51,6 +51,8 @@
               icon="AllIcons.Actions.Refresh"/>
       <action id="ezmode.ToggleCheatSheet"
               class="com.github.ivw.ezmode.actions.ToggleCheatSheetAction"/>
+      <action id="ezmode.OpenTutorial"
+              class="com.github.ivw.ezmode.actions.EzModeTutorialAction"/>
       <action id="ezmode.EnterEzMode"
               class="com.github.ivw.ezmode.actions.EnterEzModeAction">
         <keyboard-shortcut keymap="$default" first-keystroke="TAB"/>
