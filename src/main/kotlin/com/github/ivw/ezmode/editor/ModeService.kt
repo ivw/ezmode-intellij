@@ -81,7 +81,7 @@ class ModeService(val project: Project) : Disposable {
         editor.setSelectModeLeadOffset(null)
       } else if (mode == Mode.EZ && projectModeOld == Mode.EZ) {
         editor.setSelectModeLeadOffset(null)
-        editor.selectionModel.removeSelection()
+        editor.selectionModel.removeSelection(true)
       }
       handleFocusOrModeChange(editor)
     }
