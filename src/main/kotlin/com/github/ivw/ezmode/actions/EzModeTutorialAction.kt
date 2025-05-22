@@ -12,16 +12,16 @@ class EzModeTutorialAction : DumbAwareAction() {
     val tutorialText = tutorialText ?: return
 
     val scratchFile = ScratchRootType.getInstance().createScratchFile(
-      project, "tutorial.md", null, tutorialText,
+      project, "EzModeTutorial.md", null, tutorialText,
     ) ?: return
 
-    val editors = FileEditorManager.getInstance(project).openFile(scratchFile, true)
-    editors.forEach { editor ->
-      // Close the markdown preview:
-      TextEditorWithPreview.getParentSplitEditor(editor)?.setLayout(
-        TextEditorWithPreview.Layout.SHOW_EDITOR
-      )
-    }
+    FileEditorManager.getInstance(project).openFile(scratchFile, true)
+      .forEach { editor ->
+        // Close the markdown preview:
+        TextEditorWithPreview.getParentSplitEditor(editor)?.setLayout(
+          TextEditorWithPreview.Layout.SHOW_EDITOR
+        )
+      }
   }
 
   companion object {
