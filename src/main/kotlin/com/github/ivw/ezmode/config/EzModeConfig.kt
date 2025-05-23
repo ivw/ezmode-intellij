@@ -5,7 +5,6 @@ import com.intellij.openapi.diagnostic.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
 import com.intellij.openapi.project.*
-import com.intellij.ui.*
 import java.awt.*
 
 typealias MutableEzModeKeyMap = LinkedHashMap<ModeAndChar, KeyBinding>
@@ -16,7 +15,7 @@ class EzModeConfig(
 ) {
   val defaultMode: String? get() = vars["defaultmode"]
 
-  val caretColor: JBColor? by lazy {
+  val caretColor: Color? by lazy {
     vars["caretcolor"]?.let {
       try {
         Color.decode(it)
@@ -24,7 +23,7 @@ class EzModeConfig(
         thisLogger().info(t)
         null
       }
-    }?.let { JBColor(it, it) }
+    }
   }
 
   fun performKeyAction(

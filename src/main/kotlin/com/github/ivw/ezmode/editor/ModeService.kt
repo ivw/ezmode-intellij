@@ -8,7 +8,7 @@ import com.intellij.openapi.editor.event.*
 import com.intellij.openapi.editor.ex.*
 import com.intellij.openapi.fileEditor.*
 import com.intellij.openapi.project.*
-import com.intellij.ui.*
+import java.awt.*
 import java.awt.event.*
 
 @Service(Service.Level.PROJECT)
@@ -23,7 +23,7 @@ class ModeService(val project: Project) : Disposable {
   var focusedEditor: Editor? = null
     private set
 
-  var ezModeCaretColor: JBColor? = null
+  var ezModeCaretColor: Color? = null
     private set
 
   fun init() {
