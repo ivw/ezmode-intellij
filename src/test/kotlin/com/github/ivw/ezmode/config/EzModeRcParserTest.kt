@@ -6,9 +6,9 @@ import io.kotest.assertions.throwables.*
 import io.kotest.matchers.*
 import io.kotest.matchers.collections.*
 import io.kotest.matchers.nulls.*
-import io.kotest.matchers.types.shouldBeInstanceOf
+import io.kotest.matchers.types.*
 import org.junit.*
-import java.awt.Color
+import java.awt.*
 
 class EzModeRcParserTest {
   @Test

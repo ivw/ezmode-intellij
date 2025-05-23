@@ -4,6 +4,7 @@ import com.github.ivw.ezmode.config.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.ide.*
 import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.actionSystem.ex.*
 import com.intellij.openapi.application.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.diagnostic.*
@@ -24,21 +25,19 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
       if (anAction is EmptyAction) {
         handleEmptyAction(anAction, e)
       } else {
-        val presentation = Presentation()
         val anActionEvent = AnActionEvent.createEvent(
+          anAction,
           e.dataContext,
-          presentation,
-          "ezmode",
+          null,
+          ActionPlaces.KEYBOARD_SHORTCUT,
           ActionUiKind.NONE,
           null,
         )
-        anAction.update(anActionEvent)
-        if (presentation.isEnabled) {
-          anAction.actionPerformed(anActionEvent)
-          afterActionPerformed(anAction, e.editor)
-        } else {
-          LOG.info("Action not enabled: $actionId")
-        }
+        ActionUtil.performActionDumbAwareWithCallbacks(
+          anAction,
+          anActionEvent
+        )
+        if (anAction is AceAction) afterAceActionPerformed(e.editor)
       }
     }
   }
@@ -47,25 +46,23 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
    * After an AceJump action, we want to update the selection (if select mode),
    * and recalculate the editor colors.
    */
-  fun afterActionPerformed(action: AnAction, editor: Editor) {
-    if (action is AceAction) {
-      editor.project?.service<ModeService>()?.apply {
-        val mode = getMode(editor)
-        val offsetBeforeJumping = editor.selectionModel.leadSelectionOffset
-        SessionManager[editor]?.addAceJumpListener(object : AceJumpListener {
-          override fun finished(mark: String?, query: String?) {
-            if (focusedEditor == editor) {
-              if (mode == Mode.SELECT) {
-                editor.selectionModel.setSelection(offsetBeforeJumping, editor.caretModel.offset)
-              }
+  fun afterAceActionPerformed(editor: Editor) {
+    editor.project?.service<ModeService>()?.apply {
+      val mode = getMode(editor)
+      val offsetBeforeJumping = editor.selectionModel.leadSelectionOffset
+      SessionManager[editor]?.addAceJumpListener(object : AceJumpListener {
+        override fun finished(mark: String?, query: String?) {
+          if (focusedEditor == editor) {
+            if (mode == Mode.SELECT) {
+              editor.selectionModel.setSelection(offsetBeforeJumping, editor.caretModel.offset)
+            }
 
-              ApplicationManager.getApplication().invokeLater {
-                editor.updateEditorColors(mode, ezModeCaretColor)
-              }
+            ApplicationManager.getApplication().invokeLater {
+              editor.updateEditorColors(mode, ezModeCaretColor)
             }
           }
-        })
-      }
+        }
+      })
     }
   }
 
