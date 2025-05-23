@@ -19,7 +19,7 @@ map ez = <idea ezmode.AroundTextObject>
 map ez _ <idea ezmode.DeleteDelimsTextObject>
 
 map ez q <idea NextSplitter>
-map ez Q <idea Unsplit>
+map ez Q <idea CloseAllEditors>
 map ez w <idea CloseContent>
 map ez W <idea CloseAllEditorsButActive>
 map ez e <mode select>
