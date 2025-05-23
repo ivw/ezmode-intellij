@@ -13,7 +13,7 @@ private val colorKey = EditorColors.CARET_COLOR
 private val ORIGINAL_CARET_COLOR_KEY = Key.create<Color?>("ezmode.originalCaretColor")
 
 fun Editor.updateEditorColors(mode: String, ezModeCaretColor: Color?) {
-  val originalColor: Color? = getOrCreateUserData(ORIGINAL_CARET_COLOR_KEY) {
+  val originalColor: Color? = getOrCreateUserDataUnsafe(ORIGINAL_CARET_COLOR_KEY) {
     colorsScheme.getColor(colorKey)
   }
   colorsScheme.setColor(
