@@ -6,7 +6,9 @@ import io.kotest.assertions.throwables.*
 import io.kotest.matchers.*
 import io.kotest.matchers.collections.*
 import io.kotest.matchers.nulls.*
+import io.kotest.matchers.types.shouldBeInstanceOf
 import org.junit.*
+import java.awt.Color
 
 class EzModeRcParserTest {
   @Test
@@ -121,7 +123,7 @@ class EzModeRcParserTest {
       EzModeRcParser.parse(config, lines, null)
     }
     config.defaultMode.shouldBe(Mode.EZ)
-    config.caretColor.shouldNotBeNull().red.shouldBe(0xAB)
+    config.caretColor.shouldBeInstanceOf<Color>().red.shouldBe(0xAB)
     config.vars["myvar"].shouldBe("This var has multiple words")
   }
 
