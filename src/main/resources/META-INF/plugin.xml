@@ -25,6 +25,7 @@
                 factoryClass="com.github.ivw.ezmode.cheatsheet.CheatSheetToolWindowFactory"
                 anchor="right"
                 secondary="false"
+                icon="icons/ezmode.svg"
     />
   </extensions>
 
@@ -50,7 +51,8 @@
               class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"
               icon="AllIcons.Actions.Refresh"/>
       <action id="ezmode.ToggleCheatSheet"
-              class="com.github.ivw.ezmode.actions.ToggleCheatSheetAction"/>
+              class="com.github.ivw.ezmode.actions.ToggleCheatSheetAction"
+              icon="icons/ezmode.svg"/>
       <action id="ezmode.OpenTutorial"
               class="com.github.ivw.ezmode.actions.EzModeTutorialAction"
               icon="AllIcons.General.ReaderMode"/>
