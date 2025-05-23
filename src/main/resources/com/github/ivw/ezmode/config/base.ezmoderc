@@ -12,7 +12,7 @@ map ez $ <idea HideAllWindows>
 map ez 8 <idea GotoDeclaration>
 map ez 9 <idea UnselectPreviousOccurrence>
 map ez ( <pair open ()>
-map ez 0 <idea SelectNextOccurrence>
+map ez 0 <idea ezmode.SelectNextOccurrence>
 map ez ) <pair close ()>
 map ez - <idea ezmode.InsideTextObject>
 map ez = <idea ezmode.AroundTextObject>

@@ -42,6 +42,8 @@
             class="com.github.ivw.ezmode.actions.AroundTextObjectAction"/>
     <action id="ezmode.DeleteDelimsTextObject"
             class="com.github.ivw.ezmode.actions.DeleteDelimsTextObjectAction"/>
+    <action id="ezmode.SelectNextOccurrence"
+            class="com.github.ivw.ezmode.actions.SelectNextOccurrenceAction"/>
     <group id="ezmode.EzModeActionGroup"
            class="com.github.ivw.ezmode.actions.EzModeActionGroup">
       <action id="ezmode.OpenEzModeRc"
