@@ -9,7 +9,8 @@ class TextObjectUtilsTest {
   fun selectWordInside() {
     val chars: CharSequence = "a word!"
     val caret = mockk<Caret>(relaxed = true)
-    every { caret.offset } returns 4
+    every { caret.selectionStart } returns 4
+    every { caret.selectionEnd } returns 4
 
     selectWord(caret, chars, around = false)
     verify { caret.setSelection(2, 6) }
@@ -19,7 +20,8 @@ class TextObjectUtilsTest {
   fun selectWordAroundAfter() {
     val chars: CharSequence = "a word b"
     val caret = mockk<Caret>(relaxed = true)
-    every { caret.offset } returns 4
+    every { caret.selectionStart } returns 4
+    every { caret.selectionEnd } returns 4
 
     selectWord(caret, chars, around = true)
     verify { caret.setSelection(2, 7) }
@@ -29,7 +31,8 @@ class TextObjectUtilsTest {
   fun selectWordAroundBefore() {
     val chars: CharSequence = "a word!"
     val caret = mockk<Caret>(relaxed = true)
-    every { caret.offset } returns 4
+    every { caret.selectionStart } returns 4
+    every { caret.selectionEnd } returns 4
 
     selectWord(caret, chars, around = true)
     verify { caret.setSelection(1, 6) }
@@ -39,7 +42,8 @@ class TextObjectUtilsTest {
   fun selectWordAroundEndOfString() {
     val chars: CharSequence = "word"
     val caret = mockk<Caret>(relaxed = true)
-    every { caret.offset } returns 2
+    every { caret.selectionStart } returns 2
+    every { caret.selectionEnd } returns 2
 
     selectWord(caret, chars, around = true)
     verify { caret.setSelection(0, 4) }

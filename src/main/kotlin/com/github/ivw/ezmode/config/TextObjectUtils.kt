@@ -91,8 +91,8 @@ val quoteChars: List<Char> = listOf('"', '\'', '`')
 val Char.isWordChar get() = isLetterOrDigit() || this == '_'
 
 fun selectWord(caret: Caret, chars: CharSequence, around: Boolean) {
-  var start = caret.offset
-  var end = caret.offset
+  var start = caret.selectionStart
+  var end = caret.selectionEnd
   while (start > 0 && chars[start - 1].isWordChar) {
     start--
   }
