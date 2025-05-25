@@ -68,5 +68,7 @@
               class="com.github.ivw.ezmode.actions.OpenEzModeGithubAction"
               icon="AllIcons.Vcs.Vendors.Github"/>
     </group>
+    <action id="ezmode.EzModeActionGroupPopup"
+            class="com.github.ivw.ezmode.actions.EzModeActionGroup$PopupAction"/>
   </actions>
 </idea-plugin>
