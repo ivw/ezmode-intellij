@@ -3,10 +3,13 @@ package com.github.ivw.ezmode.editor
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.colors.*
 import com.intellij.openapi.util.*
+import com.intellij.ui.*
 import java.awt.*
 
-@Suppress("UseJBColor")
-val defaultEzModeCaretColor = Color(255, 98, 0)
+val defaultEzModeCaretColor = JBColor(
+  Color(255, 98, 0),
+  Color(255, 112, 0)
+)
 
 private val colorKey = EditorColors.CARET_COLOR
 
