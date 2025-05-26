@@ -44,12 +44,6 @@
             class="com.github.ivw.ezmode.actions.DeleteDelimsTextObjectAction"/>
     <action id="ezmode.SelectNextOccurrence"
             class="com.github.ivw.ezmode.actions.SelectNextOccurrenceAction"/>
-    <action id="ezmode.ToggleProjectToolbar"
-            class="com.github.ivw.ezmode.actions.ToggleToolbarAction$Project"/>
-    <action id="ezmode.ToggleCommitToolbar"
-            class="com.github.ivw.ezmode.actions.ToggleToolbarAction$Commit"/>
-    <action id="ezmode.ToggleTerminal"
-            class="com.github.ivw.ezmode.actions.ToggleToolbarAction$Terminal"/>
     <group id="ezmode.EzModeActionGroup"
            class="com.github.ivw.ezmode.actions.EzModeActionGroup">
       <action id="ezmode.OpenEzModeRc"
@@ -59,7 +53,7 @@
               class="com.github.ivw.ezmode.actions.ReloadEzModeRcAction"
               icon="AllIcons.Actions.Refresh"/>
       <action id="ezmode.ToggleCheatSheet"
-              class="com.github.ivw.ezmode.actions.ToggleToolbarAction$CheatSheet"
+              class="com.github.ivw.ezmode.actions.ToggleCheatSheetAction"
               icon="icons/ezmode.svg"/>
       <action id="ezmode.OpenTutorial"
               class="com.github.ivw.ezmode.actions.EzModeTutorialAction"
