@@ -95,7 +95,7 @@ exercise('Change the quotes to double quotes')
 
 ## Multiple selection
 
-Type `0` to add the next occurrence of the current word to the selection.
+Press `0` to add the next occurrence of the current word to the selection.
 Press `9` to undo the last added selection.
 
 ```
@@ -106,6 +106,20 @@ Exercise: change every 0 to a 1: 0_0_0_0_0
 Exercise: remove the number next to every x: x0 x1 x2 x3 x4
 ```
 *Hint: press Tab to exit select mode while keeping the multiple carets.*
+
+
+## Files and windows
+
+Use `p` to open any file. Use `w` to close a tab or `W` to close all other tabs.
+
+Use `\` to split the editor into two windows,
+or `|` to do the same but without the copy on the left.
+Use `q` to move between split windows and `Q` to close a split window.
+
+Toggle tool windows with the lower number keys:
+`1`: File tree, `2`: Local changes, `3`: Terminal.
+To focus a tool window, use the above keys with shift. Press `Esc` to unfocus.
+Use `4` to hide all tool windows.
 
 
 ## Customization
