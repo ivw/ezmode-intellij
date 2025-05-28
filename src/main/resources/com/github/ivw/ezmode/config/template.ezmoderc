@@ -9,7 +9,7 @@ set defaultmode ez
 # Key mappings are in this format:
 # map {mode} {keychar} {actions}
 
-# Example: upper case C selects the whole file:
+# Example: uppercase C selects the whole file:
 # map ez C ac
 
 # Example: Do not unselect after copying:
@@ -17,6 +17,9 @@ set defaultmode ez
 
 # Example: Delete selection before going to type mode:
 # map ez t <idea ezmode.DeleteSelection><mode type>
+
+# Example: Use AceJump in "all words mode":
+# map ez <space> <idea AceWordAction>
 
 # To see the full base config, go to:
 # https://github.com/ivw/ezmode-intellij/blob/main/src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc
