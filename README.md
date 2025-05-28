@@ -7,7 +7,15 @@ EzMode is a plugin for [Jetbrains IDEs](https://www.jetbrains.com/ides/) that ad
 
 ![Keyboard layout](KeyboardLayout.png)
 
-<video autoplay loop muted playsinline src="demo.mp4"></video>
+<video autoplay loop muted playsinline src="https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4"></video>
+
+2nd option:
+
+https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4
+
+3rd option:
+
+[demo.mp4](https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4)
 
 ![Build](https://github.com/ivw/ezmode-intellij/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
@@ -54,3 +62,7 @@ Plugin based on the [IntelliJ Platform Plugin Template][template].
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template
 [docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
+
+
+
+
