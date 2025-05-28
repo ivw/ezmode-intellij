@@ -33,11 +33,12 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
           ActionUiKind.NONE,
           null,
         )
-        ActionUtil.performActionDumbAwareWithCallbacks(
-          anAction,
-          anActionEvent
-        )
-        if (anAction is AceAction) afterAceActionPerformed(e.editor)
+
+        ActionUtil.performDumbAwareUpdate(anAction, anActionEvent, false)
+        if (anActionEvent.presentation.isEnabled) {
+          ActionUtil.performActionDumbAwareWithCallbacks(anAction, anActionEvent)
+          if (anAction is AceAction) afterAceActionPerformed(e.editor)
+        }
       }
     }
   }
