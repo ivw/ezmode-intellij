@@ -55,6 +55,7 @@ map ez D <idea EditorBackSpace>
 map ez f <idea Find>
 map ez F <idea FindInPath>
 map ez g <mode git>
+map ez G <idea Run>
 map ez h <idea EditorLineStart>
 map ez H <idea EditorTextStart>
 map ez j <idea EditorLeft>
@@ -69,9 +70,11 @@ map ez ' <quote '>
 map ez " <quote ">
 
 map ez z <idea $Undo>
+map ez Z <idea ReopenClosedTab>
 map ez x <idea $Cut>
 map ez c <idea $Copy><idea ezmode.Unselect>
 map ez v <idea $Paste>
+map ez V <idea EditorDuplicate>
 map ez b <idea EditorJoinLines>
 map ez B <idea EditorUp><idea EditorJoinLines>
 map ez n <idea EditorStartNewLine>
