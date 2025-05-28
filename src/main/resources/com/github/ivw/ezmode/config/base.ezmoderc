@@ -49,6 +49,7 @@ map ez | <idea MoveTabRight>
 map ez a <idea ezmode.SelectWord>
 map ez A <idea $SelectAll>
 map ez s <idea SaveAll>
+map ez S <idea ReformatCode>
 map ez d <idea $Delete>
 map ez D <idea EditorBackSpace>
 map ez f <idea Find>
@@ -115,6 +116,8 @@ map select M <ofmode ez><mode ez>
 
 
 map git <default> <mode ez>
+
+map git 5 <idea ezmode.ToggleCheatSheet>
 
 map git u <idea Vcs.UpdateProject><mode ez>
 map git i <idea PreviousDiff>
