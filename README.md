@@ -1,4 +1,13 @@
-# ezmode-intellij
+EzMode is a plugin for [Jetbrains IDEs](https://www.jetbrains.com/ides/) that adds the power of modal editing.
+
+- **Fast**: edit with minimal keystrokes, without needing a mouse or Ctrl/Alt.
+- **Built for modern IDEs**: open tool windows, control git, navigate diffs, work with split windows.
+- **Customizable**: map any character to any IDE action, define new modes.
+- **Intuitive**: easy to memorize keyboard layout that fits on a single sheet
+
+![Keyboard layout](KeyboardLayout.png)
+
+<video autoplay loop muted playsinline src="demo.mp4"></video>
 
 ![Build](https://github.com/ivw/ezmode-intellij/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)

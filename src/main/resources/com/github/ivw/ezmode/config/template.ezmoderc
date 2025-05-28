@@ -17,3 +17,6 @@ set defaultmode ez
 
 # Example: Delete selection before going to type mode:
 # map ez t <idea ezmode.DeleteSelection><mode type>
+
+# To see the full base config, go to:
+# https://github.com/ivw/ezmode-intellij/blob/main/src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc
