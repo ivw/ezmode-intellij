@@ -4,6 +4,16 @@
   <name>EzMode</name>
   <vendor url="https://github.com/ivw">ivw</vendor>
 
+  <description><![CDATA[
+Modal editing without the steep learning curve!
+<ul>
+<li><strong>Fast</strong>: edit with minimal keystrokes, without needing a mouse or Ctrl/Alt</li>
+<li><strong>Built for modern IDEs</strong>: open tool windows, control git, navigate diffs, work with split windows</li>
+<li><strong>Intuitive</strong>: easy to memorize keyboard layout that fits on a single sheet</li>
+<li><strong>Customizable</strong>: map any character to any IDE action, and define new modes</li>
+</ul>
+]]></description>
+
   <depends>com.intellij.modules.platform</depends>
   <depends>AceJump</depends>
 

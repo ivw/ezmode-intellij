@@ -1,68 +1,23 @@
-EzMode is a plugin for [Jetbrains IDEs](https://www.jetbrains.com/ides/) that adds the power of modal editing.
-
-- **Fast**: edit with minimal keystrokes, without needing a mouse or Ctrl/Alt.
-- **Built for modern IDEs**: open tool windows, control git, navigate diffs, work with split windows.
-- **Customizable**: map any character to any IDE action, define new modes.
-- **Intuitive**: easy to memorize keyboard layout that fits on a single sheet
-
-![Keyboard layout](KeyboardLayout.png)
-
-<video autoplay loop muted playsinline src="https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4"></video>
-
-2nd option:
-
-https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4
-
-3rd option:
-
-[demo.mp4](https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4)
-
 ![Build](https://github.com/ivw/ezmode-intellij/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [x] Get familiar with the [template documentation][template].
-- [x] Adjust the [pluginGroup](./gradle.properties) and [pluginName](./gradle.properties), as well as the [id](./src/main/resources/META-INF/plugin.xml) and [sources package](./src/main/kotlin).
-- [x] Adjust the plugin description in `README` (see [Tips][docs:plugin-description])
-- [x] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the `MARKETPLACE_ID` in the above README badges. You can obtain it once the plugin is published to JetBrains Marketplace.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [x] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
+EzMode is a plugin for [Jetbrains IDEs](https://www.jetbrains.com/ides/) that adds the power of modal editing,
+without the steep learning curve!
 
-<!-- Plugin description -->
-Mouse-free editing without the learning curve.
-<!-- Plugin description end -->
+- **Fast**: edit with minimal keystrokes, without needing a mouse or Ctrl/Alt
+- **Built for modern IDEs**: open tool windows, control git, navigate diffs, work with split windows
+- **Intuitive**: easy to memorize keyboard layout that fits on a single sheet
+- **Customizable**: map any character to any IDE action, and define new modes
 
-## Installation
+Install the plugin (*Settings > Plugins > Marketplace > EzMode*) and open the tutorial in your IDE!
 
-- Using the IDE built-in plugin system:
-  
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "ezmode-intellij"</kbd> >
-  <kbd>Install</kbd>
-  
-- Using JetBrains Marketplace:
+[Demo](https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4)
 
-  Go to [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID) and install it by clicking the <kbd>Install to ...</kbd> button in case your IDE is running.
+Default keyboard layout:
 
-  You can also download the [latest release](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID/versions) from JetBrains Marketplace and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+![Keyboard layout](KeyboardLayout.png)
 
-- Manually:
+*Image created with [Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/921b61bce0466d1a2678bc081b256d29)*
 
-  Download the [latest release](https://github.com/ivw/ezmode-intellij/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
-
-
----
-Plugin based on the [IntelliJ Platform Plugin Template][template].
-
-[template]: https://github.com/JetBrains/intellij-platform-plugin-template
-[docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
-
-
-
-
+All of these keys are customizable in your `.ezmoderc` file.
