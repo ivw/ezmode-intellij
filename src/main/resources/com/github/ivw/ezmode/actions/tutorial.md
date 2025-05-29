@@ -25,6 +25,7 @@ Holding one of these keys is a good way to scroll through a document.
 `h` / `;`: move to the start/end of a line
 `H` / `:`: move to the start/end of a file
 
+*Make sure you have the AceJump plugin installed for this step:*
 To jump to any visible symbol, press `Space`,
 then type one or more of the characters you want to jump to,
 and type the adjacent tag.
