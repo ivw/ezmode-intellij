@@ -39,9 +39,9 @@ map ez o <idea EditorNextWord>
 map ez O <idea EditorDeleteToWordEnd>
 map ez p <idea SearchEverywhere>
 map ez P <idea GotoAction>
-map ez [ <pair open []>
+map ez [ <idea PreviousTab>
 map ez { <pair open {}>
-map ez ] <pair close []>
+map ez ] <idea NextTab>
 map ez } <pair close {}>
 map ez \ <idea SplitVertically>
 map ez | <idea MoveTabRight>
@@ -55,7 +55,7 @@ map ez D <idea EditorBackSpace>
 map ez f <idea Find>
 map ez F <idea FindInPath>
 map ez g <mode git>
-map ez G <idea Run>
+map ez G <idea ChooseRunConfiguration>
 map ez h <idea EditorLineStart>
 map ez H <idea EditorTextStart>
 map ez j <idea EditorLeft>
