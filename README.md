@@ -2,7 +2,7 @@
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
-EzMode is a plugin for [Jetbrains IDEs](https://www.jetbrains.com/ides/) that adds the power of modal editing,
+EzMode is a plugin for [JetBrains IDEs](https://www.jetbrains.com/ides/) that adds the power of modal editing,
 without the steep learning curve!
 
 - **Fast**: edit with minimal keystrokes, without needing a mouse or Ctrl/Alt

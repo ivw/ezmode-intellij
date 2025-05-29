@@ -15,7 +15,7 @@ Modal editing without the steep learning curve!
 ]]></description>
 
   <depends>com.intellij.modules.platform</depends>
-  <depends>AceJump</depends>
+  <depends optional="true" config-file="EzMode-withAceJump.xml">AceJump</depends>
 
   <resource-bundle>messages.EzModeBundle</resource-bundle>
 
