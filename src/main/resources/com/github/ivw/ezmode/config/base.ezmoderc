@@ -118,9 +118,7 @@ map select m <ofmode ez><mode ez>
 map select M <ofmode ez><mode ez>
 
 
-map git <default> <mode ez>
-
-map git 5 <idea ezmode.ToggleCheatSheet>
+map git <default> <ofmode ez>
 
 map git u <idea Vcs.UpdateProject><mode ez>
 map git i <idea PreviousDiff>
@@ -128,6 +126,7 @@ map git p <idea Vcs.Push><mode ez>
 
 map git a <idea Annotate><mode ez>
 map git s <idea Vcs.Show.Log><mode ez>
+map git g <mode ez>
 map git h <idea Vcs.ShowTabbedFileHistory><mode ez>
 map git j <idea Diff.PrevChange>
 map git k <idea NextDiff>
