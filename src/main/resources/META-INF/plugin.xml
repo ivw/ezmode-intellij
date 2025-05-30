@@ -2,7 +2,7 @@
 <idea-plugin>
   <id>com.github.ivw.ezmode</id>
   <name>EzMode</name>
-  <vendor url="https://github.com/ivw">ivw</vendor>
+  <vendor url="https://github.com/ivw">Ivo Wijnker</vendor>
 
   <description><![CDATA[
 <p>Modal editing without the steep learning curve!</p>
