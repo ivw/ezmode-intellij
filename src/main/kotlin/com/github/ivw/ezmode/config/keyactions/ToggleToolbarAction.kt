@@ -4,7 +4,7 @@ import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
 import com.intellij.openapi.wm.*
 
-class ToggleToolbarAction(
+class ToggleToolWindowAction(
   /**
    * @see ToolWindowId
    */
@@ -17,7 +17,7 @@ class ToggleToolbarAction(
   }
 
   override fun toNiceString(): String {
-    return EzModeBundle.message("ezmode.KeyAction.ToggleToolbar", id)
+    return EzModeBundle.message("ezmode.KeyAction.ToggleToolWindow", id)
   }
 }
 

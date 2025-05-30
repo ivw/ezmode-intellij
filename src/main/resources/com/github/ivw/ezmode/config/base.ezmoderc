@@ -3,11 +3,11 @@ map typeonce <default> <native><mode ez>
 
 
 map ez ` <quote `>
-map ez 1 <toolbar Project>
+map ez 1 <toolwindow Project>
 map ez ! <idea SelectInProjectView>
-map ez 2 <toolbar Commit>
+map ez 2 <toolwindow Commit>
 map ez @ <idea ActivateCommitToolWindow>
-map ez 3 <toolbar Terminal>
+map ez 3 <toolwindow Terminal>
 map ez # <idea ActivateTerminalToolWindow>
 map ez 4 <idea HideAllWindows>
 map ez 5 <idea ezmode.ToggleCheatSheet>

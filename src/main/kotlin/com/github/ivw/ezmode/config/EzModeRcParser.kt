@@ -150,7 +150,7 @@ object EzModeRcParser {
       }
 
       "quote" -> QuoteAction(scanner.next().single())
-      "toolbar" -> ToggleToolbarAction(scanner.restOfLine())
+      "toolwindow" -> ToggleToolWindowAction(scanner.restOfLine())
       else -> {
         throw LineParseError("unknown action keyword: $keyword")
       }
