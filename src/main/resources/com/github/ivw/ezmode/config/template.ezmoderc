@@ -1,16 +1,11 @@
-# .ezmoderc lets you define custom key mappings for ezmode.
+# Documentation: https://github.com/ivw/ezmode-intellij?tab=readme-ov-file#customization
+# Full base config: https://github.com/ivw/ezmode-intellij/blob/main/src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc
 
 # Set default mode when starting up:
 set defaultmode ez
 
 # Example: change the EzMode caret color:
 # set caretcolor #ff0000
-
-# Key mappings are in this format:
-# map {mode} {keychar} {actions}
-
-# Example: uppercase C selects the whole file:
-# map ez C ac
 
 # Example: Do not unselect after copying:
 # map select c <idea $Copy>
@@ -20,6 +15,3 @@ set defaultmode ez
 
 # Example: Use AceJump in "all words mode":
 # map ez <space> <idea AceWordAction>
-
-# To see the full base config, go to:
-# https://github.com/ivw/ezmode-intellij/blob/main/src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc
