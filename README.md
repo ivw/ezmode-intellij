@@ -15,7 +15,7 @@ the steep learning curve.
 ### Default keyboard layout:
 
 ![Keyboard layout](KeyboardLayout.png)
-*View on [Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/921b61bce0466d1a2678bc081b256d29)*
+*[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/921b61bce0466d1a2678bc081b256d29)*
 
 ---
 
@@ -58,14 +58,15 @@ Special values:
 ### `actions`
 
 A string of one or more actions with no separators.
-You can map an action to the parent keymap by typing its character,
+
+You can map an action to the parent keymap by typing its `keychar`,
 or you can use a base action:
 
 - `<idea SomeActionId>`: Invoke an IntelliJ IDE action. Most action IDs can be
   found [here](https://github.com/JetBrains/intellij-community/blob/master/platform/platform-resources/src/keymaps/%24default.xml)
 - `<mode somemode>`: Switch to a different mode
-- `<ofmode somemode>`: Let another mode handle the character
-- `<native>`: Insert the character into the editor
+- `<ofmode somemode>`: Let another mode handle the `keychar`
+- `<native>`: Insert the `keychar` into the editor
 - `<write Hello word!>`: Insert a string into the editor
 - `<toolwindow ToolWindowId>`: Toggle a tool window (list of
   IDS [here](https://github.com/JetBrains/intellij-community/blob/master/platform/ide-core/src/com/intellij/openapi/wm/ToolWindowId.java))
