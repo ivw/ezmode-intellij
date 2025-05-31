@@ -99,6 +99,8 @@ map select i <idea EditorUpWithSelection>
 map select I <idea EditorBackwardParagraphWithSelection>
 map select o <idea EditorNextWordWithSelection>
 map select O <ofmode ez><mode ez>
+map select [ <pair open []>
+map select ] <pair close []>
 
 map select d <ofmode ez><mode ez>
 map select D <ofmode ez><mode ez>
@@ -116,6 +118,8 @@ map select c <ofmode ez><mode ez>
 map select v <ofmode ez><mode ez>
 map select m <ofmode ez><mode ez>
 map select M <ofmode ez><mode ez>
+map select < <pair open angle>
+map select > <pair close angle>
 
 
 map git <default> <ofmode ez>
