@@ -5,7 +5,7 @@
   <vendor url="https://github.com/ivw">Ivo Wijnker</vendor>
 
   <description><![CDATA[
-<p>Modal editing without the steep learning curve!</p>
+<p>Modal editing without the steep learning curve.</p>
 <ul>
 <li><strong>Fast</strong>: edit with minimal keystrokes, without needing a mouse or Ctrl/Alt</li>
 <li><strong>Built for modern IDEs</strong>: open tool windows, control git, navigate diffs, work with split windows</li>
