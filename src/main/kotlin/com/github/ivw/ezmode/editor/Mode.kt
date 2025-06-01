@@ -8,6 +8,7 @@ object Mode {
   const val TYPE = "type"
   const val EZ = "ez"
   const val SELECT = "select"
+  const val GIT = "git"
   // This is not an exhaustive list.
 }
 

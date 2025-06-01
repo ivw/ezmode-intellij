@@ -39,18 +39,31 @@ class ModeStatusBarWidget(val project: Project) : CustomStatusBarWidget {
   override fun ID(): @NonNls String = ModeStatusBarWidgetFactory.ID
 
   override fun install(statusBar: StatusBar) {
-    project.subscribeToFocusOrModeChange(this) { mode, _ ->
-      label.text = mode
-    }
-
-    GotItTooltip(
-      id = "com.github.ivw.ezmode.tutorial",
-      text = EzModeBundle.message("ezmode.gotItTooltip.tutorial.text"),
+    val gitTip = GotItTooltip(
+      id = "com.github.ivw.ezmode.gitMode",
+      text = EzModeBundle.message("ezmode.gotItTooltip.gitMode.text"),
       parentDisposable = this,
     )
-      .withLink(EzModeBundle.message("action.ezmode.OpenTutorial.text")) {
-        EzModeTutorialAction.openTutorial(project)
+    project.subscribeToFocusOrModeChange(this) { mode, _ ->
+      label.text = mode
+
+      if (mode == Mode.GIT) {
+        showTip(gitTip)
       }
-      .show(label, GotItTooltip.TOP_MIDDLE)
+    }
+
+    showTip(
+      GotItTooltip(
+        id = "com.github.ivw.ezmode.tutorial",
+        text = EzModeBundle.message("ezmode.gotItTooltip.tutorial.text"),
+        parentDisposable = this,
+      )
+        .withLink(EzModeBundle.message("action.ezmode.OpenTutorial.text")) {
+          EzModeTutorialAction.openTutorial(project)
+        })
+  }
+
+  fun showTip(tooltip: GotItTooltip) {
+    tooltip.show(label, GotItTooltip.TOP_MIDDLE)
   }
 }
