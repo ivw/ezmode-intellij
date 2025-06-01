@@ -8,7 +8,6 @@ import com.intellij.openapi.editor.event.*
 import com.intellij.openapi.editor.ex.*
 import com.intellij.openapi.fileEditor.*
 import com.intellij.openapi.project.*
-import java.awt.*
 import java.awt.event.*
 
 @Service(Service.Level.PROJECT)
@@ -23,20 +22,18 @@ class ModeService(val project: Project) : Disposable {
   var focusedEditor: Editor? = null
     private set
 
-  var ezModeCaretColor: Color? = null
+  var config: EzModeConfig? = null
     private set
 
   fun init() {
     val configService = service<EzModeConfigAppService>()
     configService.getConfig().let { config ->
       config.defaultMode?.let { projectMode = it }
-      config.caretColor?.let { ezModeCaretColor = it }
+      this.config = config
     }
     configService.subscribeToConfig(this) { config ->
-      if (config.caretColor != ezModeCaretColor) {
-        ezModeCaretColor = config.caretColor
-        focusedEditor?.let { editor -> editor.updateEditorColors(getMode(editor), ezModeCaretColor) }
-      }
+      this.config = config
+      focusedEditor?.let { editor -> editor.updateEditorColors(getMode(editor), config) }
     }
 
     FileEditorManager.getInstance(project).selectedTextEditor?.let(::focusEditorIfValid)
@@ -66,7 +63,7 @@ class ModeService(val project: Project) : Disposable {
 
   private fun handleFocusOrModeChange(editor: Editor) {
     val editorMode = getMode(editor)
-    editor.updateEditorColors(editorMode, ezModeCaretColor)
+    editor.updateEditorColors(editorMode, config)
     project.messageBus.syncPublisher(FocusOrModeChangeNotifier.TOPIC)
       .onChanged(editorMode, editor)
   }

@@ -31,7 +31,7 @@ class AceJumpActionListener : AnActionListener {
                 }
 
                 ApplicationManager.getApplication().invokeLater {
-                  editor.updateEditorColors(mode, ezModeCaretColor)
+                  editor.updateEditorColors(mode, config)
                 }
               }
             }

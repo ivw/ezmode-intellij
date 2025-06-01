@@ -5,7 +5,8 @@
 set defaultmode ez
 
 # Example: change the EzMode caret color:
-# set caretcolor #ff0000
+# set primarycolor #ff0000
+# set secondarycolor #00ff00
 
 # Example: Do not unselect after copying:
 # map select c <idea $Copy>

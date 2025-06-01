@@ -1,7 +1,6 @@
 package com.github.ivw.ezmode.config
 
 import com.intellij.openapi.actionSystem.*
-import com.intellij.openapi.diagnostic.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
 import com.intellij.openapi.project.*
@@ -15,15 +14,12 @@ class EzModeConfig(
 ) {
   val defaultMode: String? get() = vars["defaultmode"]
 
-  val caretColor: Color? by lazy {
-    vars["caretcolor"]?.let {
-      try {
-        Color.decode(it)
-      } catch (t: Throwable) {
-        thisLogger().info(t)
-        null
-      }
-    }
+  val primaryColor: Color? by lazy {
+    vars["primarycolor"]?.let { EzModeRcParser.parseColor(it) }
+  }
+
+  val secondaryColor: Color? by lazy {
+    vars["secondarycolor"]?.let { EzModeRcParser.parseColor(it) }
   }
 
   fun performKeyAction(

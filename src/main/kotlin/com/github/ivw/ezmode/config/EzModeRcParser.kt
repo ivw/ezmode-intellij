@@ -2,6 +2,8 @@ package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.keyactions.*
+import com.intellij.openapi.diagnostic.*
+import java.awt.*
 import java.util.*
 
 object EzModeRcParser {
@@ -158,4 +160,12 @@ object EzModeRcParser {
   }
 
   private fun Scanner.restOfLine() = nextLine().trimStart()
+
+  fun parseColor(colorString: String): Color? =
+    try {
+      Color.decode(colorString)
+    } catch (t: Throwable) {
+      thisLogger().info(t)
+      null
+    }
 }
