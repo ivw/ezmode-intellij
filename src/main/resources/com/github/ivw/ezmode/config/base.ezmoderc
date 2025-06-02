@@ -125,6 +125,7 @@ map select > <pair close angle>
 
 map git <default> <ofmode ez>
 
+map git w <idea CloseContent><mode ez>
 map git u <idea Vcs.UpdateProject><mode ez>
 map git i <idea PreviousDiff>
 map git p <idea Vcs.Push><mode ez>
