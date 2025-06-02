@@ -21,6 +21,7 @@ class ModeService(val project: Project) : Disposable {
 
   var focusedEditor: Editor? = null
     private set
+    get() = field?.takeUnless { it.isDisposed }
 
   var config: EzModeConfig? = null
     private set
