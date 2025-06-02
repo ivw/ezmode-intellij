@@ -6,10 +6,20 @@ import com.intellij.openapi.editor.actionSystem.*
 import com.intellij.openapi.project.*
 import java.awt.*
 
-typealias MutableEzModeKeyMap = LinkedHashMap<ModeAndChar, KeyBinding>
+class ModeBindings(
+  val name: String,
+  val keyBindings: MutableMap<Char?, KeyBinding> = HashMap(),
+) {
+  fun getBindingOrDefault(char: Char): KeyBinding? =
+    keyBindings[char] ?: keyBindings[null]
+
+  fun copy() = ModeBindings(name, HashMap(keyBindings))
+}
+
+const val DEFAULT_MODES_CAPACITY = 8
 
 class EzModeConfig(
-  val keyMap: MutableEzModeKeyMap = MutableEzModeKeyMap(),
+  val modes: MutableList<ModeBindings> = ArrayList(DEFAULT_MODES_CAPACITY),
   val vars: LinkedHashMap<String, String> = LinkedHashMap(),
 ) {
   val defaultMode: String? get() = vars["defaultmode"]
@@ -29,7 +39,7 @@ class EzModeConfig(
     editor: Editor,
     nativeHandler: TypedActionHandler,
   ) {
-    keyMap.getBindingOrDefault(mode, char)?.action?.perform(
+    getBindingOrDefault(mode, char)?.action?.perform(
       EzModeKeyEvent(
         this, mode, char, dataContext, editor, nativeHandler
       )
@@ -37,18 +47,22 @@ class EzModeConfig(
   }
 
   fun copy() = EzModeConfig(
-    MutableEzModeKeyMap(keyMap),
+    modes.mapTo(ArrayList(DEFAULT_MODES_CAPACITY)) { it.copy() },
     LinkedHashMap(vars),
   )
-}
 
-data class ModeAndChar(val mode: String, val keyChar: Char?)
+  fun getMode(name: String): ModeBindings? =
+    modes.firstOrNull { it.name == name }
 
-fun MutableEzModeKeyMap.getBindingOrDefault(mode: String, char: Char): KeyBinding? =
-  this[ModeAndChar(mode, char)] ?: this[ModeAndChar(mode, null)]
+  fun getOrAddMode(name: String): ModeBindings =
+    getMode(name) ?: ModeBindings(name).also { modes.add(it) }
 
-fun MutableEzModeKeyMap.addBinding(binding: KeyBinding) {
-  put(ModeAndChar(binding.mode, binding.keyChar), binding)
+  fun addBinding(binding: KeyBinding) {
+    getOrAddMode(binding.mode).keyBindings.put(binding.keyChar, binding)
+  }
+
+  fun getBindingOrDefault(mode: String, char: Char): KeyBinding? =
+    getMode(mode)?.getBindingOrDefault(char)
 }
 
 data class KeyBinding(

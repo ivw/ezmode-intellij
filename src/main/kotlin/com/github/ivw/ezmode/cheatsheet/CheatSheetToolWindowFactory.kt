@@ -64,18 +64,23 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
           }
       }
       appendLine()
-      config.keyMap.values.forEach { keyBinding ->
-        if (keyBinding.mode == mode) {
-          append(
-            when (keyBinding.keyChar) {
-              ' ' -> EzModeBundle.message("ezmode.EzModeKeyMap.space")
-              null -> EzModeBundle.message("ezmode.EzModeKeyMap.defaultAction")
-              else -> keyBinding.keyChar.toString()
-            }
-          )
-          append(": ")
-          appendLine(keyBinding.action.toNiceString())
+      config.getMode(mode)?.let { modeBindings ->
+        keyboardOrder.forEach { char ->
+          modeBindings.keyBindings[char]?.let { keyBinding ->
+            append(
+              when (keyBinding.keyChar) {
+                ' ' -> EzModeBundle.message("ezmode.EzModeKeyMap.space")
+                null -> EzModeBundle.message("ezmode.EzModeKeyMap.defaultAction")
+                else -> keyBinding.keyChar.toString()
+              }
+            )
+            append(": ")
+            appendLine(keyBinding.action.toNiceString())
+          }
         }
       }
     }.toString()
 }
+
+const val keyboardOrder =
+  """`~1!2@3#4$5%6^7&8*9(0)-_=+qQwWeErRtTyYuUiIoOpP[{]}\|aAsSdDfFgGhHjJkKlL;:'"zZxXcCvVbBnNmM,<.>/?"""

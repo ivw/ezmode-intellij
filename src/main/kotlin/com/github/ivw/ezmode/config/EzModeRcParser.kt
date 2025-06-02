@@ -63,7 +63,7 @@ object EzModeRcParser {
         val mode = scanner.next()
         val char = parseChar(scanner)
         parseActionChain(scanner.restOfLine(), src, mode)?.let { action ->
-          dest.keyMap.addBinding(KeyBinding(mode, char, action))
+          dest.addBinding(KeyBinding(mode, char, action))
         }
       }
 
@@ -96,7 +96,7 @@ object EzModeRcParser {
         actions.add(parseSpecialAction(actionChainString.substring(charIndex + 1, closingIndex)))
         charIndex = closingIndex + 1
       } else {
-        src?.keyMap?.getBindingOrDefault(mode, actionChainString[charIndex])?.action?.let {
+        src?.getBindingOrDefault(mode, actionChainString[charIndex])?.action?.let {
           actions.add(it)
         }
         charIndex++
