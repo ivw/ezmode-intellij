@@ -35,6 +35,8 @@ class EzModeAppService : Disposable {
     TypedAction.getInstance().ensureEzModeUnloaded()
 
     clearAllEditorsEzModeData()
+
+    restoreTabShortcuts()
   }
 
   companion object {

@@ -4,6 +4,7 @@
 
 ## [Unreleased]
 - Small code improvements
+- Restore IDE Tab shortcuts when unloading the plugin
 
 ## 1.0.0
 ### Changed
