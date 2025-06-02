@@ -6,8 +6,8 @@ import com.intellij.openapi.keymap.*
 private val tabShortcut = KeyboardShortcut.fromString("TAB")
 private val newTabShortcut = KeyboardShortcut.fromString("alt T")
 
-val Keymap.ezModeUsesTab get() =
-  getShortcuts("ezmode.EnterEzMode").contains(tabShortcut)
+val Keymap.ezModeUsesTab
+  get() = getShortcuts("ezmode.EnterEzMode").contains(tabShortcut)
 
 /**
  * Since tab is used to enter EzMode by default,

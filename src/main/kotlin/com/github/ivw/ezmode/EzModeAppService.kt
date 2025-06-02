@@ -3,6 +3,7 @@ package com.github.ivw.ezmode
 import com.github.ivw.ezmode.config.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.*
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.*
 import com.intellij.openapi.diagnostic.*
 import com.intellij.openapi.editor.actionSystem.*
@@ -29,7 +30,7 @@ class EzModeAppService : Disposable {
   }
 
   fun ensureUnloaded() {
-    if (!isLoaded) return
+    if (!isLoaded || ApplicationManager.getApplication().isDisposed) return
     isLoaded = false
 
     TypedAction.getInstance().ensureEzModeUnloaded()
