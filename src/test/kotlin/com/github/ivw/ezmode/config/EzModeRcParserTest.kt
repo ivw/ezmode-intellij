@@ -25,13 +25,16 @@ class EzModeRcParserTest {
       EzModeRcParser.parse(config, lines, null)
     }
     val gAction = WriteAction("git abc")
-    config.keyMap.values.shouldContainExactly(
-      KeyBinding("ez", 'A', IdeKeyAction("EditorSelectLine")),
-      KeyBinding("ez", 't', KeyAction.ChangeMode("type")),
-      KeyBinding("ez", 'g', gAction),
-      KeyBinding("ez", 'd', KeyAction.Native),
-      KeyBinding("ez", 'D', KeyAction.NativeOf('q')),
-    )
+    config.modes.shouldBeSingleton { mode ->
+      mode.name.shouldBe("ez")
+      mode.keyBindings.values.shouldContainExactlyInAnyOrder(
+        KeyBinding('A', IdeKeyAction("EditorSelectLine")),
+        KeyBinding('t', KeyAction.ChangeMode("type")),
+        KeyBinding('g', gAction),
+        KeyBinding('d', KeyAction.Native),
+        KeyBinding('D', KeyAction.NativeOf('q')),
+      )
+    }
 
     val childConfig = EzModeConfig()
     """
@@ -40,18 +43,21 @@ class EzModeRcParserTest {
     """.lines().let { lines ->
       EzModeRcParser.parse(childConfig, lines, config)
     }
-    childConfig.keyMap.values.shouldContainExactly(
-      KeyBinding(
-        "ez", 'm', KeyAction.Composite(
-          listOf(
-            IdeKeyAction("${"$"}SelectAll"),
-            gAction,
-            gAction,
+    childConfig.modes.shouldBeSingleton { mode ->
+      mode.name.shouldBe("ez")
+      mode.keyBindings.values.shouldContainExactlyInAnyOrder(
+        KeyBinding(
+          'm', KeyAction.Composite(
+            listOf(
+              IdeKeyAction("${"$"}SelectAll"),
+              gAction,
+              gAction,
+            )
           )
-        )
-      ),
-      KeyBinding("ez", ' ', gAction)
-    )
+        ),
+        KeyBinding(' ', gAction)
+      )
+    }
   }
 
   @Test
@@ -64,22 +70,25 @@ class EzModeRcParserTest {
       EzModeRcParser.parse(config, lines, null)
     }
 
-    config.keyMap.values.shouldContainExactly(
-      KeyBinding(
-        "ez", '{',
-        PairOpenCloseAction(
-          isTargetOpen = true,
-          DelimPair('{', '}')
+    config.modes.shouldBeSingleton { mode ->
+      mode.name.shouldBe("ez")
+      mode.keyBindings.values.shouldContainExactlyInAnyOrder(
+        KeyBinding(
+          '{',
+          PairOpenCloseAction(
+            isTargetOpen = true,
+            DelimPair('{', '}')
+          ),
         ),
-      ),
-      KeyBinding(
-        "ez", '>',
-        PairOpenCloseAction(
-          isTargetOpen = false,
-          DelimPair('<', '>')
-        ),
+        KeyBinding(
+          '>',
+          PairOpenCloseAction(
+            isTargetOpen = false,
+            DelimPair('<', '>')
+          ),
+        )
       )
-    )
+    }
 
     """
       map ez { <pair hello {}>

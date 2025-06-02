@@ -2,6 +2,9 @@
 
 # ezmode-intellij Changelog
 
+## [Unreleased]
+- Small code improvements
+
 ## 1.0.0
 ### Changed
 - `.ezmoderc`: `caretcolor` is replaced with `primarycolor` and `secondarycolor`
