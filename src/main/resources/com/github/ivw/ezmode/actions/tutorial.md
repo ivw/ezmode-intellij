@@ -133,4 +133,4 @@ choose "Reload .ezmoderc" to apply the changes.
 
 Tab is the default key to enter EzMode because it's easy and not often used
 in modern IDEs with automatic indentation. The original Tab functionality is moved to `Alt-T`.
-You can change any of this in Settings > Keymap.
+You can change any of this in *Settings > Keymap*.

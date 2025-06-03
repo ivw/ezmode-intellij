@@ -27,6 +27,44 @@ the steep learning curve.
 4. Open the [tutorial](src/main/resources/com/github/ivw/ezmode/actions/tutorial.md) in your IDE by clicking the mode
    indicator in the bottom-right corner.
 
+## Default modes
+
+### `type`
+
+In this mode, everything behaves as it normally would in the IDE,
+except `Tab` switches to `ez` mode. If you need to manually indent, use `Alt-t`,
+or change it in *Settings > Keymap*.
+
+### `ez`
+
+The main mode where you control the IDE using simple keystrokes.
+See the keyboard layout above, or press `5` to view all key bindings.
+
+### `select`
+
+When you press `e` or select something in `ez` mode, you automatically switch to `select` mode.
+Most keys are the same as `ez` mode, but moving the caret extends the selection.
+
+### `typeonce`
+
+Like `type` mode, but after typing one character it switches back to `ez` mode.
+Useful for quickly adding or replacing a single character while in `ez` mode.
+
+### `git`
+
+Pressing `g` in `ez` mode switches to `git` mode, where you can:
+- `r`: Review diffs of local changes
+- `i`, `k`: Go to previous/next diff
+- `j`, `l`: Go to previous/next diff file
+- `w`: Close diff and return to `ez` mode
+- `c`: Commit
+- `p`: Push changes
+- `u`: Update/pull changes
+- `b`: Show branches
+- `s`: Show git log
+- `h`: Show git history of file
+- `a`: Annotate/blame file
+
 ## Customization
 
 The full keymap is defined in [base.ezmoderc](src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc),
