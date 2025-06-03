@@ -19,19 +19,7 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
       if (anAction is EmptyAction) {
         handleEmptyAction(anAction, e)
       } else {
-        val anActionEvent = AnActionEvent.createEvent(
-          anAction,
-          e.dataContext,
-          null,
-          ActionPlaces.KEYBOARD_SHORTCUT,
-          ActionUiKind.NONE,
-          null,
-        )
-
-        ActionUtil.performDumbAwareUpdate(anAction, anActionEvent, false)
-        if (anActionEvent.presentation.isEnabled) {
-          ActionUtil.performActionDumbAwareWithCallbacks(anAction, anActionEvent)
-        }
+        anAction.performActionIfEnabled(e.dataContext, ActionPlaces.KEYBOARD_SHORTCUT)
       }
     }
   }
@@ -64,6 +52,21 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
 
   companion object {
     val LOG = logger<IdeKeyAction>()
+  }
+}
+
+fun AnAction.performActionIfEnabled(dataContext: DataContext, place: String) {
+  val anActionEvent = AnActionEvent.createEvent(
+    this,
+    dataContext,
+    null,
+    place,
+    ActionUiKind.NONE,
+    null,
+  )
+  ActionUtil.performDumbAwareUpdate(this, anActionEvent, false)
+  if (anActionEvent.presentation.isEnabled) {
+    ActionUtil.performActionDumbAwareWithCallbacks(this, anActionEvent)
   }
 }
 
