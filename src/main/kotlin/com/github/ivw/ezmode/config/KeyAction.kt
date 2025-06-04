@@ -35,7 +35,6 @@ abstract class KeyAction {
 
     override fun toNiceString(): String =
       actions.joinToString(separator = ", ", transform = KeyAction::toNiceString)
-
   }
 
   data class ChangeMode(val mode: String) : KeyAction() {

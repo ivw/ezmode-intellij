@@ -106,6 +106,11 @@ object EzModeRcParser {
     return if (actions.size == 1) {
       actions[0]
     } else {
+      for (i in 0 until actions.size - 1) {
+        if (actions[i] is KeyAction.ChangeMode) {
+          throw LineParseError("action with index $i changes the mode. This is only allowed in the last action.")
+        }
+      }
       KeyAction.Composite(actions)
     }
   }

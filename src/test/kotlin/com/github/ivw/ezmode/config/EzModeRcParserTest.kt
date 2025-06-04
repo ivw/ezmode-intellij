@@ -146,4 +146,21 @@ class EzModeRcParserTest {
     }
     config.primaryColor.shouldBe(null)
   }
+
+  @Test
+  fun parseModeChangeNotAndEnd() {
+    val config = EzModeConfig()
+    """
+      map ez h <nop>
+      map ez e <mode select>
+      map ez ; <nop>
+      map ez E he;
+    """.lines().let { lines ->
+      shouldThrow<EzModeRcParser.ParseError> {
+        EzModeRcParser.parse(config, lines, config)
+      }.cause.shouldNotBeNull().message.shouldBe(
+        "action with index 1 changes the mode. This is only allowed in the last action."
+      )
+    }
+  }
 }
