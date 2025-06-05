@@ -25,7 +25,7 @@ map ez Q <idea CloseAllEditors>
 map ez w <idea CloseContent>
 map ez W <idea CloseAllEditorsButActive>
 map ez e <mode select>
-map ez E <idea EditorSelectLine>
+map ez E <idea ezmode.SelectLine>
 map ez r <idea Replace>
 map ez R <idea ReplaceInPath>
 map ez t <mode type>
