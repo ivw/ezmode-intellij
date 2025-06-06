@@ -5,7 +5,7 @@ import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
 import com.intellij.openapi.editor.actions.*
 
-class SelectLineAction : EditorAction(Handler()) {
+class SelectLineContentsAction : EditorAction(Handler()) {
   class Handler : EditorActionHandler.ForEachCaret() {
     override fun doExecute(editor: Editor, caret: Caret, dataContext: DataContext?) {
       val start = editor.visualPositionToOffset(caret.selectionStartPosition.line.let { line ->
