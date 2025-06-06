@@ -2,6 +2,7 @@ package com.github.ivw.ezmode.editor
 
 import com.github.ivw.ezmode.config.*
 import com.intellij.openapi.*
+import com.intellij.openapi.application.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.event.*
@@ -112,8 +113,13 @@ class ModeService(val project: Project) : Disposable {
       if (isValidEditor(e.editor)) {
         if (e.newRange.isEmpty) {
           if (e.newRange.startOffset != e.editor.getSelectModeLeadOffset()) {
-            e.editor.setSelectModeLeadOffset(null)
-            handleFocusOrModeChange(e.editor)
+            // Use `invokeLater` to make sure the editor's caret count is updated.
+            ApplicationManager.getApplication().invokeLater {
+              if (e.editor.caretModel.caretCount <= 1) {
+                e.editor.setSelectModeLeadOffset(null)
+                handleFocusOrModeChange(e.editor)
+              }
+            }
           }
         } else if (e.oldRange.isEmpty) {
           e.editor.setSelectModeLeadOffset()
