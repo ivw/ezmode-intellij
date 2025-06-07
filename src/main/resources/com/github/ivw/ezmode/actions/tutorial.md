@@ -20,10 +20,10 @@ Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 To move up and down by paragraph, use uppercase `I` and `K`.
 Holding one of these keys is a good way to scroll through a document.
 
-`J` / `L`: move backward/forward in history
-`u` / `o`: move backward/forward by word
-`h` / `;`: move to the start/end of a line
-`H` / `:`: move to the start/end of a file
+`J` / `L`: Move backward/forward in history
+`u` / `o`: Move backward/forward by word
+`h` / `;`: Move to the start/end of a line
+`H` / `:`: Move to the start/end of a file
 
 *Make sure you have the AceJump plugin installed for this step:*
 To jump to any visible symbol, press `Space`,
@@ -67,18 +67,18 @@ You probably already know these - they match common Ctrl shortcuts!
 To view the full keymap, press `5`.
 
 ```
-Exercise: copy this line and paste it 3 more times.
+Exercise: Copy this line and paste it 3 more times.
 ```
-*Hint: to copy a line, you don't need to select it. Simply press `c`.*
+*Hint: To copy a line, you don't need to select it. Simply press `c`.*
 
 
 ## Brackets and quotes
 
 Type any bracket or quote character (`{} () [] '' ""`) to jump to the nearest surrounding one.
 With the caret positioned there:
-`-`: select inside the brackets or quotes
-`=`: select around the brackets or quotes
-`_`: remove the brackets or quotes and select the contents
+`-`: Select inside the brackets or quotes
+`=`: Select around the brackets or quotes
+`_`: Remove the brackets or quotes and select the contents
 
 ```
 exercise(remove, these, arguments)
@@ -91,23 +91,30 @@ exercise + (remove + parentheses)
 ```
 exercise('Change the quotes to double quotes')
 ```
-*Hint: after removing the quotes, use `T"` to surround with double quotes.*
+*Hint: After removing the quotes, use `T"` to surround them with double quotes.*
 
 
-## Multiple selection
+## Multiple carets
 
-Press `0` to add the next occurrence of the current word to the selection.
+Press `0` to add the next occurrence of the current selection to the selection.
 Press `9` to undo the last added selection.
 
 ```
-Exercise: change every 0 to a 1: 0_0_0_0_0
+Exercise: Change every 0 to a 1: 0_0_0_0_0
 ```
 
 ```
-Exercise: remove the number next to every x: x0 x1 x2 x3 x4
+Exercise: Remove the number next to every x: x0 x1 x2 x3 x4
 ```
-*Hint: press Tab to exit select mode while keeping the multiple carets.*
+*Hint: Press Tab to exit select mode while keeping the multiple carets.*
 
+When in select mode (`e`), use `.` / `,` to add a new caret below/above.
+
+```
+Exercise: Add a dash to the start of these 3 sentences.
+Including this one.
+And this one.
+```
 
 ## Files and windows
 
@@ -127,7 +134,7 @@ Use `4` to hide all tool windows.
 
 In EzMode, every character key is customizable. You can even define your own modes.
 Open your config file by typing `<` in EzMode, and choosing "Open .ezmoderc".
-This will create a template with some examples, if the file doesn't already exist.
+This will create a template with some examples if the file doesn't already exist.
 After editing and saving this file, use `<` again and
 choose "Reload .ezmoderc" to apply the changes.
 
