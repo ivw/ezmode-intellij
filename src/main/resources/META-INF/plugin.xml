@@ -7,12 +7,14 @@
   <description><![CDATA[
 <p>Modal editing without the steep learning curve.</p>
 <ul>
-<li><strong>Fast</strong>: edit with minimal keystrokes, without needing a mouse or Ctrl/Alt</li>
-<li><strong>Built for modern IDEs</strong>: open tool windows, control git, navigate diffs, work with split windows</li>
-<li><strong>Intuitive</strong>: easy to memorize keyboard layout that fits on a single sheet</li>
-<li><strong>Customizable</strong>: map any character to any IDE action, and define new modes</li>
+<li><strong>Fast</strong>: Edit with minimal keystrokes, without needing a mouse or Ctrl/Alt</li>
+<li><strong>Built for modern IDEs</strong>: Control git, navigate diffs, use multiple cursors, manage split windows and tool windows</li>
+<li><strong>Intuitive</strong>: Easy to memorize keyboard layout that fits on a single sheet</li>
+<li><strong>Customizable</strong>: Map any character to any IDE action, and define new modes</li>
 </ul>
-<p><a href="https://github.com/ivw/ezmode-intellij">GitHub</a></p>
+<p>Compared to Vim and Kakoune, EzMode is significantly easier if you're already familiar with IntelliJ-style IDEs
+and integrates tightly with the IDE.</p>
+<p><a href="https://github.com/ivw/ezmode-intellij">More info on GitHub</a></p>
 ]]></description>
 
   <depends>com.intellij.modules.platform</depends>

@@ -5,10 +5,10 @@
 EzMode is a plugin for [JetBrains IDEs](https://www.jetbrains.com/ides/) that brings the power of modal editing, without
 the steep learning curve.
 
-- **Fast**: edit with minimal keystrokes, without needing a mouse or Ctrl/Alt
-- **Built for modern IDEs**: open tool windows, control git, navigate diffs, manage split windows
-- **Intuitive**: easy-to-memorize keyboard layout that fits on a single sheet
-- **Customizable**: map any character to any IDE action, and define new modes
+- **Fast**: Edit with minimal keystrokes, without needing a mouse or Ctrl/Alt
+- **Built for modern IDEs**: Control git, navigate diffs, use multiple cursors, manage split windows and tool windows
+- **Intuitive**: Easy-to-memorize keyboard layout that fits on a single sheet
+- **Customizable**: Map any character to any IDE action, and define new modes
 
 [Demo](https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4)
 
@@ -38,6 +38,7 @@ or change it in *Settings > Keymap*.
 ### `ez`
 
 The main mode where you control the IDE using simple keystrokes.
+
 See the keyboard layout above, or press `5` to view all key bindings.
 
 ### `select`
@@ -53,6 +54,7 @@ Useful for quickly adding or replacing a single character while in `ez` mode.
 ### `git`
 
 Pressing `g` in `ez` mode switches to `git` mode, where you can:
+
 - `r`: Review diffs of local changes
 - `i`, `k`: Go to previous/next diff
 - `j`, `l`: Go to previous/next diff file
@@ -89,8 +91,8 @@ Ctrl/Alt shortcuts are not characters and not handled by EzMode.
 
 Special values:
 
-- `<space>`: the space character.
-- `<default>`: the default key mapping, which will be triggered by any key that does not have a mapping for the given
+- `<space>`: The space character.
+- `<default>`: The default key mapping, which will be triggered by any key that does not have a mapping for the given
   mode.
 
 ### `actions`
@@ -112,11 +114,13 @@ or you can use a base action:
 ### Examples
 
 Map `C` (Shift + c) in `ez` mode to select all (`A`) and copy (`c`):
+
 ```
 map ez C Ac
 ```
 
 Create a mode that types every character twice:
+
 ```
 map doubletype <default> <native><native>
 map ez X <mode doubletype>
@@ -124,3 +128,26 @@ map ez X <mode doubletype>
 
 More practical examples can be found in
 the [template .ezmoderc](src/main/resources/com/github/ivw/ezmode/config/template.ezmoderc)
+
+## Why EzMode
+
+Compared to other modal editors like Vim and Kakoune, EzMode is significantly easier if you're already familiar with
+IntelliJ-style IDEs and integrates tightly with the IDE.
+
+EzMode doesn't add as many commands as Vim, for example, but EzMode can use any action that's already available in the IDE.
+
+EzMode uses the *object-verb* style like Kakoune, instead of Vim's *verb-object*. A few common examples:
+
+|                           | EzMode | Vim    | Kakoune     |
+|---------------------------|--------|--------|-------------|
+| Select word               | `a`    | `viw`  | `<Alt-i>w`  |
+| Delete word               | `ad`   | `diw`  | `<Alt-i>wd` |
+| Copy word                 | `ac`   | `yiw`  | `<Alt-i>wy` |
+| Change word               | `at`   | `ciw`  | `<Alt-i>wc` |
+| Select line               | `E`    | `V`    | `x`         |
+| Delete line               | `m`    | `dd`   | `xd`        |
+| Copy line                 | `c`    | `yy`   | `xy`        |
+| Change line               | `Et`   | `cc`   | `xc`        |
+| Jump to surrounding quote | `'`    | `f'`   | `f'`        |
+| Delete surrounding quote  | `'_`   | `ds'`  | -           |
+| Change surrounding quote  | `'_T"` | `cs'"` | -           |
