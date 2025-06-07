@@ -76,7 +76,7 @@ class ModeService(val project: Project) : Disposable {
     focusedEditor?.let { editor ->
       if (mode == Mode.SELECT) {
         editor.setSelectModeLeadOffset()
-      } else if (!editor.selectionModel.hasSelection()) {
+      } else if (!editor.selectionModel.hasSelection(true)) {
         editor.setSelectModeLeadOffset(null)
       } else if (mode == Mode.EZ && projectModeOld == Mode.EZ) {
         editor.setSelectModeLeadOffset(null)
