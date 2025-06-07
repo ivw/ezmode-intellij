@@ -117,7 +117,9 @@ map select c <ofmode ez><mode ez>
 map select v <ofmode ez><mode ez>
 map select m <ofmode ez><mode ez>
 map select M <ofmode ez><mode ez>
+map select , <idea EditorCloneCaretAbove>
 map select < <pair open angle>
+map select . <idea EditorCloneCaretBelow>
 map select > <pair close angle>
 
 
