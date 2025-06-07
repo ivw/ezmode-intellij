@@ -2,9 +2,13 @@
 
 # ezmode-intellij Changelog
 
-## [Unreleased]
-- Small code improvements
-- Restore IDE Tab shortcuts when unloading the plugin
+## 1.1.0
+- Restore IDE Tab shortcuts when unloading the plugin.
+- Git mode improvements: add "review" action, and exit git mode when pressing `w`.
+- .ezmoderc: Warn when changing mode at the end of an action.
+- Improve "select line" action.
+- The `[]` keys in select mode are now the same as in ez mode.
+- Fixed and improved multiple cursor handling. Add `.` and `,` keys to select mode.
 
 ## 1.0.0
 ### Changed

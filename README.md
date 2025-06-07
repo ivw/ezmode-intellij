@@ -136,7 +136,7 @@ IntelliJ-style IDEs and integrates tightly with the IDE.
 
 EzMode doesn't add as many commands as Vim, for example, but EzMode can use any action that's already available in the IDE.
 
-EzMode uses the *object-verb* style like Kakoune, instead of Vim's *verb-object*. A few common examples:
+EzMode uses *object-verb* style like Kakoune, rather than Vim's *verb-object* style. A few common examples:
 
 |                           | EzMode | Vim    | Kakoune     |
 |---------------------------|--------|--------|-------------|
