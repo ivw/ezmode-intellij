@@ -2,6 +2,8 @@
 
 # ezmode-intellij Changelog
 
+## [Unreleased]
+
 ## 1.1.0
 - Restore IDE Tab shortcuts when unloading the plugin.
 - Git mode improvements: add "review" action, and exit git mode when pressing `w`.
