@@ -1,6 +1,6 @@
 package com.github.ivw.ezmode.config
 
-import com.github.ivw.ezmode.editor.Mode
+import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.command.*
 import com.intellij.openapi.editor.*
 
@@ -8,13 +8,15 @@ data class DelimPair(
   val openChar: Char,
   val closeChar: Char,
 ) {
-  fun findOpeningDelim(chars: CharSequence, caretOffset: Int, skip: Int = 1): Int? {
+  fun findOpeningDelim(chars: CharSequence, caretOffset: Int, ignoreMatchAtCaret: Boolean): Int? {
     var oppositeDelimCount = 0
-    for (i in caretOffset - 1 - skip downTo 0) {
+    for (i in caretOffset - 1 downTo 0) {
       val char = chars[i]
       when (char) {
         openChar -> {
-          if (oppositeDelimCount > 0) {
+          if (ignoreMatchAtCaret && i == caretOffset - 1) {
+            // Ignore.
+          } else if (oppositeDelimCount > 0) {
             oppositeDelimCount--
           } else {
             return i + 1
@@ -29,13 +31,15 @@ data class DelimPair(
     return null
   }
 
-  fun findClosingDelim(chars: CharSequence, caretOffset: Int, skip: Int = 1): Int? {
+  fun findClosingDelim(chars: CharSequence, caretOffset: Int, ignoreMatchAtCaret: Boolean): Int? {
     var oppositeDelimCount = 0
-    for (i in caretOffset + skip until chars.length) {
+    for (i in caretOffset until chars.length) {
       val char = chars[i]
       when (char) {
         closeChar -> {
-          if (oppositeDelimCount > 0) {
+          if (ignoreMatchAtCaret && i == caretOffset) {
+            // Ignore.
+          } else if (oppositeDelimCount > 0) {
             oppositeDelimCount--
           } else {
             return i
@@ -121,7 +125,7 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   if (caret.selectionStart > 0) {
     val charLeft = chars[caret.selectionStart - 1]
     val rightDelimOffset: Int? = delimPairs.firstOrNull { it.openChar == charLeft }
-      ?.findClosingDelim(chars, caret.selectionStart, 0)
+      ?.findClosingDelim(chars, caret.selectionStart, false)
       ?: quoteChars.firstOrNull { it == charLeft }?.let {
         findQuoteRight(chars, caret.selectionStart, it, 0)
       }
@@ -133,7 +137,7 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   if (caret.selectionEnd < chars.length) {
     val charRight = chars[caret.selectionEnd]
     val leftDelimOffset: Int? = delimPairs.firstOrNull { it.closeChar == charRight }
-      ?.findOpeningDelim(chars, caret.selectionEnd, 0)
+      ?.findOpeningDelim(chars, caret.selectionEnd, false)
       ?: quoteChars.firstOrNull { it == charRight }?.let {
         findQuoteLeft(chars, caret.selectionEnd, it, 0)
       }

@@ -14,9 +14,9 @@ data class PairOpenCloseAction(
     val chars = e.editor.document.charsSequence
     e.editor.caretModel.runForEachCaret { caret ->
       val delim = if (isTargetOpen) {
-        pair.findOpeningDelim(chars, caret.offset)
+        pair.findOpeningDelim(chars, caret.offset, true)
       } else {
-        pair.findClosingDelim(chars, caret.offset)
+        pair.findClosingDelim(chars, caret.offset, true)
       }
       delim?.let {
         moveCaretWithOptionalSelection(caret, it, e.mode)
