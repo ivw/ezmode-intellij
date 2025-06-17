@@ -50,7 +50,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
   }
 
   fun getText(mode: String, config: EzModeConfig): String =
-    StringBuilder().apply {
+    buildString {
       appendLine(EzModeBundle.getMessage("ezmode.CheatSheet.mode", mode))
       if (mode == Mode.TYPE) {
         KeymapManager.getInstance().activeKeymap.getShortcuts("ezmode.EnterEzMode")
@@ -65,21 +65,19 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
       }
       appendLine()
       config.getMode(mode)?.let { modeBindings ->
-        keyboardOrder.forEach { char ->
-          modeBindings.keyBindings[char]?.let { keyBinding ->
-            append(
-              when (keyBinding.keyChar) {
-                ' ' -> EzModeBundle.message("ezmode.EzModeKeyMap.space")
-                null -> EzModeBundle.message("ezmode.EzModeKeyMap.defaultAction")
-                else -> keyBinding.keyChar.toString()
-              }
-            )
-            append(": ")
-            appendLine(keyBinding.action.toNiceString())
-          }
+        fun KeyBinding.appendKey(label: String) {
+          append(label)
+          append(": ")
+          appendLine(action.toNiceString())
         }
+
+        modeBindings.keyBindings[null]?.appendKey(EzModeBundle.message("ezmode.EzModeKeyMap.defaultAction"))
+        keyboardOrder.forEach { char ->
+          modeBindings.keyBindings[char]?.appendKey(char.toString())
+        }
+        modeBindings.keyBindings[' ']?.appendKey(EzModeBundle.message("ezmode.EzModeKeyMap.space"))
       }
-    }.toString()
+    }
 }
 
 const val keyboardOrder =
