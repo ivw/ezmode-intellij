@@ -1,7 +1,6 @@
 package com.github.ivw.ezmode.cheatsheet
 
 import com.github.ivw.ezmode.*
-import com.intellij.icons.*
 import com.intellij.openapi.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.ide.*
@@ -17,10 +16,10 @@ class KeystrokeHistoryComponent(val project: Project) {
 
   val heading = JBLabel(EzModeBundle.message("ezmode.keystrokeHistory"))
 
-  val clearButton = IconLabelButton(AllIcons.General.Delete) {
+  val clearButton = ActionLink(EzModeBundle.getMessage("ezmode.keystrokeHistory.clear")) {
     keystrokeHistoryService.clear()
   }
-  val copyButton = IconLabelButton(AllIcons.General.Copy) {
+  val copyButton = ActionLink(EzModeBundle.getMessage("ezmode.keystrokeHistory.copy")) {
     CopyPasteManager.getInstance().setContents(
       StringSelection(keystrokeHistoryService.getHistory())
     )
