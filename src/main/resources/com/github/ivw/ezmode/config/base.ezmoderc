@@ -2,6 +2,7 @@ map type <default> <native>
 map typeonce <default> <native><mode ez>
 
 
+map ez ~ <idea ezmode.ToggleCase>
 map ez ` <quote `>
 map ez 1 <toolwindow Project>
 map ez ! <idea SelectInProjectView>

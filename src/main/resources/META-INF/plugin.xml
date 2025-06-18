@@ -54,6 +54,8 @@ and integrates tightly with the IDE.</p>
             class="com.github.ivw.ezmode.actions.UnselectAction"/>
     <action id="ezmode.SelectWord"
             class="com.github.ivw.ezmode.actions.SelectWordAction"/>
+    <action id="ezmode.ToggleCase"
+            class="com.github.ivw.ezmode.actions.ToggleCaseAction"/>
     <action id="ezmode.SelectLineContents"
             class="com.github.ivw.ezmode.actions.SelectLineContentsAction"/>
     <action id="ezmode.InsideTextObject"

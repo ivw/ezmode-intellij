@@ -49,7 +49,7 @@ Exercise: change THIS_WORD to 123.
 ```
 The last part of this sentence SHOULDN'T BE UPPER CASE.
 ```
-*Hint: use `P` to open the command palette, from which you can toggle case.*
+*Hint: use `~` to toggle case.*
 
 
 ## Basic actions
