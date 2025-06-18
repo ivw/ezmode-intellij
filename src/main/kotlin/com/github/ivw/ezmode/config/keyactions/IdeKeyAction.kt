@@ -8,6 +8,8 @@ import com.intellij.openapi.diagnostic.*
 import java.awt.event.*
 import javax.swing.*
 
+const val EZMODE_ACTION_PLACE = "ezmode"
+
 data class IdeKeyAction(val actionId: String) : KeyAction() {
   val anAction: AnAction? by lazy {
     ActionManager.getInstance().getAction(actionId)
@@ -19,7 +21,7 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
       if (anAction is EmptyAction) {
         handleEmptyAction(anAction, e)
       } else {
-        anAction.performActionIfEnabled(e.dataContext, ActionPlaces.KEYBOARD_SHORTCUT)
+        anAction.performActionIfEnabled(e.dataContext, EZMODE_ACTION_PLACE)
       }
     }
   }

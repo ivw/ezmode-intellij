@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.editor
 
+import com.github.ivw.ezmode.cheatsheet.*
 import com.github.ivw.ezmode.config.*
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.components.*
@@ -16,6 +17,8 @@ class EzModeTypedActionHandler(
 ) : TypedActionHandler {
   override fun execute(editor: Editor, charTyped: Char, dataContext: DataContext) {
     val config = service<EzModeConfigAppService>().getConfig()
+
+    editor.project?.service<KeystrokeHistoryService>()?.add(charTyped.toString())
 
     config.performKeyAction(editor.getMode(), charTyped, dataContext, editor, originalHandler)
   }

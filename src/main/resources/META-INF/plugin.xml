@@ -42,6 +42,11 @@ and integrates tightly with the IDE.</p>
     />
   </extensions>
 
+  <applicationListeners>
+    <listener class="com.github.ivw.ezmode.listeners.IdeaActionListener"
+              topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
+  </applicationListeners>
+
   <actions>
     <action id="ezmode.DeleteSelection"
             class="com.github.ivw.ezmode.actions.DeleteSelectionAction"/>

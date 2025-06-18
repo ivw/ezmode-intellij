@@ -8,6 +8,7 @@ import com.intellij.openapi.editor.colors.*
 import com.intellij.openapi.keymap.*
 import com.intellij.openapi.project.*
 import com.intellij.openapi.wm.*
+import com.intellij.ui.*
 import com.intellij.ui.components.*
 import com.intellij.ui.content.*
 import com.intellij.util.ui.*
@@ -27,9 +28,17 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
       margin = JBUI.insets(5)
     }
 
-    val component = JBScrollPane(textArea)
+    val keystrokeHistoryComponent = KeystrokeHistoryComponent(project)
+
     val content = ContentFactory.getInstance().createContent(
-      component, null, true,
+      Box.createVerticalBox().apply {
+        add(JBScrollPane(textArea).apply {
+          border = BorderFactory.createMatteBorder(0, 0, 1, 0, JBColor.border())
+        })
+        add(Box.createVerticalStrut(10))
+        keystrokeHistoryComponent.addComponents(this)
+      },
+      null, true,
     )
     toolWindow.contentManager.addContent(content)
 
@@ -47,6 +56,7 @@ class CheatSheetToolWindowFactory : ToolWindowFactory, DumbAware {
         updateText()
       }
     }
+    keystrokeHistoryComponent.install(content)
   }
 
   fun getText(mode: String, config: EzModeConfig): String =

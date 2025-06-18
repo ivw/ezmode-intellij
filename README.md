@@ -103,7 +103,8 @@ You can map an action to the parent keymap by typing its `keychar`,
 or you can use a base action:
 
 - `<idea SomeActionId>`: Invoke an IntelliJ IDE action. Most action IDs can be
-  found [here](https://github.com/JetBrains/intellij-community/blob/master/platform/platform-resources/src/keymaps/%24default.xml)
+  found [here](https://github.com/JetBrains/intellij-community/blob/master/platform/platform-resources/src/keymaps/%24default.xml).
+  The keystroke history at the bottom of the cheat sheet displays the ID of any action triggered without EzMode.
 - `<mode somemode>`: Switch to a different mode
 - `<ofmode somemode>`: Let another mode handle the `keychar`
 - `<native>`: Insert the `keychar` into the editor
