@@ -122,8 +122,11 @@ class ModeService(val project: Project) : Disposable {
             }
           }
         } else if (e.oldRange.isEmpty) {
-          e.editor.setSelectModeLeadOffset()
-          handleFocusOrModeChange(e.editor)
+          // We have to use `invokeLater` in both cases for consistency.
+          ApplicationManager.getApplication().invokeLater {
+            e.editor.setSelectModeLeadOffset()
+            handleFocusOrModeChange(e.editor)
+          }
         }
       }
     }
