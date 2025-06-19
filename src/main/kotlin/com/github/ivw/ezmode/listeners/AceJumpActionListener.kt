@@ -13,11 +13,7 @@ class AceJumpActionListener : AnActionListener {
    * After an AceJump action, we want to update the selection (if select mode),
    * and recalculate the editor colors.
    */
-  override fun afterActionPerformed(
-    action: AnAction,
-    event: AnActionEvent,
-    result: AnActionResult,
-  ) {
+  override fun afterActionPerformed(action: AnAction, event: AnActionEvent, result: AnActionResult) {
     if (action is AceAction) {
       CommonDataKeys.EDITOR.getData(event.dataContext)?.let { editor ->
         editor.project?.service<ModeService>()?.apply {

@@ -1,7 +1,7 @@
 package com.github.ivw.ezmode.listeners
 
 import com.github.ivw.ezmode.cheatsheet.*
-import com.github.ivw.ezmode.config.keyactions.EZMODE_ACTION_PLACE
+import com.github.ivw.ezmode.config.keyactions.*
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.actionSystem.ex.*
 import com.intellij.openapi.components.*

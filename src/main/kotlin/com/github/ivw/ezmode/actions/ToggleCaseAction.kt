@@ -3,7 +3,6 @@ package com.github.ivw.ezmode.actions
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
-import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler
 
 class ToggleCaseAction : EditorAction(Handler()) {
   class Handler : EditorWriteActionHandler.ForEachCaret() {

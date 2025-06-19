@@ -2,7 +2,7 @@ package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.editor.*
-import com.intellij.openapi.components.service
+import com.intellij.openapi.components.*
 
 /**
  * An action triggered by the EzMode key handler.

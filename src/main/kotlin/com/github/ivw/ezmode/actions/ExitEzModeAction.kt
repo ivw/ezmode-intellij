@@ -2,7 +2,7 @@ package com.github.ivw.ezmode.actions
 
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.actionSystem.*
-import com.intellij.openapi.components.service
+import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
 

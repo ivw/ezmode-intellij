@@ -3,7 +3,7 @@ package com.github.ivw.ezmode
 import com.github.ivw.ezmode.config.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.*
-import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.application.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.diagnostic.*
 import com.intellij.openapi.editor.actionSystem.*
