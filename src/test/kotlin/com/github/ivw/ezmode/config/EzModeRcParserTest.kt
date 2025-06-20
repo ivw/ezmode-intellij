@@ -24,13 +24,12 @@ class EzModeRcParserTest {
     """.lines().let { lines ->
       EzModeRcParser.parse(config, lines, null)
     }
-    val gAction = WriteAction("git abc")
     config.modes.shouldBeSingleton { mode ->
       mode.name.shouldBe("ez")
       mode.keyBindings.values.shouldContainExactlyInAnyOrder(
         KeyBinding('A', IdeKeyAction("EditorSelectLine")),
         KeyBinding('t', KeyAction.ChangeMode("type")),
-        KeyBinding('g', gAction),
+        KeyBinding('g', WriteAction("git abc")),
         KeyBinding('d', KeyAction.Native),
         KeyBinding('D', KeyAction.NativeOf('q')),
       )
@@ -50,12 +49,12 @@ class EzModeRcParserTest {
           'm', KeyAction.Composite(
             listOf(
               IdeKeyAction("${"$"}SelectAll"),
-              gAction,
-              gAction,
+              KeyAction.OfKeyChar('g', config),
+              KeyAction.OfKeyChar('g', config),
             )
           )
         ),
-        KeyBinding(' ', gAction)
+        KeyBinding(' ', KeyAction.OfKeyChar('g', config))
       )
     }
   }
@@ -148,19 +147,9 @@ class EzModeRcParserTest {
   }
 
   @Test
-  fun parseModeChangeNotAndEnd() {
-    val config = EzModeConfig()
-    """
-      map ez h <nop>
-      map ez e <mode select>
-      map ez ; <nop>
-      map ez E he;
-    """.lines().let { lines ->
-      shouldThrow<EzModeRcParser.ParseError> {
-        EzModeRcParser.parse(config, lines, config)
-      }.cause.shouldNotBeNull().message.shouldBe(
-        "action with index 1 changes the mode. This is only allowed in the last action."
-      )
-    }
+  fun parseActionChain() {
+    EzModeRcParser.parseActionChain("<mode select>kk<mode ez>", null)
+      .shouldNotBeNull()
+      .toNiceString().shouldBe("Switch mode to select, kk, Switch mode to ez")
   }
 }

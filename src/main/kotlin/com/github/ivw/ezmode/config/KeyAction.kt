@@ -2,6 +2,7 @@ package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.editor.*
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.*
 
 /**
@@ -30,11 +31,42 @@ abstract class KeyAction {
 
   data class Composite(val actions: List<KeyAction>) : KeyAction() {
     override fun perform(e: EzModeKeyEvent) {
-      actions.forEach { it.perform(e) }
+      if (actions.isEmpty()) return
+
+      val iterator = actions.iterator()
+
+      // Perform the first action directly.
+      iterator.next().perform(e)
+
+      // Schedule the next action (recursively)
+      val app = ApplicationManager.getApplication()
+      fun handleNext() {
+        if (iterator.hasNext()) {
+          app.invokeLater {
+            iterator.next().perform(e.withUpdatedMode())
+            handleNext()
+          }
+        }
+      }
+      handleNext()
     }
 
-    override fun toNiceString(): String =
-      actions.joinToString(separator = ", ", transform = KeyAction::toNiceString)
+    override fun toNiceString(): String = if (actions.isEmpty()) "" else buildString {
+      val iterator = actions.iterator()
+
+      var lastAction = iterator.next()
+      append(lastAction.toNiceString())
+      while (iterator.hasNext()) {
+        val action = iterator.next()
+        if (lastAction is OfKeyChar && action is OfKeyChar) {
+          // Do not add separator between two `OfKeyChar` actions.
+        } else {
+          append(", ")
+        }
+        append(action.toNiceString())
+        lastAction = action
+      }
+    }
   }
 
   data class ChangeMode(val mode: String) : KeyAction() {
@@ -45,9 +77,17 @@ abstract class KeyAction {
     override fun toNiceString() = EzModeBundle.message("ezmode.KeyAction.ChangeMode", mode)
   }
 
-  data class OfMode(val mode: String) : KeyAction() {
+  data class OfKeyChar(val keyChar: Char, val config: EzModeConfig?) : KeyAction() {
     override fun perform(e: EzModeKeyEvent) {
-      e.config.getBindingOrDefault(mode, e.char)?.action?.perform(e)
+      e.copy(char = keyChar, config = config ?: e.config).perform()
+    }
+
+    override fun toNiceString() = "$keyChar"
+  }
+
+  data class OfMode(val mode: String, val config: EzModeConfig?) : KeyAction() {
+    override fun perform(e: EzModeKeyEvent) {
+      e.copy(mode = mode, config = config ?: e.config).perform()
     }
 
     override fun toNiceString(): String = EzModeBundle.message("ezmode.KeyAction.OfMode", mode)

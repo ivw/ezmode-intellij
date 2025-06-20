@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.config
 
+import com.github.ivw.ezmode.editor.getMode
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
@@ -32,20 +33,6 @@ class EzModeConfig(
     vars["secondarycolor"]?.let { EzModeRcParser.parseColor(it) }
   }
 
-  fun performKeyAction(
-    mode: String,
-    char: Char,
-    dataContext: DataContext,
-    editor: Editor,
-    nativeHandler: TypedActionHandler,
-  ) {
-    getBindingOrDefault(mode, char)?.action?.perform(
-      EzModeKeyEvent(
-        this, mode, char, dataContext, editor, nativeHandler
-      )
-    )
-  }
-
   fun copy() = EzModeConfig(
     modes.mapTo(ArrayList(DEFAULT_MODES_CAPACITY)) { it.copy() },
     LinkedHashMap(vars),
@@ -74,7 +61,7 @@ data class KeyBinding(
   val action: KeyAction,
 )
 
-class EzModeKeyEvent(
+data class EzModeKeyEvent(
   val config: EzModeConfig,
   val mode: String,
   val char: Char,
@@ -83,4 +70,10 @@ class EzModeKeyEvent(
   val nativeHandler: TypedActionHandler,
 ) {
   val project: Project? get() = editor.project
+
+  fun perform() {
+    config.getBindingOrDefault(mode, char)?.action?.perform(this)
+  }
+
+  fun withUpdatedMode() = copy(mode = editor.getMode())
 }

@@ -62,7 +62,7 @@ object EzModeRcParser {
       "map" -> {
         val mode = scanner.next()
         val char = parseChar(scanner)
-        parseActionChain(scanner.restOfLine(), src, mode)?.let { action ->
+        parseActionChain(scanner.restOfLine(), src)?.let { action ->
           dest.addBinding(mode, KeyBinding(char, action))
         }
       }
@@ -80,11 +80,7 @@ object EzModeRcParser {
     return charString.single()
   }
 
-  fun parseActionChain(
-    actionChainString: String,
-    src: EzModeConfig?,
-    mode: String,
-  ): KeyAction? {
+  fun parseActionChain(actionChainString: String, src: EzModeConfig?): KeyAction? {
     var charIndex = 0
     val actions = mutableListOf<KeyAction>()
     do {
@@ -93,12 +89,13 @@ object EzModeRcParser {
         if (closingIndex == -1) {
           throw LineParseError("missing closing bracket in: $actionChainString")
         }
-        actions.add(parseSpecialAction(actionChainString.substring(charIndex + 1, closingIndex)))
+        actions.add(parseSpecialAction(
+          actionChainString.substring(charIndex + 1, closingIndex),
+          src,
+        ))
         charIndex = closingIndex + 1
       } else {
-        src?.getBindingOrDefault(mode, actionChainString[charIndex])?.action?.let {
-          actions.add(it)
-        }
+        actions.add(KeyAction.OfKeyChar(actionChainString[charIndex], src))
         charIndex++
       }
     } while (charIndex < actionChainString.length)
@@ -106,16 +103,11 @@ object EzModeRcParser {
     return if (actions.size == 1) {
       actions[0]
     } else {
-      for (i in 0 until actions.size - 1) {
-        if (actions[i] is KeyAction.ChangeMode) {
-          throw LineParseError("action with index $i changes the mode. This is only allowed in the last action.")
-        }
-      }
       KeyAction.Composite(actions)
     }
   }
 
-  fun parseSpecialAction(specialActionString: String): KeyAction {
+  fun parseSpecialAction(specialActionString: String, src: EzModeConfig?): KeyAction {
     val scanner = Scanner(specialActionString)
     val keyword = scanner.next()
     return when (keyword) {
@@ -130,7 +122,7 @@ object EzModeRcParser {
         }
       }
 
-      "ofmode" -> KeyAction.OfMode(scanner.restOfLine())
+      "ofmode" -> KeyAction.OfMode(scanner.restOfLine(), src)
       "nop" -> KeyAction.Nop
       "pair" -> {
         val isTargetOpen: Boolean = when (scanner.next()) {

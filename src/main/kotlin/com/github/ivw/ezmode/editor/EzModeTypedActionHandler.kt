@@ -20,7 +20,14 @@ class EzModeTypedActionHandler(
 
     editor.project?.service<KeystrokeHistoryService>()?.add(charTyped.toString())
 
-    config.performKeyAction(editor.getMode(), charTyped, dataContext, editor, originalHandler)
+    EzModeKeyEvent(
+      config = config,
+      mode = editor.getMode(),
+      char = charTyped,
+      dataContext = dataContext,
+      editor = editor,
+      nativeHandler = originalHandler,
+    ).perform()
   }
 
   companion object {
