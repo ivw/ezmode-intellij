@@ -16,7 +16,7 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
       .also { if (it == null) LOG.info("Action not found: $actionId") }
   }
 
-  override fun perform(e: EzModeKeyEvent) {
+  override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
     anAction?.let { anAction ->
       if (anAction is EmptyAction) {
         handleEmptyAction(anAction, e)
@@ -24,6 +24,7 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
         anAction.performActionIfEnabled(e.dataContext, EZMODE_ACTION_PLACE)
       }
     }
+    onComplete?.invokeLater()
   }
 
   /**

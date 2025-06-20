@@ -5,7 +5,7 @@ import com.github.ivw.ezmode.config.*
 import com.intellij.openapi.command.*
 
 data class WriteAction(val text: String) : KeyAction() {
-  override fun perform(e: EzModeKeyEvent) {
+  override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
     WriteCommandAction.runWriteCommandAction(e.project) {
       e.editor.caretModel.runForEachCaret { caret ->
         if (caret.hasSelection()) {
@@ -17,6 +17,7 @@ data class WriteAction(val text: String) : KeyAction() {
         }
       }
     }
+    onComplete?.invoke()
   }
 
   override fun toNiceString(): String = EzModeBundle.message("ezmode.InsertStringAction", text)

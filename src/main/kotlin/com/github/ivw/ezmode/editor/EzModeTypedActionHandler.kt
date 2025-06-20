@@ -27,7 +27,7 @@ class EzModeTypedActionHandler(
       dataContext = dataContext,
       editor = editor,
       nativeHandler = originalHandler,
-    ).perform()
+    ).perform(null)
   }
 
   companion object {

@@ -10,7 +10,7 @@ data class PairOpenCloseAction(
   val isTargetOpen: Boolean,
   val pair: DelimPair,
 ) : KeyAction() {
-  override fun perform(e: EzModeKeyEvent) {
+  override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
     val chars = e.editor.document.charsSequence
     e.editor.caretModel.runForEachCaret { caret ->
       val delim = if (isTargetOpen) {
@@ -22,6 +22,7 @@ data class PairOpenCloseAction(
         moveCaretWithOptionalSelection(caret, it, e.mode)
       }
     }
+    onComplete?.invoke()
   }
 
   override fun toNiceString() = EzModeBundle.message(

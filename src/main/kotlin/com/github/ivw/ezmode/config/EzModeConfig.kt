@@ -1,6 +1,6 @@
 package com.github.ivw.ezmode.config
 
-import com.github.ivw.ezmode.editor.getMode
+import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
@@ -71,8 +71,10 @@ data class EzModeKeyEvent(
 ) {
   val project: Project? get() = editor.project
 
-  fun perform() {
-    config.getBindingOrDefault(mode, char)?.action?.perform(this)
+  fun getKeyAction(): KeyAction? = config.getBindingOrDefault(mode, char)?.action
+
+  fun perform(onComplete: OnComplete?) {
+    getKeyAction()?.perform(this, onComplete)
   }
 
   fun withUpdatedMode() = copy(mode = editor.getMode())

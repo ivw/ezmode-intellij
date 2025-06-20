@@ -9,13 +9,14 @@ import com.github.ivw.ezmode.config.*
 data class QuoteAction(
   val quoteChar: Char,
 ) : KeyAction() {
-  override fun perform(e: EzModeKeyEvent) {
+  override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
     val chars = e.editor.document.charsSequence
     e.editor.caretModel.runForEachCaret { caret ->
       findQuoteAuto(chars, caret.offset, quoteChar)?.let { offset ->
         moveCaretWithOptionalSelection(caret, offset, e.mode)
       }
     }
+    onComplete?.invoke()
   }
 
   override fun toNiceString() = EzModeBundle.message(
