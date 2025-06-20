@@ -5,6 +5,11 @@ import com.intellij.openapi.keymap.*
 
 private val tabShortcut = KeyboardShortcut.fromString("TAB")
 private val newTabShortcut = KeyboardShortcut.fromString("alt T")
+private val tabActionsToMove: List<String> = listOf(
+  "EditorTab",
+  "EditorIndentSelection",
+  "ExpandLiveTemplateByTab"
+)
 
 val Keymap.ezModeUsesTab
   get() = getShortcuts("ezmode.EnterEzMode").contains(tabShortcut)
@@ -21,19 +26,19 @@ val Keymap.ezModeUsesTab
 fun moveTabShortcuts() {
   val keymap = KeymapManager.getInstance().activeKeymap
   if (keymap.ezModeUsesTab) {
-    keymap.removeShortcut("EditorTab", tabShortcut)
-    keymap.removeShortcut("EditorIndentSelection", tabShortcut)
-    keymap.addShortcut("EditorTab", newTabShortcut)
-    keymap.addShortcut("EditorIndentSelection", newTabShortcut)
+    tabActionsToMove.forEach { actionId ->
+      keymap.removeShortcut(actionId, tabShortcut)
+      keymap.addShortcut(actionId, newTabShortcut)
+    }
   }
 }
 
 fun restoreTabShortcuts() {
   val keymap = KeymapManager.getInstance().activeKeymap
   if (keymap.ezModeUsesTab) {
-    keymap.removeShortcut("EditorTab", newTabShortcut)
-    keymap.removeShortcut("EditorIndentSelection", newTabShortcut)
-    keymap.addShortcut("EditorTab", tabShortcut)
-    keymap.addShortcut("EditorIndentSelection", tabShortcut)
+    tabActionsToMove.forEach { actionId ->
+      keymap.removeShortcut(actionId, newTabShortcut)
+      keymap.addShortcut(actionId, tabShortcut)
+    }
   }
 }
