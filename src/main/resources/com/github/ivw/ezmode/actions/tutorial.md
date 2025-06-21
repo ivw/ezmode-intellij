@@ -47,7 +47,7 @@ Exercise: change THIS_WORD to 123.
 ```
 
 ```
-The last part of this sentence SHOULDN'T BE UPPER CASE.
+The last part of this sentence SHOULDN'T BE UPPERCASE.
 ```
 *Hint: use `~` to toggle case.*
 

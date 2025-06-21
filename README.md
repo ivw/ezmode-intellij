@@ -5,10 +5,10 @@
 EzMode is a plugin for [JetBrains IDEs](https://www.jetbrains.com/ides/) that brings the power of modal editing, without
 the steep learning curve.
 
-- **Fast**: Edit with minimal keystrokes, without needing a mouse or Ctrl/Alt
-- **Built for modern IDEs**: Control git, navigate diffs, use multiple cursors, manage split windows and tool windows
-- **Intuitive**: Easy-to-memorize keyboard layout that fits on a single sheet
-- **Customizable**: Map any character to any IDE action, and define new modes
+- **Fast**: Edit with minimal keystrokes, no mouse or Ctrl/Alt needed
+- **Built for modern IDEs**: Seamless integration with git, diffs, multi-cursor, and tool windows
+- **Intuitive**: Easy-to-learn keyboard layout that fits on one page
+- **Customizable**: Map any character to any IDE action and create custom modes
 
 [Demo](https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4)
 
@@ -85,7 +85,7 @@ define your own as well.
 
 ### `keychar`
 
-The character that has to be "typed" to trigger the action. Naturally, upper case means you have to hold shift.
+The character that has to be "typed" to trigger the action. Naturally, uppercase means you have to hold shift.
 
 Ctrl/Alt shortcuts are not characters and not handled by EzMode.
 

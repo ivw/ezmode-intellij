@@ -7,10 +7,10 @@
   <description><![CDATA[
 <p>Modal editing without the steep learning curve.</p>
 <p><ul>
-<li><strong>Fast</strong>: Edit with minimal keystrokes, without needing a mouse or Ctrl/Alt</li>
-<li><strong>Built for modern IDEs</strong>: Control git, navigate diffs, use multiple cursors, manage split windows and tool windows</li>
-<li><strong>Intuitive</strong>: Easy to memorize keyboard layout that fits on a single sheet</li>
-<li><strong>Customizable</strong>: Map any character to any IDE action, and define new modes</li>
+<li><strong>Fast</strong>: Edit with minimal keystrokes, no mouse or Ctrl/Alt needed</li>
+<li><strong>Built for modern IDEs</strong>: Seamless integration with git, diffs, multi-cursor, and tool windows</li>
+<li><strong>Intuitive</strong>: Easy-to-learn keyboard layout that fits on one page</li>
+<li><strong>Customizable</strong>: Map any character to any IDE action and create custom modes</li>
 </ul></p>
 <p>Compared to Vim and Kakoune, EzMode is significantly easier if you're already familiar with IntelliJ-style IDEs
 and integrates tightly with the IDE.</p>
@@ -27,8 +27,7 @@ and integrates tightly with the IDE.</p>
 
     <statusBarWidgetFactory implementation="com.github.ivw.ezmode.widget.ModeStatusBarWidgetFactory"
                             id="ezmode.ModeStatusBarWidget"
-                            order="before Position"
-    />
+                            order="before Position"/>
 
     <notificationGroup id="ezmode.parser"
                        displayType="STICKY_BALLOON"
@@ -38,8 +37,7 @@ and integrates tightly with the IDE.</p>
                 factoryClass="com.github.ivw.ezmode.cheatsheet.CheatSheetToolWindowFactory"
                 anchor="right"
                 secondary="false"
-                icon="icons/ezmode.svg"
-    />
+                icon="icons/ezmode.svg"/>
   </extensions>
 
   <applicationListeners>
