@@ -112,6 +112,7 @@ object EzModeRcParser {
     val keyword = scanner.next()
     return when (keyword) {
       "write" -> WriteAction(scanner.restOfLine())
+      "writevar" -> WriteVarAction(scanner.restOfLine())
       "mode" -> KeyAction.ChangeMode(scanner.restOfLine())
       "idea" -> IdeKeyAction(scanner.restOfLine())
       "native" -> {

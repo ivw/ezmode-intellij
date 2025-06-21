@@ -12,6 +12,7 @@ map ez 3 <toolwindow Terminal>
 map ez # <idea ActivateTerminalToolWindow>
 map ez 4 <idea HideAllWindows>
 map ez 5 <idea ezmode.ToggleCheatSheet>
+map ez 7 <mode special>
 map ez 8 <idea GotoDeclaration>
 map ez 9 <idea UnselectPreviousOccurrence>
 map ez ( <pair open ()>
@@ -142,3 +143,12 @@ map git l <idea Diff.NextChange>
 
 map git c <idea CheckinProject><mode ez>
 map git b <idea Git.Branches><mode ez>
+
+
+map special <default> <ofmode ez>
+
+map special 7 <mode ez>
+map special i <writevar caretindex><mode ez>
+map special f <writevar filename><mode ez>
+map special l <writevar line><mode ez>
+map special c <writevar column><mode ez>

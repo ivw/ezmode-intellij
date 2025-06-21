@@ -17,7 +17,7 @@ data class WriteAction(val text: String) : KeyAction() {
         }
       }
     }
-    onComplete?.invoke()
+    onComplete?.invokeLater()
   }
 
   override fun toNiceString(): String = EzModeBundle.message("ezmode.InsertStringAction", text)
