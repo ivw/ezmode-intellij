@@ -3,6 +3,7 @@ package com.github.ivw.ezmode.config
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.command.*
 import com.intellij.openapi.editor.*
+import com.intellij.openapi.util.*
 
 data class DelimPair(
   val openChar: Char,
@@ -118,6 +119,31 @@ fun selectWord(caret: Caret, chars: CharSequence, around: Boolean) {
   }
   caret.moveToOffset(end)
   caret.setSelection(start, end)
+}
+
+fun findNumber(chars: CharSequence, caretOffset: Int): TextRange? {
+  var end = caretOffset
+  if (end + 1 < chars.length && chars[end] == '-' && chars[end + 1].isDigit()) {
+    end += 2
+    while (end < chars.length && chars[end].isDigit()) {
+      end++
+    }
+    return TextRange(caretOffset, end)
+  }
+  while (end < chars.length && chars[end].isDigit()) {
+    end++
+  }
+
+  var start = caretOffset
+  while (start > 0 && chars[start - 1].isDigit()) {
+    start--
+  }
+  if (start == end) return null
+  if (start > 0 && chars[start - 1] == '-') {
+    start--
+  }
+
+  return TextRange(start, end)
 }
 
 fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {

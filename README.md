@@ -67,6 +67,16 @@ Pressing `g` in `ez` mode switches to `git` mode, where you can:
 - `h`: Show git history of file
 - `a`: Annotate/blame file
 
+### `special`
+
+Pressing `7` in `ez` mode switches to `special` mode, where you can:
+
+- `f`: Insert the filename into the editor
+- `i`: Insert the caret index into the editor. With multiple carets, this creates a sequence.
+- `l`, `c`: Insert the line/column into the editor
+- `+`, `-`: Increment/decrement a number
+- `*`, `/`: Double/halve a number
+
 ## Customization
 
 The full keymap is defined in [base.ezmoderc](src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc),

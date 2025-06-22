@@ -148,6 +148,10 @@ map git b <idea Git.Branches><mode ez>
 map special <default> <ofmode ez>
 
 map special 7 <mode ez>
+map special + <numberop +>
+map special - <numberop ->
+map special * <numberop *>
+map special / <numberop />
 map special i <writevar caretindex><mode ez>
 map special f <writevar filename><mode ez>
 map special l <writevar line><mode ez>

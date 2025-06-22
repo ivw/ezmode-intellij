@@ -1,6 +1,7 @@
 package com.github.ivw.ezmode.config
 
 import com.intellij.openapi.editor.*
+import com.intellij.openapi.util.*
 import io.kotest.matchers.*
 import io.mockk.*
 import org.junit.*
@@ -147,5 +148,24 @@ class TextObjectUtilsTest {
 
     selectTextObject(caret, around = false, deleteDelims = false)
     verify { selectRange(1, 6, caret, around = false, deleteDelims = false) }
+  }
+
+  @Test
+  fun findNumber() {
+    val chars: CharSequence = "--123-"
+    val numberTextRange = TextRange(1, 5)
+    findNumber(chars, 0).shouldBe(null)
+    findNumber(chars, 1).shouldBe(numberTextRange)
+    findNumber(chars, 2).shouldBe(numberTextRange)
+    findNumber(chars, 3).shouldBe(numberTextRange)
+    findNumber(chars, 4).shouldBe(numberTextRange)
+    findNumber(chars, 5).shouldBe(numberTextRange)
+    findNumber(chars, 6).shouldBe(null)
+
+    findNumber("-1-1", 2).shouldBe(
+      TextRange(2, 4)
+    )
+
+    findNumber("-", 0).shouldBe(null)
   }
 }

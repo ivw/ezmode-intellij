@@ -89,10 +89,12 @@ object EzModeRcParser {
         if (closingIndex == -1) {
           throw LineParseError("missing closing bracket in: $actionChainString")
         }
-        actions.add(parseSpecialAction(
-          actionChainString.substring(charIndex + 1, closingIndex),
-          src,
-        ))
+        actions.add(
+          parseSpecialAction(
+            actionChainString.substring(charIndex + 1, closingIndex),
+            src,
+          )
+        )
         charIndex = closingIndex + 1
       } else {
         actions.add(KeyAction.OfKeyChar(actionChainString[charIndex], src))
@@ -151,6 +153,7 @@ object EzModeRcParser {
 
       "quote" -> QuoteAction(scanner.next().single())
       "toolwindow" -> ToggleToolWindowAction(scanner.restOfLine())
+      "numberop" -> NumberOperationAction(scanner.restOfLine())
       else -> {
         throw LineParseError("unknown action keyword: $keyword")
       }
