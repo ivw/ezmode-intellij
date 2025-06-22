@@ -55,7 +55,7 @@ Useful for quickly adding or replacing a single character while in `ez` mode.
 
 Pressing `g` in `ez` mode switches to `git` mode, where you can:
 
-- `r`: Review diffs of local changes
+- `r`: Review diffs of local changes. Press `r` again to exit to source.
 - `i`, `k`: Go to previous/next diff
 - `j`, `l`: Go to previous/next diff file
 - `w`: Close diff and return to `ez` mode
