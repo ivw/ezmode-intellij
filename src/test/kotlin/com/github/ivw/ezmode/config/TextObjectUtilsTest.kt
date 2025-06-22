@@ -151,21 +151,21 @@ class TextObjectUtilsTest {
   }
 
   @Test
-  fun findNumber() {
+  fun getTextRangeOfInt() {
     val chars: CharSequence = "--123-"
     val numberTextRange = TextRange(1, 5)
-    findNumber(chars, 0).shouldBe(null)
-    findNumber(chars, 1).shouldBe(numberTextRange)
-    findNumber(chars, 2).shouldBe(numberTextRange)
-    findNumber(chars, 3).shouldBe(numberTextRange)
-    findNumber(chars, 4).shouldBe(numberTextRange)
-    findNumber(chars, 5).shouldBe(numberTextRange)
-    findNumber(chars, 6).shouldBe(null)
+    getTextRangeOfInt(chars, 0).shouldBe(null)
+    getTextRangeOfInt(chars, 1).shouldBe(numberTextRange)
+    getTextRangeOfInt(chars, 2).shouldBe(numberTextRange)
+    getTextRangeOfInt(chars, 3).shouldBe(numberTextRange)
+    getTextRangeOfInt(chars, 4).shouldBe(numberTextRange)
+    getTextRangeOfInt(chars, 5).shouldBe(numberTextRange)
+    getTextRangeOfInt(chars, 6).shouldBe(null)
 
-    findNumber("-1-1", 2).shouldBe(
+    getTextRangeOfInt("-1-1", 2).shouldBe(
       TextRange(2, 4)
     )
 
-    findNumber("-", 0).shouldBe(null)
+    getTextRangeOfInt("-", 0).shouldBe(null)
   }
 }

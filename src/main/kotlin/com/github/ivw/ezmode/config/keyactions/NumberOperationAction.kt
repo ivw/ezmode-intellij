@@ -11,7 +11,7 @@ class NumberOperationAction(val operationId: String) : KeyAction() {
         if (caret.hasSelection()) {
           caret.selectionRange
         } else {
-          findNumber(e.editor.document.charsSequence, caret.offset)
+          getTextRangeOfInt(e.editor.document.charsSequence, caret.offset)
         }?.let { range ->
           e.editor.document.getText(range).toIntOrNull()?.let { number ->
             when (operationId) {

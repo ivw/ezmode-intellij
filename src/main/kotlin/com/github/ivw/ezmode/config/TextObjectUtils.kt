@@ -121,7 +121,7 @@ fun selectWord(caret: Caret, chars: CharSequence, around: Boolean) {
   caret.setSelection(start, end)
 }
 
-fun findNumber(chars: CharSequence, caretOffset: Int): TextRange? {
+fun getTextRangeOfInt(chars: CharSequence, caretOffset: Int): TextRange? {
   var end = caretOffset
   if (end + 1 < chars.length && chars[end] == '-' && chars[end + 1].isDigit()) {
     end += 2
