@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## 1.3.0
+- Always scroll to caret in actions that change the selection
+- Add more key mappings: `$`, `gP`, `gf`, `gm`, `7r`, `7R` 
+
 ## 1.2.0
 - Git review action: when already reviewing, exit to source
 - Add `special` mode
