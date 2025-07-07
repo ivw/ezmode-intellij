@@ -119,6 +119,7 @@ fun selectWord(caret: Caret, chars: CharSequence, around: Boolean) {
   }
   caret.moveToOffset(end)
   caret.setSelection(start, end)
+  caret.editor.scrollingModel.scrollToCaret(ScrollType.RELATIVE)
 }
 
 fun getTextRangeOfInt(chars: CharSequence, caretOffset: Int): TextRange? {
@@ -177,6 +178,7 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
 fun selectRange(start: Int, end: Int, caret: Caret, around: Boolean, deleteDelims: Boolean) {
   val aroundOffset = if (around && !deleteDelims) 1 else 0
   caret.setSelection(start - aroundOffset, end + aroundOffset)
+  caret.editor.scrollingModel.scrollToCaret(ScrollType.RELATIVE)
   if (deleteDelims) {
     WriteCommandAction.runWriteCommandAction(caret.editor.project) {
       caret.editor.document.deleteString(end, end + 1)

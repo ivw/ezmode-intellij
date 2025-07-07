@@ -17,6 +17,7 @@ class SelectLineContentsAction : EditorAction(Handler()) {
       })
       caret.moveToOffset(end)
       caret.setSelection(start, end)
+      caret.editor.scrollingModel.scrollToCaret(ScrollType.RELATIVE)
     }
   }
 }
