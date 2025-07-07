@@ -60,8 +60,11 @@ Pressing `g` in `ez` mode switches to `git` mode, where you can:
 - `j`, `l`: Go to previous/next diff file
 - `w`: Close diff and return to `ez` mode
 - `c`: Commit
-- `p`: Push changes
-- `u`: Update/pull changes
+- `p`: Push
+- `P`: Pull from…
+- `u`: Update/pull
+- `f`: Fetch
+- `m`: Merge
 - `b`: Show branches
 - `s`: Show git log
 - `h`: Show git history of file
@@ -76,6 +79,7 @@ Pressing `7` in `ez` mode switches to `special` mode, where you can:
 - `l`, `c`: Insert the line/column into the editor
 - `+`, `-`: Increment/decrement a number
 - `*`, `/`: Double/halve a number
+- `r`, `R`: Rename symbol/file
 
 ## Customization
 

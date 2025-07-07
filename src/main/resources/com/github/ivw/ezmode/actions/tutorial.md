@@ -106,7 +106,7 @@ Exercise: Change every 0 to a 1: 0_0_0_0_0
 ```
 Exercise: Remove the number next to every x: x0 x1 x2 x3 x4
 ```
-*Hint: Press Tab to exit select mode while keeping the multiple carets.*
+*Hint: Press `e` to exit select mode while keeping the multiple carets.*
 
 When in select mode (`e`), use `.` / `,` to add a new caret below/above.
 
