@@ -27,7 +27,7 @@ the steep learning curve.
 4. Open the [tutorial](src/main/resources/com/github/ivw/ezmode/actions/tutorial.md) in your IDE by clicking the mode
    indicator in the bottom-right corner.
 
-## Default modes
+## Modes
 
 ### `type`
 
@@ -118,13 +118,12 @@ or you can use a base action:
 
 - `<idea SomeActionId>`: Invoke an IntelliJ IDE action. Most action IDs can be
   found [here](https://github.com/JetBrains/intellij-community/blob/master/platform/platform-resources/src/keymaps/%24default.xml).
-  The keystroke history at the bottom of the cheat sheet displays the ID of any action triggered without EzMode.
+  Another way to find action IDs is the keystroke history at the bottom of the EzMode cheat sheet.
 - `<mode somemode>`: Switch to a different mode
 - `<ofmode somemode>`: Let another mode handle the `keychar`
 - `<native>`: Insert the `keychar` into the editor
 - `<write Hello word!>`: Insert a string into the editor
-- `<toolwindow ToolWindowId>`: Toggle a tool window (list of
-  IDS [here](https://github.com/JetBrains/intellij-community/blob/master/platform/ide-core/src/com/intellij/openapi/wm/ToolWindowId.java))
+- `<toolwindow ToolWindowId>`: Toggle a tool window ([List of IDs](https://github.com/JetBrains/intellij-community/blob/master/platform/ide-core/src/com/intellij/openapi/wm/ToolWindowId.java))
 
 ### Examples
 
@@ -142,7 +141,7 @@ map ez X <mode doubletype>
 ```
 
 More practical examples can be found in
-the [template .ezmoderc](src/main/resources/com/github/ivw/ezmode/config/template.ezmoderc)
+the [.ezmoderc template](src/main/resources/com/github/ivw/ezmode/config/template.ezmoderc)
 
 ## Why EzMode
 
