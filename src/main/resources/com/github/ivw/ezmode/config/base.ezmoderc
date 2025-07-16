@@ -96,6 +96,8 @@ map ez <space> <idea AceAction>
 
 map select <default> <ofmode ez>
 
+map select ~ <ofmode ez><mode ez>
+
 map select e <mode ez>
 map select u <idea EditorPreviousWordWithSelection>
 map select U <ofmode ez><mode ez>
