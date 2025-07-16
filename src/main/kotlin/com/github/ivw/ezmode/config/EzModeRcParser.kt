@@ -137,7 +137,7 @@ object EzModeRcParser {
         }
         val delimPair: DelimPair = scanner.next().let { pairChars ->
           if (pairChars == "angle") {
-            DelimPair('<', '>')
+            DelimPair.angleBrackets
           } else {
             if (pairChars.length != 2) {
               throw LineParseError("pair argument must have 2 chars: $pairChars")

@@ -54,6 +54,17 @@ data class DelimPair(
     }
     return null
   }
+
+  companion object {
+    val parentheses = DelimPair('(', ')')
+    val curlyBraces = DelimPair('{', '}')
+    val squareBrackets = DelimPair('[', ']')
+    val angleBrackets = DelimPair('<', '>')
+
+    val allPairs: List<DelimPair> = listOf(
+      parentheses, curlyBraces, squareBrackets, angleBrackets
+    )
+  }
 }
 
 fun findQuoteLeft(chars: CharSequence, caretOffset: Int, quoteChar: Char, skip: Int = 1): Int? {
@@ -83,13 +94,6 @@ fun findQuoteAuto(chars: CharSequence, caretOffset: Int, quoteChar: Char, skip: 
 
 fun isCharEscaped(chars: CharSequence, offset: Int) =
   offset > 0 && chars[offset - 1] == '\\'
-
-val delimPairs: List<DelimPair> = listOf(
-  DelimPair('(', ')'),
-  DelimPair('{', '}'),
-  DelimPair('[', ']'),
-  DelimPair('<', '>'),
-)
 
 val quoteChars: List<Char> = listOf('"', '\'', '`')
 
@@ -151,7 +155,7 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   val chars = caret.editor.document.charsSequence
   if (caret.selectionStart > 0) {
     val charLeft = chars[caret.selectionStart - 1]
-    val rightDelimOffset: Int? = delimPairs.firstOrNull { it.openChar == charLeft }
+    val rightDelimOffset: Int? = DelimPair.allPairs.firstOrNull { it.openChar == charLeft }
       ?.findClosingDelim(chars, caret.selectionStart, false)
       ?: quoteChars.firstOrNull { it == charLeft }?.let {
         findQuoteRight(chars, caret.selectionStart, it, 0)
@@ -163,7 +167,7 @@ fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
   }
   if (caret.selectionEnd < chars.length) {
     val charRight = chars[caret.selectionEnd]
-    val leftDelimOffset: Int? = delimPairs.firstOrNull { it.closeChar == charRight }
+    val leftDelimOffset: Int? = DelimPair.allPairs.firstOrNull { it.closeChar == charRight }
       ?.findOpeningDelim(chars, caret.selectionEnd, false)
       ?: quoteChars.firstOrNull { it == charRight }?.let {
         findQuoteLeft(chars, caret.selectionEnd, it, 0)

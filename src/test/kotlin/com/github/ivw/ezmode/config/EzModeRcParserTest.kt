@@ -76,14 +76,14 @@ class EzModeRcParserTest {
           '{',
           PairOpenCloseAction(
             isTargetOpen = true,
-            DelimPair('{', '}')
+            DelimPair.curlyBraces
           ),
         ),
         KeyBinding(
           '>',
           PairOpenCloseAction(
             isTargetOpen = false,
-            DelimPair('<', '>')
+            DelimPair.angleBrackets
           ),
         )
       )
