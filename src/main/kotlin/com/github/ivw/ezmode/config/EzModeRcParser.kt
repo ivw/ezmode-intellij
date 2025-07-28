@@ -136,22 +136,26 @@ object EzModeRcParser {
             throw LineParseError("first argument of `pair` must be open or close")
           }
         }
-        val delim: Delim = scanner.next().let { pairChars ->
-          when (pairChars) {
-            "angle" -> PairDelim.angleBrackets
-            "xml" -> XmlTagDelim
-            else -> {
-              if (pairChars.length != 2) {
-                throw LineParseError("invalid pair argument: $pairChars")
+        val delims = mutableListOf<Delim>()
+        do {
+          val delim: Delim = scanner.next().let { pairChars ->
+            when (pairChars) {
+              "angle" -> PairDelim.angleBrackets
+              "xml" -> XmlTagDelim
+              else -> {
+                if (pairChars.length != 2) {
+                  throw LineParseError("invalid pair argument: $pairChars")
+                }
+                if (pairChars[0] == pairChars[1]) {
+                  throw LineParseError("pair chars must be different: $pairChars")
+                }
+                PairDelim(pairChars[0], pairChars[1])
               }
-              if (pairChars[0] == pairChars[1]) {
-                throw LineParseError("pair chars must be different: $pairChars")
-              }
-              PairDelim(pairChars[0], pairChars[1])
             }
           }
-        }
-        PairOpenCloseAction(findClosingDelim, delim)
+          delims.add(delim)
+        } while (scanner.hasNext())
+        PairOpenCloseAction(findClosingDelim, delims)
       }
 
       "quote" -> QuoteAction(QuoteDelim(scanner.next().single()))

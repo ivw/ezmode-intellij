@@ -9,11 +9,13 @@ import com.github.ivw.ezmode.config.textobjects.*
  */
 data class PairOpenCloseAction(
   val findClosingDelim: Boolean,
-  val delim: Delim,
+  val delims: List<Delim>,
 ) : KeyAction() {
   override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
     e.editor.caretModel.runForEachCaret { caret ->
-      delim.findDelim(findClosingDelim, e.editor, caret.offset, true)?.let {
+      delims.firstNotNullOfOrNull { delim ->
+        delim.findDelim(findClosingDelim, e.editor, caret.offset, true)
+      }?.let {
         moveCaretWithOptionalSelection(caret, it, e.mode)
       }
     }
@@ -22,6 +24,6 @@ data class PairOpenCloseAction(
 
   override fun toNiceString() = EzModeBundle.message(
     "ezmode.PairOpenCloseAction",
-    delim.toNiceString(findClosingDelim)
+    delims.joinToString { it.toNiceString(findClosingDelim) }
   )
 }

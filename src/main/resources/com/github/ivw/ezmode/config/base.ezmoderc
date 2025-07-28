@@ -43,9 +43,9 @@ map ez O <idea EditorDeleteToWordEnd>
 map ez p <idea SearchEverywhere>
 map ez P <idea GotoAction>
 map ez [ <idea PreviousTab>
-map ez { <pair open {}>
+map ez { <pair open {} xml>
 map ez ] <idea NextTab>
-map ez } <pair close {}>
+map ez } <pair close {} xml>
 map ez \ <idea SplitVertically>
 map ez | <idea MoveTabRight>
 

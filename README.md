@@ -124,7 +124,8 @@ or you can use a base action:
 - `<native>`: Insert the `keychar` into the editor
 - `<write Hello word!>`: Insert a string into the editor
 - `<toolwindow ToolWindowId>`: Toggle a tool window ([List of IDs](https://github.com/JetBrains/intellij-community/blob/master/platform/ide-core/src/com/intellij/openapi/wm/ToolWindowId.java))
-- `<pair open/close {}>`: Jump to the opening/closing delimiter defined in the third argument, which must be two characters, or `angle` for <>, or `xml` for XML/HTML tags.
+- `<pair open/close {}>`: Jump to the opening/closing delimiter defined in the third argument, which must be two characters,
+  or `angle` for <>, or `xml` for XML/HTML tags. You can list multiple delimiters by separating them with spaces.
 
 ### Examples
 
