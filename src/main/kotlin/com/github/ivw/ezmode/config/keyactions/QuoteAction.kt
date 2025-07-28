@@ -2,17 +2,17 @@ package com.github.ivw.ezmode.config.keyactions
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
+import com.github.ivw.ezmode.config.textobjects.*
 
 /**
  * An action to jump to a quote.
  */
 data class QuoteAction(
-  val quoteChar: Char,
+  val quote: QuoteDelim,
 ) : KeyAction() {
   override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
-    val chars = e.editor.document.charsSequence
     e.editor.caretModel.runForEachCaret { caret ->
-      findQuoteAuto(chars, caret.offset, quoteChar)?.let { offset ->
+      quote.findAuto(e.editor, caret.offset)?.let { offset ->
         moveCaretWithOptionalSelection(caret, offset, e.mode)
       }
     }
@@ -21,6 +21,6 @@ data class QuoteAction(
 
   override fun toNiceString() = EzModeBundle.message(
     "ezmode.QuoteAction",
-    quoteChar
+    quote.char
   )
 }

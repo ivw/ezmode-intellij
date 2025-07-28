@@ -2,6 +2,7 @@ package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.keyactions.*
+import com.github.ivw.ezmode.config.textobjects.*
 import com.intellij.openapi.diagnostic.*
 import java.awt.*
 import java.util.*
@@ -128,30 +129,32 @@ object EzModeRcParser {
       "ofmode" -> KeyAction.OfMode(scanner.restOfLine(), src)
       "nop" -> KeyAction.Nop
       "pair" -> {
-        val isTargetOpen: Boolean = when (scanner.next()) {
-          "open" -> true
-          "close" -> false
+        val findClosingDelim: Boolean = when (scanner.next()) {
+          "open" -> false
+          "close" -> true
           else -> {
             throw LineParseError("first argument of `pair` must be open or close")
           }
         }
-        val delimPair: DelimPair = scanner.next().let { pairChars ->
-          if (pairChars == "angle") {
-            DelimPair.angleBrackets
-          } else {
-            if (pairChars.length != 2) {
-              throw LineParseError("pair argument must have 2 chars: $pairChars")
+        val delim: Delim = scanner.next().let { pairChars ->
+          when (pairChars) {
+            "angle" -> PairDelim.angleBrackets
+            "xml" -> XmlTagDelim
+            else -> {
+              if (pairChars.length != 2) {
+                throw LineParseError("invalid pair argument: $pairChars")
+              }
+              if (pairChars[0] == pairChars[1]) {
+                throw LineParseError("pair chars must be different: $pairChars")
+              }
+              PairDelim(pairChars[0], pairChars[1])
             }
-            if (pairChars[0] == pairChars[1]) {
-              throw LineParseError("pair chars must be different: $pairChars")
-            }
-            DelimPair(pairChars[0], pairChars[1])
           }
         }
-        PairOpenCloseAction(isTargetOpen, delimPair)
+        PairOpenCloseAction(findClosingDelim, delim)
       }
 
-      "quote" -> QuoteAction(scanner.next().single())
+      "quote" -> QuoteAction(QuoteDelim(scanner.next().single()))
       "toolwindow" -> ToggleToolWindowAction(scanner.restOfLine())
       "numberop" -> NumberOperationAction(scanner.restOfLine())
       else -> {

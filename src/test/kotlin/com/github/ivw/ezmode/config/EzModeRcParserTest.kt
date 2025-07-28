@@ -1,6 +1,7 @@
 package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.config.keyactions.*
+import com.github.ivw.ezmode.config.textobjects.PairDelim
 import com.github.ivw.ezmode.editor.*
 import io.kotest.assertions.throwables.*
 import io.kotest.matchers.*
@@ -74,17 +75,11 @@ class EzModeRcParserTest {
       mode.keyBindings.values.shouldContainExactlyInAnyOrder(
         KeyBinding(
           '{',
-          PairOpenCloseAction(
-            isTargetOpen = true,
-            DelimPair.curlyBraces
-          ),
+          PairOpenCloseAction(findClosingDelim = false, PairDelim.curlyBraces),
         ),
         KeyBinding(
           '>',
-          PairOpenCloseAction(
-            isTargetOpen = false,
-            DelimPair.angleBrackets
-          ),
+          PairOpenCloseAction(findClosingDelim = true, PairDelim.angleBrackets),
         )
       )
     }
@@ -105,7 +100,7 @@ class EzModeRcParserTest {
       shouldThrow<EzModeRcParser.ParseError> {
         EzModeRcParser.parse(config, lines, null)
       }.cause.shouldNotBeNull().message.shouldBe(
-        "pair argument must have 2 chars: [[]]"
+        "invalid pair argument: [[]]"
       )
     }
 

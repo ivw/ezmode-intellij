@@ -2,23 +2,18 @@ package com.github.ivw.ezmode.config.keyactions
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
+import com.github.ivw.ezmode.config.textobjects.*
 
 /**
  * An action to jump to an opening/closing delimiter such as { or }.
  */
 data class PairOpenCloseAction(
-  val isTargetOpen: Boolean,
-  val pair: DelimPair,
+  val findClosingDelim: Boolean,
+  val delim: Delim,
 ) : KeyAction() {
   override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
-    val chars = e.editor.document.charsSequence
     e.editor.caretModel.runForEachCaret { caret ->
-      val delim = if (isTargetOpen) {
-        pair.findOpeningDelim(chars, caret.offset, true)
-      } else {
-        pair.findClosingDelim(chars, caret.offset, true)
-      }
-      delim?.let {
+      delim.findDelim(findClosingDelim, e.editor, caret.offset, true)?.let {
         moveCaretWithOptionalSelection(caret, it, e.mode)
       }
     }
@@ -27,6 +22,6 @@ data class PairOpenCloseAction(
 
   override fun toNiceString() = EzModeBundle.message(
     "ezmode.PairOpenCloseAction",
-    if (isTargetOpen) pair.openChar else pair.closeChar
+    delim.toNiceString(findClosingDelim)
   )
 }

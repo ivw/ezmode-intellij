@@ -1,101 +1,13 @@
 package com.github.ivw.ezmode.config
 
+import com.github.ivw.ezmode.config.textobjects.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.command.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.util.*
 
-data class DelimPair(
-  val openChar: Char,
-  val closeChar: Char,
-) {
-  fun findOpeningDelim(chars: CharSequence, caretOffset: Int, ignoreMatchAtCaret: Boolean): Int? {
-    var oppositeDelimCount = 0
-    for (i in caretOffset - 1 downTo 0) {
-      val char = chars[i]
-      when (char) {
-        openChar -> {
-          if (ignoreMatchAtCaret && i == caretOffset - 1) {
-            // Ignore.
-          } else if (oppositeDelimCount > 0) {
-            oppositeDelimCount--
-          } else {
-            return i + 1
-          }
-        }
-
-        closeChar -> {
-          oppositeDelimCount++
-        }
-      }
-    }
-    return null
-  }
-
-  fun findClosingDelim(chars: CharSequence, caretOffset: Int, ignoreMatchAtCaret: Boolean): Int? {
-    var oppositeDelimCount = 0
-    for (i in caretOffset until chars.length) {
-      val char = chars[i]
-      when (char) {
-        closeChar -> {
-          if (ignoreMatchAtCaret && i == caretOffset) {
-            // Ignore.
-          } else if (oppositeDelimCount > 0) {
-            oppositeDelimCount--
-          } else {
-            return i
-          }
-        }
-
-        openChar -> {
-          oppositeDelimCount++
-        }
-      }
-    }
-    return null
-  }
-
-  companion object {
-    val parentheses = DelimPair('(', ')')
-    val curlyBraces = DelimPair('{', '}')
-    val squareBrackets = DelimPair('[', ']')
-    val angleBrackets = DelimPair('<', '>')
-
-    val allPairs: List<DelimPair> = listOf(
-      parentheses, curlyBraces, squareBrackets, angleBrackets
-    )
-  }
-}
-
-fun findQuoteLeft(chars: CharSequence, caretOffset: Int, quoteChar: Char, skip: Int = 1): Int? {
-  for (i in caretOffset - 1 - skip downTo 0) {
-    if (chars[i] == quoteChar && !isCharEscaped(chars, i)) {
-      return i + 1
-    }
-  }
-  return null
-}
-
-fun findQuoteRight(chars: CharSequence, caretOffset: Int, quoteChar: Char, skip: Int = 1): Int? {
-  for (i in caretOffset + skip until chars.length) {
-    if (chars[i] == quoteChar && !isCharEscaped(chars, i)) {
-      return i
-    }
-  }
-  return null
-}
-
-fun findQuoteAuto(chars: CharSequence, caretOffset: Int, quoteChar: Char, skip: Int = 1): Int? =
-  if (caretOffset > skip && chars[caretOffset - skip] != quoteChar) {
-    findQuoteLeft(chars, caretOffset, quoteChar)
-  } else {
-    findQuoteRight(chars, caretOffset, quoteChar)
-  }
-
 fun isCharEscaped(chars: CharSequence, offset: Int) =
   offset > 0 && chars[offset - 1] == '\\'
-
-val quoteChars: List<Char> = listOf('"', '\'', '`')
 
 val Char.isWordChar get() = isLetterOrDigit() || this == '_'
 
@@ -152,41 +64,33 @@ fun getTextRangeOfInt(chars: CharSequence, caretOffset: Int): TextRange? {
 }
 
 fun selectTextObject(caret: Caret, around: Boolean, deleteDelims: Boolean) {
-  val chars = caret.editor.document.charsSequence
-  if (caret.selectionStart > 0) {
-    val charLeft = chars[caret.selectionStart - 1]
-    val rightDelimOffset: Int? = DelimPair.allPairs.firstOrNull { it.openChar == charLeft }
-      ?.findClosingDelim(chars, caret.selectionStart, false)
-      ?: quoteChars.firstOrNull { it == charLeft }?.let {
-        findQuoteRight(chars, caret.selectionStart, it, 0)
-      }
-    if (rightDelimOffset != null) {
-      selectRange(caret.selectionStart, rightDelimOffset, caret, around, deleteDelims)
+  Delim.allDelims.forEach { delim ->
+    delim.getMatchingDelim(false, caret.editor, caret.selectionStart)?.let {
+      selectRange(it, caret, around, deleteDelims)
       return
     }
   }
-  if (caret.selectionEnd < chars.length) {
-    val charRight = chars[caret.selectionEnd]
-    val leftDelimOffset: Int? = DelimPair.allPairs.firstOrNull { it.closeChar == charRight }
-      ?.findOpeningDelim(chars, caret.selectionEnd, false)
-      ?: quoteChars.firstOrNull { it == charRight }?.let {
-        findQuoteLeft(chars, caret.selectionEnd, it, 0)
-      }
-    if (leftDelimOffset != null) {
-      selectRange(leftDelimOffset, caret.selectionEnd, caret, around, deleteDelims)
+  Delim.allDelims.forEach { delim ->
+    delim.getMatchingDelim(true, caret.editor, caret.selectionEnd)?.let {
+      selectRange(it, caret, around, deleteDelims)
       return
     }
   }
 }
 
-fun selectRange(start: Int, end: Int, caret: Caret, around: Boolean, deleteDelims: Boolean) {
-  val aroundOffset = if (around && !deleteDelims) 1 else 0
-  caret.setSelection(start - aroundOffset, end + aroundOffset)
+fun Caret.setSelection(textRange: TextRange) =
+  setSelection(textRange.startOffset, textRange.endOffset)
+
+fun selectRange(delimRanges: DelimRanges, caret: Caret, around: Boolean, deleteDelims: Boolean) {
+  caret.setSelection(
+    if (around && !deleteDelims) delimRanges.aroundRange
+    else delimRanges.insideRange
+  )
   caret.editor.scrollingModel.scrollToCaret(ScrollType.RELATIVE)
   if (deleteDelims) {
     WriteCommandAction.runWriteCommandAction(caret.editor.project) {
-      caret.editor.document.deleteString(end, end + 1)
-      caret.editor.document.deleteString(start - 1, start)
+      caret.editor.document.deleteString(delimRanges.insideRange.endOffset, delimRanges.aroundRange.endOffset)
+      caret.editor.document.deleteString(delimRanges.aroundRange.startOffset, delimRanges.insideRange.startOffset)
     }
   }
 }
