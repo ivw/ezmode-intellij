@@ -23,7 +23,10 @@ object XmlTagDelim : Delim {
       getXmlTag(file, caretOffset)
     }
 
-  fun getInsideRange(tag: XmlTag): TextRange? {
+  fun getInsideRange(
+    tag: XmlTag,
+    shouldSkip: (TextRange) -> Boolean = { false },
+  ): TextRange? {
     var startTagEndOffset: Int? = null
     var endTagStartOffset: Int? = null
     tag.processElements(PsiElementProcessor<PsiElement> { element ->
@@ -41,9 +44,11 @@ object XmlTagDelim : Delim {
         else -> true
       }
     }, tag)
-    return if (startTagEndOffset != null && endTagStartOffset != null) {
+    val textRange = if (startTagEndOffset != null && endTagStartOffset != null) {
       TextRange(startTagEndOffset, endTagStartOffset)
     } else null
+    return textRange?.takeUnless(shouldSkip)
+      ?: tag.parentTag?.let { getInsideRange(it, shouldSkip) }
   }
 
   override fun findOpeningDelim(
@@ -51,11 +56,7 @@ object XmlTagDelim : Delim {
     caretOffset: Int,
     ignoreMatchAtCaret: Boolean,
   ): Int? = getXmlTag(editor, caretOffset)?.let { tag ->
-    getInsideRange(tag)?.startOffset?.let {
-      if (it != caretOffset) it else {
-        tag.parentTag?.let(::getInsideRange)?.startOffset
-      }
-    }
+    getInsideRange(tag, shouldSkip = { ignoreMatchAtCaret && it.startOffset == caretOffset })?.startOffset
   }
 
   override fun findClosingDelim(
@@ -63,11 +64,7 @@ object XmlTagDelim : Delim {
     caretOffset: Int,
     ignoreMatchAtCaret: Boolean,
   ): Int? = getXmlTag(editor, caretOffset)?.let { tag ->
-    getInsideRange(tag)?.endOffset?.let {
-      if (it != caretOffset) it else {
-        tag.parentTag?.let(::getInsideRange)?.endOffset
-      }
-    }
+    getInsideRange(tag, shouldSkip = { ignoreMatchAtCaret && it.endOffset == caretOffset })?.endOffset
   }
 
   override fun getMatchingDelim(fromClosingDelim: Boolean, editor: Editor, caretOffset: Int): DelimRanges? {
