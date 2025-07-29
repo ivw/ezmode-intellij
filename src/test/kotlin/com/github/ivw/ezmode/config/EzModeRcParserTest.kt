@@ -75,11 +75,11 @@ class EzModeRcParserTest {
       mode.keyBindings.values.shouldContainExactlyInAnyOrder(
         KeyBinding(
           '{',
-          PairOpenCloseAction(findClosingDelim = false, PairDelim.curlyBraces),
+          PairOpenCloseAction(findClosingDelim = false, listOf(PairDelim.curlyBraces)),
         ),
         KeyBinding(
           '>',
-          PairOpenCloseAction(findClosingDelim = true, PairDelim.angleBrackets),
+          PairOpenCloseAction(findClosingDelim = true, listOf(PairDelim.angleBrackets)),
         )
       )
     }
