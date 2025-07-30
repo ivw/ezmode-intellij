@@ -11,7 +11,7 @@ val defaultPrimaryColor = JBColor(
   Color(255, 98, 0),
   Color(255, 112, 0)
 )
-val defaultSecondaryColor: JBColor = JBColor.BLUE
+val defaultSecondaryColor: JBColor = JBColor.BLUE // #589DF6
 
 private val colorKey = EditorColors.CARET_COLOR
 
