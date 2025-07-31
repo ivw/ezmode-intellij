@@ -6,14 +6,23 @@
 
   <description><![CDATA[
 <p>Modal editing without the steep learning curve.</p>
+<h3>What is modal editing?</h3>
+<p>In a modal editor, keys that normally insert characters can perform different actions based on the current mode.</p>
+<p>For example, in EzMode you can press <code>a</code> to select a word, and <code>c</code> to copy it.
+This is less work than double-clicking with your mouse and pressing <code>Ctrl-c</code>.</p>
+<h4>Then how do I type?</h4>
+<p>Press <code>t</code> to enter type mode, and press <code>Tab</code> to go back to ez mode.</p>
+<h4>So it&#39;s like Vim?</h4>
+<p>Yes, but a lot simpler. EzMode focuses just on <em>modes</em>.
+It does <strong>not</strong>:</p>
 <ul>
-<li><strong>Fast</strong>: Edit with minimal keystrokes, no mouse or Ctrl/Alt needed</li>
-<li><strong>Built for modern IDEs</strong>: Seamless integration with git, diffs, multi-cursor, and tool windows</li>
-<li><strong>Intuitive</strong>: Easy-to-learn keyboard layout that fits on one page</li>
-<li><strong>Customizable</strong>: Map any character to any IDE action and create custom modes</li>
+<li>use any Ctrl or Alt shortcuts</li>
+<li>use a block cursor</li>
+<li>change how copy/paste works</li>
+<li>use <code>hjkl</code> for arrow keys. EzMode uses <code>ijkl</code>.</li>
 </ul>
-<p>Compared to Vim and Kakoune, EzMode is significantly easier if you're already familiar with IntelliJ-style IDEs
-and integrates tightly with the IDE.</p>
+<p>EzMode is built for modern IDEs. It works well with viewing diffs,
+using multi-cursor, and managing tool windows.</p>
 <p><a href="https://github.com/ivw/ezmode-intellij">More info on GitHub</a></p>
 ]]></description>
 

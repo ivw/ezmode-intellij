@@ -5,14 +5,32 @@
 EzMode is a plugin for [JetBrains IDEs](https://www.jetbrains.com/ides/) that brings the power of modal editing, without
 the steep learning curve.
 
-- **Fast**: Edit with minimal keystrokes, no mouse or Ctrl/Alt needed
-- **Built for modern IDEs**: Seamless integration with git, diffs, multi-cursor, and tool windows
-- **Intuitive**: Easy-to-learn keyboard layout that fits on one page
-- **Customizable**: Map any character to any IDE action and create custom modes
+### What is modal editing?
+
+In a modal editor, keys that normally insert characters can perform different actions based on the current mode.
+
+For example, in EzMode you can press `a` to select a word, and `c` to copy it.
+This is less work than double-clicking with your mouse and pressing `Ctrl-c`.
+
+#### Then how do I type?
+
+Press `t` to enter type mode, and press `Tab` to go back to ez mode.
+
+#### So it's like Vim?
+
+Yes, but a lot simpler. EzMode focuses just on *modes*.
+It does **not**:
+- use any Ctrl or Alt shortcuts
+- use a block cursor
+- change how copy/paste works
+- use `hjkl` for arrow keys. EzMode uses `ijkl`.
+
+EzMode is built for modern IDEs. It works well with viewing diffs,
+using multi-cursor, and managing tool windows.
 
 [Demo](https://github.com/user-attachments/assets/9695bfb2-c1b6-4932-87b0-67ec47d6f5b4)
 
-### Default keyboard layout:
+### Keyboard layout:
 
 ![Keyboard layout](KeyboardLayout.png)
 *[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/921b61bce0466d1a2678bc081b256d29)*
@@ -22,64 +40,10 @@ the steep learning curve.
 ## Getting Started
 
 1. Open the plugin marketplace in your IDE: *Settings > Plugins > Marketplace*
-2. (Optional but recommended) Install the [AceJump](https://github.com/acejump/AceJump) plugin.
+2. (Optional) Install the [AceJump](https://github.com/acejump/AceJump) plugin to allow jumping with the space bar.
 3. Install the [EzMode](https://plugins.jetbrains.com/plugin/27497-ezmode) plugin.
 4. Open the [tutorial](src/main/resources/com/github/ivw/ezmode/actions/tutorial.md) in your IDE by clicking the mode
    indicator in the bottom-right corner.
-
-## Modes
-
-### `type`
-
-In this mode, everything behaves as it normally would in the IDE,
-except `Tab` switches to `ez` mode. If you need to manually indent, use `Alt-t`,
-or change it in *Settings > Keymap*.
-
-### `ez`
-
-The main mode where you control the IDE using simple keystrokes.
-
-See the keyboard layout above, or press `5` to view all key bindings.
-
-### `select`
-
-When you press `e` or select something in `ez` mode, you automatically switch to `select` mode.
-Most keys are the same as `ez` mode, but moving the caret extends the selection.
-
-### `typeonce`
-
-Like `type` mode, but after typing one character it switches back to `ez` mode.
-Useful for quickly adding or replacing a single character while in `ez` mode.
-
-### `git`
-
-Pressing `g` in `ez` mode switches to `git` mode, where you can:
-
-- `r`: Review diffs of local changes. Press `r` again to exit to source.
-- `i`, `k`: Go to previous/next diff
-- `j`, `l`: Go to previous/next diff file
-- `w`: Close diff and return to `ez` mode
-- `c`: Commit
-- `p`: Push
-- `P`: Pull from…
-- `u`: Update/pull
-- `f`: Fetch
-- `m`: Merge
-- `b`: Show branches
-- `s`: Show git log
-- `h`: Show git history of file
-- `a`: Annotate/blame file
-
-### `special`
-
-Pressing `7` in `ez` mode switches to `special` mode, where you can:
-
-- `f`: Insert the filename into the editor
-- `i`: Insert the caret index into the editor. With multiple carets, this creates a sequence.
-- `l`, `c`: Insert the line/column into the editor
-- `+`, `-`: Increment/decrement a number
-- `*`, `/`: Double/halve a number
-- `r`, `R`: Rename symbol/file
 
 ## Customization
 
@@ -125,7 +89,7 @@ or you can use a base action:
 - `<write Hello word!>`: Insert a string into the editor
 - `<toolwindow ToolWindowId>`: Toggle a tool window ([List of IDs](https://github.com/JetBrains/intellij-community/blob/master/platform/ide-core/src/com/intellij/openapi/wm/ToolWindowId.java))
 - `<pair open/close {}>`: Jump to the opening/closing delimiter defined in the third argument, which must be two characters,
-  or `angle` for <>, or `xml` for XML/HTML tags. You can list multiple delimiters by separating them with spaces.
+  or `angle` for `<>`, or `xml` for XML/HTML tags. You can list multiple delimiters by separating them with spaces.
 
 ### Examples
 
@@ -145,10 +109,7 @@ map ez X <mode doubletype>
 More practical examples can be found in
 the [.ezmoderc template](src/main/resources/com/github/ivw/ezmode/config/template.ezmoderc)
 
-## Why EzMode
-
-Compared to other modal editors like Vim and Kakoune, EzMode is significantly easier if you're already familiar with
-IntelliJ-style IDEs and integrates tightly with the IDE.
+## Comparison with other modal editors
 
 EzMode doesn't add as many commands as Vim, for example, but EzMode can use any action that's already available in the IDE.
 
@@ -167,3 +128,10 @@ EzMode uses *object-verb* style like Kakoune, rather than Vim's *verb-object* st
 | Jump to surrounding quote | `'`    | `f'`   | `f'`        |
 | Delete surrounding quote  | `'_`   | `ds'`  | -           |
 | Change surrounding quote  | `'_T"` | `cs'"` | -           |
+
+## Supported IDEs
+
+Version 2025.1+ or 251.0+ of the following:
+
+Android Studio, AppCode, Aqua, CLion, Code With Me Guest, DataSpell, DataGrip, JetBrains Gateway, GoLand, IntelliJ IDEA Ultimate, IntelliJ IDEA Community, JetBrains Client, MPS, PhpStorm, Rider, RubyMine, RustRover, WebStorm, Writerside, PyCharm
+

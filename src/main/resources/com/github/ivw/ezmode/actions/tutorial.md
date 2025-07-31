@@ -155,3 +155,5 @@ or view the keyboard layout here:
 https://github.com/ivw/ezmode-intellij/blob/main/KeyboardLayout.png
 
 The full documentation can be found at https://github.com/ivw/ezmode-intellij
+
+Enjoy! If you have suggestions, email me at ivo@ezmode.dev

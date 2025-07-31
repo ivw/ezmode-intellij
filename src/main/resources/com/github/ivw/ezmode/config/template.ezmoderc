@@ -14,5 +14,8 @@ set defaultmode ez
 # Example: Delete selection before going to type mode:
 # map ez t <idea ezmode.DeleteSelection><mode type>
 
+# Example: Use the space bar to type spaces in ez mode:
+# map ez <space> <native>
+
 # Example: Use AceJump in "all words mode":
 # map ez <space> <idea AceWordAction>
