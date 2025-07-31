@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## 1.4.0
+- Support XML/HTML tag jumping and selection
+- `<pair>` action: support multiple delims
+- `~` key: Unselect after toggling case
+- Improve tutorial
+- Change plugin description
+- Improve KeyboardLayout.png
+
 ## 1.3.0
 - Always scroll to caret in actions that change the selection
 - Add more key mappings: `$`, `gP`, `gf`, `gm`, `7r`, `7R` 
