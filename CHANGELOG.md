@@ -3,6 +3,9 @@
 # ezmode-intellij Changelog
 
 ## [Unreleased]
+- Add more variables: `projectname`, `mode`, `key`, `space`, `tab`, `nl`
+- `<write>` action: Support variables prefixed with $
+- `<writevar>` action: Removed in favor of `<write>`
 
 ## 1.4.0
 - Support XML/HTML tag jumping and selection

@@ -45,7 +45,7 @@ class EzModeConfig(
     getMode(name) ?: ModeBindings(name).also { modes.add(it) }
 
   fun addBinding(mode: String, binding: KeyBinding) {
-    getOrAddMode(mode).keyBindings.put(binding.keyChar, binding)
+    getOrAddMode(mode).keyBindings[binding.keyChar] = binding
   }
 
   fun getBindingOrDefault(mode: String, char: Char): KeyBinding? =

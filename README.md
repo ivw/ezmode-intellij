@@ -91,6 +91,14 @@ or you can use a base action:
 - `<pair open/close {}>`: Jump to the opening/closing delimiter defined in the third argument, which must be two characters,
   or `angle` for `<>`, or `xml` for XML/HTML tags. You can list multiple delimiters by separating them with spaces.
 
+### Variables
+
+In actions that take a text argument, you can use variables prefixed with `$`,
+for example: `<write Hello, $filename!>`.
+
+- Custom variables: set in your config using `set varname value`
+- Built-in variables: `mode`, `key`, `caretindex`, `line`, `column`, `filename`, `projectname`, `space`, `tab`, `nl` (newline)
+
 ### Examples
 
 Map `C` (Shift + c) in `ez` mode to select all (`A`) and copy (`c`):
