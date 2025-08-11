@@ -6,6 +6,7 @@
 - Add more variables: `projectname`, `mode`, `key`, `space`, `tab`, `nl`
 - `<write>` action: Support variables prefixed with $
 - `<writevar>` action: Removed in favor of `<write>`
+- `E` (select line) will always switch to select mode, even if the line is empty
 
 ## 1.4.0
 - Support XML/HTML tag jumping and selection
