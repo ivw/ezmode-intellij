@@ -10,13 +10,13 @@ import javax.swing.*
 
 const val EZMODE_ACTION_PLACE = "ezmode"
 
-data class IdeKeyAction(val actionId: String) : KeyAction() {
+data class IdeKeyAction(val actionId: String) : KeyAction<EzModeEvent>() {
   val anAction: AnAction? by lazy {
     ActionManager.getInstance().getAction(actionId)
       .also { if (it == null) LOG.info("Action not found: $actionId") }
   }
 
-  override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
+  override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
     anAction?.let { anAction ->
       if (anAction is EmptyAction) {
         handleEmptyAction(anAction, e)
@@ -32,20 +32,22 @@ data class IdeKeyAction(val actionId: String) : KeyAction() {
    * with the real action added locally to some context, such as a diff viewer.
    * This is a workaround that simulates the keystroke defined in the EmptyAction.
    */
-  fun handleEmptyAction(anAction: EmptyAction, e: EzModeKeyEvent) {
+  fun handleEmptyAction(anAction: EmptyAction, e: EzModeEvent) {
     val keyStroke = anAction.getKeyStroke() ?: run {
       LOG.info("Action is empty and has no keyboard shortcut: $actionId")
       return
     }
-    val event = KeyEvent(
-      e.editor.contentComponent,
-      KeyEvent.KEY_PRESSED,
-      System.currentTimeMillis(),
-      keyStroke.modifiers,
-      keyStroke.keyCode,
-      KeyEvent.CHAR_UNDEFINED
-    )
-    IdeEventQueue.getInstance().dispatchEvent(event)
+    e.editor?.let { editor ->
+      val event = KeyEvent(
+        editor.contentComponent,
+        KeyEvent.KEY_PRESSED,
+        System.currentTimeMillis(),
+        keyStroke.modifiers,
+        keyStroke.keyCode,
+        KeyEvent.CHAR_UNDEFINED
+      )
+      IdeEventQueue.getInstance().dispatchEvent(event)
+    }
   }
 
   override fun toNiceString(): String =

@@ -3,17 +3,18 @@ package com.github.ivw.ezmode.config.keyactions
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
 import com.intellij.openapi.command.*
+import com.intellij.openapi.editor.*
 
-class NumberOperationAction(val operationId: String) : KeyAction() {
-  override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
+class NumberOperationAction(val operationId: String) : EditorKeyAction() {
+  override fun performWithEditor(e: EzModeEvent, editor: Editor, onComplete: OnComplete?) {
     WriteCommandAction.runWriteCommandAction(e.project) {
-      e.editor.caretModel.runForEachCaret { caret ->
+      editor.caretModel.runForEachCaret { caret ->
         if (caret.hasSelection()) {
           caret.selectionRange
         } else {
-          getTextRangeOfInt(e.editor.document.charsSequence, caret.offset)
+          getTextRangeOfInt(editor.document.charsSequence, caret.offset)
         }?.let { range ->
-          e.editor.document.getText(range).toIntOrNull()?.let { number ->
+          editor.document.getText(range).toIntOrNull()?.let { number ->
             when (operationId) {
               "+" -> number + 1
               "-" -> number - 1
@@ -22,7 +23,7 @@ class NumberOperationAction(val operationId: String) : KeyAction() {
               else -> null
             }
           }?.let { newNumber ->
-            e.editor.document.replaceString(range.startOffset, range.endOffset, newNumber.toString())
+            editor.document.replaceString(range.startOffset, range.endOffset, newNumber.toString())
           }
         }
       }

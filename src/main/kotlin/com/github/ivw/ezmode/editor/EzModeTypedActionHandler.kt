@@ -22,7 +22,6 @@ class EzModeTypedActionHandler(
 
     EzModeKeyEvent(
       config = config,
-      mode = editor.getMode(),
       char = charTyped,
       dataContext = dataContext,
       editor = editor,

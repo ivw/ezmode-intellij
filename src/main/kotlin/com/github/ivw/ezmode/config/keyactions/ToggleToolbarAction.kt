@@ -9,8 +9,8 @@ class ToggleToolWindowAction(
    * @see ToolWindowId
    */
   val id: String,
-) : KeyAction() {
-  override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
+) : KeyAction<EzModeEvent>() {
+  override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
     e.project?.let { project ->
       ToolWindowManager.getInstance(project).getToolWindow(id)?.toggle()
     }

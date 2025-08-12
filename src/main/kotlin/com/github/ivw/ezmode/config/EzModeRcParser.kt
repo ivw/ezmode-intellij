@@ -81,9 +81,9 @@ object EzModeRcParser {
     return charString.single()
   }
 
-  fun parseActionChain(actionChainString: String, src: EzModeConfig?): KeyAction? {
+  fun parseActionChain(actionChainString: String, src: EzModeConfig?): KeyAction<EzModeKeyEvent>? {
     var charIndex = 0
-    val actions = mutableListOf<KeyAction>()
+    val actions = mutableListOf<KeyAction<EzModeKeyEvent>>()
     do {
       if (actionChainString[charIndex] == '<') {
         val closingIndex = actionChainString.indexOf('>', charIndex)
@@ -110,7 +110,7 @@ object EzModeRcParser {
     }
   }
 
-  fun parseSpecialAction(specialActionString: String, src: EzModeConfig?): KeyAction {
+  fun parseSpecialAction(specialActionString: String, src: EzModeConfig?): KeyAction<EzModeKeyEvent> {
     val scanner = Scanner(specialActionString)
     val keyword = scanner.next()
     return when (keyword) {

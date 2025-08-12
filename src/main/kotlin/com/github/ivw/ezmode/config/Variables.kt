@@ -1,16 +1,17 @@
 package com.github.ivw.ezmode.config
 
+import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.editor.*
 
-fun resolveVar(varName: String, e: EzModeKeyEvent, caretIndex: Int, caret: Caret): String? =
+fun resolveVar(varName: String, e: EzModeEvent, caretIndex: Int, caret: Caret): String? =
   when (varName) {
     "caretindex" -> caretIndex.toString()
     "line" -> (caret.logicalPosition.line + 1).toString()
     "column" -> (caret.logicalPosition.column + 1).toString()
-    "filename" -> e.editor.virtualFile.nameWithoutExtension
+    "filename" -> e.editor?.virtualFile?.nameWithoutExtension
     "projectname" -> e.project?.name
-    "mode" -> e.mode
-    "key" -> e.char.toString()
+    "mode" -> e.editor?.getMode()
+    "key" -> if (e is EzModeKeyEvent) e.char.toString() else null
     "space" -> " "
     "tab" -> "\t"
     "nl" -> "\n"
@@ -23,7 +24,7 @@ fun resolveVar(varName: String, e: EzModeKeyEvent, caretIndex: Int, caret: Caret
  */
 val varRegex by lazy { """\$\w+""".toRegex() }
 
-fun String.resolveVars(e: EzModeKeyEvent, caretIndex: Int, caret: Caret): String =
+fun String.resolveVars(e: EzModeEvent, caretIndex: Int, caret: Caret): String =
   replace(varRegex) { matchResult ->
     // Take the substring after the `$` character:
     val varName = matchResult.value.substring(1)

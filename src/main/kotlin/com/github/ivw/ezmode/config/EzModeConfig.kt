@@ -2,6 +2,7 @@ package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
 import com.intellij.openapi.project.*
@@ -58,24 +59,40 @@ data class KeyBinding(
    */
   val keyChar: Char?,
 
-  val action: KeyAction,
+  val action: KeyAction<EzModeKeyEvent>,
 )
 
-data class EzModeKeyEvent(
-  val config: EzModeConfig,
-  val mode: String,
-  val char: Char,
-  val dataContext: DataContext,
-  val editor: Editor,
-  val nativeHandler: TypedActionHandler,
-) {
-  val project: Project? get() = editor.project
+sealed interface EzModeEvent {
+  val project: Project?
+  val config: EzModeConfig
+  val dataContext: DataContext
+  val editor: Editor?
+}
 
-  fun getKeyAction(): KeyAction? = config.getBindingOrDefault(mode, char)?.action
+data class EzModeProjectEvent(
+  override val project: Project,
+  override val config: EzModeConfig,
+) : EzModeEvent {
+  override val dataContext: DataContext
+    get() = TODO("Not yet implemented")
+
+  override val editor: Editor?
+    get() = project.service<ModeService>().focusedEditor
+}
+
+data class EzModeKeyEvent(
+  override val config: EzModeConfig,
+  val char: Char,
+  override val dataContext: DataContext,
+  override val editor: Editor,
+  val nativeHandler: TypedActionHandler,
+) : EzModeEvent {
+  override val project: Project? get() = editor.project
+
+  fun getKeyAction(): KeyAction<EzModeKeyEvent>? =
+    config.getBindingOrDefault(editor.getMode(), char)?.action
 
   fun perform(onComplete: OnComplete?) {
     getKeyAction()?.perform(this, onComplete)
   }
-
-  fun withUpdatedMode() = copy(mode = editor.getMode())
 }

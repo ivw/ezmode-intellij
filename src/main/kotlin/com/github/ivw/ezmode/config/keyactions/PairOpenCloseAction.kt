@@ -3,6 +3,8 @@ package com.github.ivw.ezmode.config.keyactions
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
 import com.github.ivw.ezmode.config.textobjects.*
+import com.github.ivw.ezmode.editor.*
+import com.intellij.openapi.editor.*
 
 /**
  * An action to jump to an opening/closing delimiter such as { or }.
@@ -10,13 +12,13 @@ import com.github.ivw.ezmode.config.textobjects.*
 data class PairOpenCloseAction(
   val findClosingDelim: Boolean,
   val delims: List<Delim>,
-) : KeyAction() {
-  override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
-    e.editor.caretModel.runForEachCaret { caret ->
+) : EditorKeyAction() {
+  override fun performWithEditor(e: EzModeEvent, editor: Editor, onComplete: OnComplete?) {
+    editor.caretModel.runForEachCaret { caret ->
       delims.firstNotNullOfOrNull { delim ->
-        delim.findDelim(findClosingDelim, e.editor, caret.offset, true)
+        delim.findDelim(findClosingDelim, editor, caret.offset, true)
       }?.let {
-        moveCaretWithOptionalSelection(caret, it, e.mode)
+        moveCaretWithOptionalSelection(caret, it, editor.getMode())
       }
     }
     onComplete?.invoke()
