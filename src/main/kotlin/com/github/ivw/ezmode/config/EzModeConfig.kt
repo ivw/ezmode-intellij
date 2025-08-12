@@ -59,7 +59,7 @@ data class KeyBinding(
    */
   val keyChar: Char?,
 
-  val action: KeyAction<EzModeKeyEvent>,
+  val action: EzAction,
 )
 
 sealed interface EzModeEvent {
@@ -89,10 +89,10 @@ data class EzModeKeyEvent(
 ) : EzModeEvent {
   override val project: Project? get() = editor.project
 
-  fun getKeyAction(): KeyAction<EzModeKeyEvent>? =
+  fun getEzAction(): EzAction? =
     config.getBindingOrDefault(editor.getMode(), char)?.action
 
   fun perform(onComplete: OnComplete?) {
-    getKeyAction()?.perform(this, onComplete)
+    getEzAction()?.perform(this, onComplete)
   }
 }

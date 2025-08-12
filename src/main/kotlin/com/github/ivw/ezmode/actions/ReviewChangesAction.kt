@@ -1,6 +1,6 @@
 package com.github.ivw.ezmode.actions
 
-import com.github.ivw.ezmode.config.keyactions.*
+import com.github.ivw.ezmode.config.ezactions.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.ide.*
 import com.intellij.openapi.actionSystem.*

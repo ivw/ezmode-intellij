@@ -1,6 +1,6 @@
 package com.github.ivw.ezmode.config
 
-import com.github.ivw.ezmode.config.keyactions.*
+import com.github.ivw.ezmode.config.ezactions.*
 import com.github.ivw.ezmode.config.textobjects.PairDelim
 import com.github.ivw.ezmode.editor.*
 import io.kotest.assertions.throwables.*
@@ -28,11 +28,11 @@ class EzModeRcParserTest {
     config.modes.shouldBeSingleton { mode ->
       mode.name.shouldBe("ez")
       mode.keyBindings.values.shouldContainExactlyInAnyOrder(
-        KeyBinding('A', IdeKeyAction("EditorSelectLine")),
-        KeyBinding('t', KeyAction.ChangeMode("type")),
+        KeyBinding('A', IdeEzAction("EditorSelectLine")),
+        KeyBinding('t', EzAction.ChangeMode("type")),
         KeyBinding('g', WriteAction("git abc")),
-        KeyBinding('d', KeyAction.Native),
-        KeyBinding('D', KeyAction.NativeOf('q')),
+        KeyBinding('d', EzAction.Native),
+        KeyBinding('D', EzAction.NativeOf('q')),
       )
     }
 
@@ -47,15 +47,15 @@ class EzModeRcParserTest {
       mode.name.shouldBe("ez")
       mode.keyBindings.values.shouldContainExactlyInAnyOrder(
         KeyBinding(
-          'm', KeyAction.Composite(
+          'm', EzAction.Composite(
             listOf(
-              IdeKeyAction("${"$"}SelectAll"),
-              KeyAction.OfKeyChar('g', config),
-              KeyAction.OfKeyChar('g', config),
+              IdeEzAction("${"$"}SelectAll"),
+              EzAction.OfKeyChar('g', config),
+              EzAction.OfKeyChar('g', config),
             )
           )
         ),
-        KeyBinding(' ', KeyAction.OfKeyChar('g', config))
+        KeyBinding(' ', EzAction.OfKeyChar('g', config))
       )
     }
   }

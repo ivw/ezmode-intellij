@@ -1,7 +1,7 @@
 package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.*
-import com.github.ivw.ezmode.config.keyactions.*
+import com.github.ivw.ezmode.config.ezactions.*
 import com.github.ivw.ezmode.config.textobjects.*
 import com.intellij.openapi.diagnostic.*
 import java.awt.*
@@ -81,9 +81,9 @@ object EzModeRcParser {
     return charString.single()
   }
 
-  fun parseActionChain(actionChainString: String, src: EzModeConfig?): KeyAction<EzModeKeyEvent>? {
+  fun parseActionChain(actionChainString: String, src: EzModeConfig?): EzAction? {
     var charIndex = 0
-    val actions = mutableListOf<KeyAction<EzModeKeyEvent>>()
+    val actions = mutableListOf<EzAction>()
     do {
       if (actionChainString[charIndex] == '<') {
         val closingIndex = actionChainString.indexOf('>', charIndex)
@@ -98,7 +98,7 @@ object EzModeRcParser {
         )
         charIndex = closingIndex + 1
       } else {
-        actions.add(KeyAction.OfKeyChar(actionChainString[charIndex], src))
+        actions.add(EzAction.OfKeyChar(actionChainString[charIndex], src))
         charIndex++
       }
     } while (charIndex < actionChainString.length)
@@ -106,27 +106,27 @@ object EzModeRcParser {
     return if (actions.size == 1) {
       actions[0]
     } else {
-      KeyAction.Composite(actions)
+      EzAction.Composite(actions)
     }
   }
 
-  fun parseSpecialAction(specialActionString: String, src: EzModeConfig?): KeyAction<EzModeKeyEvent> {
+  fun parseSpecialAction(specialActionString: String, src: EzModeConfig?): EzAction {
     val scanner = Scanner(specialActionString)
     val keyword = scanner.next()
     return when (keyword) {
       "write" -> WriteAction(scanner.restOfLine())
-      "mode" -> KeyAction.ChangeMode(scanner.restOfLine())
-      "idea" -> IdeKeyAction(scanner.restOfLine())
+      "mode" -> EzAction.ChangeMode(scanner.restOfLine())
+      "idea" -> IdeEzAction(scanner.restOfLine())
       "native" -> {
         if (scanner.hasNext()) {
-          KeyAction.NativeOf(scanner.restOfLine().single())
+          EzAction.NativeOf(scanner.restOfLine().single())
         } else {
-          KeyAction.Native
+          EzAction.Native
         }
       }
 
-      "ofmode" -> KeyAction.OfMode(scanner.restOfLine(), src)
-      "nop" -> KeyAction.Nop
+      "ofmode" -> EzAction.OfMode(scanner.restOfLine(), src)
+      "nop" -> EzAction.Nop
       "pair" -> {
         val findClosingDelim: Boolean = when (scanner.next()) {
           "open" -> false

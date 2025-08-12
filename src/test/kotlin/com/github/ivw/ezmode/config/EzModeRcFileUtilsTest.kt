@@ -9,7 +9,7 @@ class EzModeRcFileUtilsTest {
     val config = EzModeConfig()
     EzModeRcFileUtils.parseBaseRcFile(config)
     config.getBindingOrDefault("type", 'a').shouldBe(
-      KeyBinding(null, KeyAction.Native)
+      KeyBinding(null, EzAction.Native)
     )
   }
 }

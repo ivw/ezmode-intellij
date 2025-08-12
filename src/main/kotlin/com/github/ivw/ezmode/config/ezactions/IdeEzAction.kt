@@ -1,4 +1,4 @@
-package com.github.ivw.ezmode.config.keyactions
+package com.github.ivw.ezmode.config.ezactions
 
 import com.github.ivw.ezmode.config.*
 import com.intellij.ide.*
@@ -10,7 +10,7 @@ import javax.swing.*
 
 const val EZMODE_ACTION_PLACE = "ezmode"
 
-data class IdeKeyAction(val actionId: String) : KeyAction<EzModeEvent>() {
+data class IdeEzAction(val actionId: String) : EzAction() {
   val anAction: AnAction? by lazy {
     ActionManager.getInstance().getAction(actionId)
       .also { if (it == null) LOG.info("Action not found: $actionId") }
@@ -56,7 +56,7 @@ data class IdeKeyAction(val actionId: String) : KeyAction<EzModeEvent>() {
       ?: actionId
 
   companion object {
-    val LOG = logger<IdeKeyAction>()
+    val LOG = logger<IdeEzAction>()
   }
 }
 

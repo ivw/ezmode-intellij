@@ -1,11 +1,11 @@
-package com.github.ivw.ezmode.config.keyactions
+package com.github.ivw.ezmode.config.ezactions
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
 import com.intellij.openapi.command.*
 import com.intellij.openapi.editor.*
 
-class NumberOperationAction(val operationId: String) : EditorKeyAction() {
+class NumberOperationAction(val operationId: String) : EditorEzAction() {
   override fun performWithEditor(e: EzModeEvent, editor: Editor, onComplete: OnComplete?) {
     WriteCommandAction.runWriteCommandAction(e.project) {
       editor.caretModel.runForEachCaret { caret ->

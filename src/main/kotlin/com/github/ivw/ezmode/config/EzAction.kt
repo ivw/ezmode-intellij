@@ -12,35 +12,31 @@ fun OnComplete.invokeLater() {
   ApplicationManager.getApplication().invokeLater(this)
 }
 
-// TODO rename and redoc
-/**
- * An action triggered by the EzMode key handler.
- */
-abstract class KeyAction<in E> {
-  abstract fun perform(e: E, onComplete: OnComplete?)
+abstract class EzAction {
+  abstract fun perform(e: EzModeEvent, onComplete: OnComplete?)
 
   abstract fun toNiceString(): String
 
-  data object Native : KeyAction<EzModeKeyEvent>() {
-    override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
+  data object Native : KeyEzAction() {
+    override fun performWithKey(e: EzModeKeyEvent, onComplete: OnComplete?) {
       e.nativeHandler.execute(e.editor, e.char, e.dataContext)
       onComplete?.invoke()
     }
 
-    override fun toNiceString() = EzModeBundle.message("ezmode.KeyAction.Native")
+    override fun toNiceString() = EzModeBundle.message("ezmode.EzAction.Native")
   }
 
-  data class NativeOf(val keyChar: Char) : KeyAction<EzModeKeyEvent>() {
-    override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
+  data class NativeOf(val keyChar: Char) : KeyEzAction() {
+    override fun performWithKey(e: EzModeKeyEvent, onComplete: OnComplete?) {
       e.nativeHandler.execute(e.editor, keyChar, e.dataContext)
       onComplete?.invoke()
     }
 
-    override fun toNiceString() = EzModeBundle.message("ezmode.KeyAction.NativeOf", keyChar)
+    override fun toNiceString() = EzModeBundle.message("ezmode.EzAction.NativeOf", keyChar)
   }
 
-  data class Composite<in E : EzModeEvent>(val actions: List<KeyAction<E>>) : KeyAction<E>() {
-    override fun perform(e: E, onComplete: OnComplete?) {
+  data class Composite(val actions: List<EzAction>) : EzAction() {
+    override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
       if (actions.isEmpty()) return
 
       val iterator = actions.iterator()
@@ -70,42 +66,42 @@ abstract class KeyAction<in E> {
     }
   }
 
-  data class ChangeMode(val mode: String) : KeyAction<EzModeEvent>() {
+  data class ChangeMode(val mode: String) : EzAction() {
     override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
       e.project?.service<ModeService>()?.setMode(mode)
       onComplete?.invoke()
     }
 
-    override fun toNiceString() = EzModeBundle.message("ezmode.KeyAction.ChangeMode", mode)
+    override fun toNiceString() = EzModeBundle.message("ezmode.EzAction.ChangeMode", mode)
   }
 
-  data class OfKeyChar(val keyChar: Char, val config: EzModeConfig?) : KeyAction<EzModeKeyEvent>() {
-    override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
+  data class OfKeyChar(val keyChar: Char, val config: EzModeConfig?) : KeyEzAction() {
+    override fun performWithKey(e: EzModeKeyEvent, onComplete: OnComplete?) {
       e.copy(char = keyChar, config = config ?: e.config).perform(onComplete)
     }
 
     override fun toNiceString() = "$keyChar"
   }
 
-  data class OfMode(val mode: String, val config: EzModeConfig?) : KeyAction<EzModeKeyEvent>() {
-    override fun perform(e: EzModeKeyEvent, onComplete: OnComplete?) {
+  data class OfMode(val mode: String, val config: EzModeConfig?) : EzAction() {
+    override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
       // TODO
     }
 
-    override fun toNiceString(): String = EzModeBundle.message("ezmode.KeyAction.OfMode", mode)
+    override fun toNiceString(): String = EzModeBundle.message("ezmode.EzAction.OfMode", mode)
   }
 
-  data object Nop : KeyAction<Any>() {
-    override fun perform(e: Any, onComplete: OnComplete?) {
+  data object Nop : EzAction() {
+    override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
       // Does nothing.
       onComplete?.invoke()
     }
 
-    override fun toNiceString(): String = EzModeBundle.message("ezmode.KeyAction.Nop")
+    override fun toNiceString(): String = EzModeBundle.message("ezmode.EzAction.Nop")
   }
 }
 
-abstract class EditorKeyAction : KeyAction<EzModeEvent>() {
+abstract class EditorEzAction : EzAction() {
   override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
     val editor = e.editor
     if (editor == null) {
@@ -116,4 +112,16 @@ abstract class EditorKeyAction : KeyAction<EzModeEvent>() {
   }
 
   abstract fun performWithEditor(e: EzModeEvent, editor: Editor, onComplete: OnComplete?)
+}
+
+abstract class KeyEzAction : EzAction() {
+  override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
+    if (e is EzModeKeyEvent) {
+      performWithKey(e, onComplete)
+    } else {
+      onComplete?.invoke()
+    }
+  }
+
+  abstract fun performWithKey(e: EzModeKeyEvent, onComplete: OnComplete?)
 }

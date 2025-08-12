@@ -1,4 +1,4 @@
-package com.github.ivw.ezmode.config.keyactions
+package com.github.ivw.ezmode.config.ezactions
 
 import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.config.*
@@ -11,7 +11,7 @@ import com.intellij.openapi.editor.*
  */
 data class QuoteAction(
   val quote: QuoteDelim,
-) : EditorKeyAction() {
+) : EditorEzAction() {
   override fun performWithEditor(e: EzModeEvent, editor: Editor, onComplete: OnComplete?) {
     editor.caretModel.runForEachCaret { caret ->
       quote.findAuto(editor, caret.offset)?.let { offset ->
