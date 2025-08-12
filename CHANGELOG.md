@@ -3,6 +3,22 @@
 # ezmode-intellij Changelog
 
 ## [Unreleased]
+
+## 2.0.0
+
+### Breaking changes to default keys: 
+- `r` / `R` is now used for removing lines instead of `m` / `M`
+- `m` / `M` is now used for scrolling half a page down/up
+
+To revert this change, add this to your `.ezmoderc`:
+```
+map ez r <idea Replace>
+map ez R <idea ReplaceInPath>
+map ez m <idea EditorDeleteLine>
+map ez M <idea EditorDeleteLine><idea EditorUp>
+```
+
+### Other changes:
 - Add more variables: `projectname`, `mode`, `key`, `space`, `tab`, `nl`
 - `<write>` action: Support variables prefixed with $
 - `<writevar>` action: Removed in favor of `<write>`

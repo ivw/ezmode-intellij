@@ -33,7 +33,7 @@ using multi-cursor, and managing tool windows.
 ### Keyboard layout:
 
 ![Keyboard layout](KeyboardLayout.png)
-*[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/921b61bce0466d1a2678bc081b256d29)*
+*[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/aee165d4c5c45849d72647829abe7038)*
 
 ---
 
@@ -142,4 +142,3 @@ EzMode uses *object-verb* style like Kakoune, rather than Vim's *verb-object* st
 Version 2025.1+ or 251.0+ of the following:
 
 Android Studio, AppCode, Aqua, CLion, Code With Me Guest, DataSpell, DataGrip, JetBrains Gateway, GoLand, IntelliJ IDEA Ultimate, IntelliJ IDEA Community, JetBrains Client, MPS, PhpStorm, Rider, RubyMine, RustRover, WebStorm, Writerside, PyCharm
-

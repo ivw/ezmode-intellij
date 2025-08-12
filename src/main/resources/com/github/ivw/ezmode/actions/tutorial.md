@@ -16,12 +16,10 @@ Once you're used to it, you can edit quickly without moving your hands off the h
 
 Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 
-To move up and down by paragraph, use uppercase `I` and `K`.
-Holding one of these keys is a good way to scroll through a document.
-
 `u` / `o`: Move backward/forward by word
 `h` / `;`: Move to the start/end of a line
 `H` / `:`: Move to the start/end of a file
+`m` / `M`: Scroll half a page down/up
 
 *If you have the AceJump plugin installed:*
 To jump to any visible symbol, press `Space`,
