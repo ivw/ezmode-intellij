@@ -4,6 +4,7 @@ import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.application.*
 import com.intellij.openapi.components.*
+import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.editor.*
 
 typealias OnComplete = () -> Unit
@@ -86,9 +87,22 @@ abstract class EzAction {
   }
 
   data class OfMode(val mode: String) : KeyEzAction() {
+    private var isRunning = false
+
     override fun performWithKey(e: EzModeKeyEvent, onComplete: OnComplete?) {
-      e.config.getBindingOrDefault(mode, e.char)?.action
-        ?.perform(e, onComplete)
+      e.config.getBindingOrDefault(mode, e.char)?.let { keyBinding ->
+        if (isRunning) {
+          thisLogger().info("Recursion detected in <ofmode $mode>")
+          onComplete?.invoke()
+          return
+        }
+        isRunning = true
+        try {
+          keyBinding.action.perform(e, onComplete)
+        } finally {
+          isRunning = false
+        }
+      }
     }
 
     override fun toNiceString(): String = EzModeBundle.message("ezmode.EzAction.OfMode", mode)
