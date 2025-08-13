@@ -85,9 +85,9 @@ abstract class EzAction {
     override fun toNiceString() = "$keyChar"
   }
 
-  data class OfMode(val mode: String, val config: EzModeConfig?) : KeyEzAction() {
+  data class OfMode(val mode: String) : KeyEzAction() {
     override fun performWithKey(e: EzModeKeyEvent, onComplete: OnComplete?) {
-      (config ?: e.config).getBindingOrDefault(mode, e.char)?.action
+      e.config.getBindingOrDefault(mode, e.char)?.action
         ?.perform(e, onComplete)
     }
 

@@ -125,7 +125,7 @@ object EzModeRcParser {
         }
       }
 
-      "ofmode" -> EzAction.OfMode(scanner.restOfLine(), src)
+      "ofmode" -> EzAction.OfMode(scanner.restOfLine())
       "nop" -> EzAction.Nop
       "pair" -> {
         val findClosingDelim: Boolean = when (scanner.next()) {
