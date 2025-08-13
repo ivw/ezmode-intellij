@@ -159,9 +159,9 @@ map special + <numberop +>
 map special - <numberop ->
 map special * <numberop *>
 map special / <numberop />
-map special i <write $caretindex><mode ez>
-map special f <write $filename><mode ez>
-map special l <write $line><mode ez>
-map special c <write $column><mode ez>
+map special i <write ${caretindex}><mode ez>
+map special f <write ${filename}><mode ez>
+map special l <write ${line}><mode ez>
+map special c <write ${column}><mode ez>
 map special r <idea RenameElement><mode type>
 map special R <idea RenameFile><mode ez>

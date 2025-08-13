@@ -68,7 +68,9 @@ abstract class EzAction {
 
   data class ChangeMode(val mode: String) : EzAction() {
     override fun perform(e: EzModeEvent, onComplete: OnComplete?) {
-      e.project?.service<ModeService>()?.setMode(mode)
+      e.project?.service<ModeService>()?.setMode(
+        mode.resolveVars(e, null, null)
+      )
       onComplete?.invoke()
     }
 

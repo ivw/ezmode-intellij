@@ -3,11 +3,11 @@ package com.github.ivw.ezmode.config
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.editor.*
 
-fun resolveVar(varName: String, e: EzModeEvent, caretIndex: Int, caret: Caret): String? =
+fun resolveVar(varName: String, e: EzModeEvent, caretIndex: Int?, caret: Caret?): String? =
   when (varName) {
-    "caretindex" -> caretIndex.toString()
-    "line" -> (caret.logicalPosition.line + 1).toString()
-    "column" -> (caret.logicalPosition.column + 1).toString()
+    "caretindex" -> caretIndex?.toString()
+    "line" -> caret?.let { (it.logicalPosition.line + 1).toString() }
+    "column" -> caret?.let { (it.logicalPosition.column + 1).toString() }
     "filename" -> e.editor?.virtualFile?.nameWithoutExtension
     "projectname" -> e.project?.name
     "mode" -> e.editor?.getMode()
@@ -15,19 +15,17 @@ fun resolveVar(varName: String, e: EzModeEvent, caretIndex: Int, caret: Caret): 
     "space" -> " "
     "tab" -> "\t"
     "nl" -> "\n"
-    "dollar" -> "$"
     else -> e.config.vars[varName]
   }
 
 /**
- * Matches any word preceded by a $
+ * Matches a word inside ${}
  */
-val varRegex by lazy { """\$\w+""".toRegex() }
+val varRegex by lazy { """\$\{([A-Za-z_]\w*)\}""".toRegex() }
 
-fun String.resolveVars(e: EzModeEvent, caretIndex: Int, caret: Caret): String =
+fun String.resolveVars(e: EzModeEvent, caretIndex: Int?, caret: Caret?): String =
   replace(varRegex) { matchResult ->
-    // Take the substring after the `$` character:
-    val varName = matchResult.value.substring(1)
+    val varName = matchResult.groupValues[1]
     resolveVar(varName, e, caretIndex, caret) ?: matchResult.value
   }
 

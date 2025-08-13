@@ -20,7 +20,7 @@ map ez M <idea EditorDeleteLine><idea EditorUp>
 
 ### Other changes:
 - Add more variables: `projectname`, `mode`, `key`, `space`, `tab`, `nl`
-- `<write>` action: Support variables prefixed with $
+- `<write>` action: Support variables enclosed in `${}`
 - `<writevar>` action: Removed in favor of `<write>`
 - `E` (select line) will always switch to select mode, even if the line is empty
 
