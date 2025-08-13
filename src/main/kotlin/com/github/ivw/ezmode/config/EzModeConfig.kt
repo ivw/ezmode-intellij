@@ -2,6 +2,7 @@ package com.github.ivw.ezmode.config
 
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.actionSystem.impl.*
 import com.intellij.openapi.components.*
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.actionSystem.*
@@ -73,11 +74,15 @@ data class EzModeProjectEvent(
   override val project: Project,
   override val config: EzModeConfig,
 ) : EzModeEvent {
-  override val dataContext: DataContext
-    get() = TODO("Not yet implemented")
-
   override val editor: Editor?
     get() = project.service<ModeService>().focusedEditor
+
+  override val dataContext: DataContext by lazy {
+    val builder = SimpleDataContext.builder()
+    builder.add(CommonDataKeys.PROJECT, project)
+    editor?.let { builder.add(CommonDataKeys.EDITOR, it) }
+    builder.build()
+  }
 }
 
 data class EzModeKeyEvent(
