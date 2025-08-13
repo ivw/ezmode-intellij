@@ -100,6 +100,8 @@ map select <default> <ofmode ez>
 map select ~ <ofmode ez><mode ez>
 
 map select e <mode ez>
+map select r <ofmode ez><mode ez>
+map select R <ofmode ez><mode ez>
 map select u <idea EditorPreviousWordWithSelection>
 map select U <ofmode ez><mode ez>
 map select i <idea EditorUpWithSelection>
@@ -121,8 +123,6 @@ map select : <idea EditorTextEndWithSelection>
 map select x <ofmode ez><mode ez>
 map select c <ofmode ez><mode ez>
 map select v <ofmode ez><mode ez>
-map select m <ofmode ez><mode ez>
-map select M <ofmode ez><mode ez>
 map select , <idea EditorCloneCaretAbove>
 map select < <pair open angle>
 map select . <idea EditorCloneCaretBelow>
