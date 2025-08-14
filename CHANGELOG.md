@@ -18,6 +18,9 @@ map ez m <idea EditorDeleteLine>
 map ez M <idea EditorDeleteLine><idea EditorUp>
 ```
 
+### Breaking changes to .ezmoderc files:
+- Use `//` for comments instead of `#`. Not limited to the start of the line anymore.
+
 ### Other changes:
 - Add more variables: `projectname`, `mode`, `key`, `space`, `tab`, `nl`
 - `<write>` action: Support variables enclosed in `${}`

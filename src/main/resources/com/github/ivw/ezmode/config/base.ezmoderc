@@ -82,7 +82,7 @@ map ez b <idea EditorJoinLines>
 map ez B <idea EditorUp><idea EditorJoinLines>
 map ez n <idea EditorStartNewLine>
 map ez N <idea EditorStartNewLineBefore>
-# TODO use something like <scroll 50>
+// TODO use something like <scroll 50>
 map ez m <idea EditorPageDown>
 map ez M <idea EditorPageUp>
 map ez , <idea ShowSettings>

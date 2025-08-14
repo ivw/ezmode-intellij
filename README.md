@@ -97,7 +97,8 @@ In actions that take a text argument, you can use variables enclosed in `${}`,
 for example: `<write Hello, ${filename}!>`.
 
 - Custom variables: set in your config using `set varname value`
-- Built-in variables: `mode`, `key`, `caretindex`, `line`, `column`, `filename`, `projectname`, `space`, `tab`, `nl` (newline)
+- Built-in variables: `mode`, `key`, `caretindex`, `line`, `column`, `filename`, `projectname` 
+- Escape sequences: `space`, `tab`, `nl` (newline), `doubleslash` (for `//`)
 
 ### Examples
 

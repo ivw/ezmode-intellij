@@ -16,7 +16,7 @@ class EzModeRcParserTest {
   fun parse() {
     val config = EzModeConfig()
     """
-      # This line is a comment.
+      // This line is a comment.
       map ez A <idea EditorSelectLine>
       map ez t <mode type>
       map ez g <write git abc>

@@ -8,7 +8,7 @@ import java.awt.*
 import java.util.*
 
 object EzModeRcParser {
-  const val COMMENT_PREFIX = '#'
+  const val COMMENT_PREFIX = "//"
 
   class ParseError(val lineIndex: Int, val c: Throwable) : RuntimeException(
     "line ${lineIndex + 1}: ${c.message ?: c.javaClass.name}", c
@@ -31,7 +31,7 @@ object EzModeRcParser {
    */
   fun parse(dest: EzModeConfig, lines: List<String>, src: EzModeConfig?) =
     lines.forEachIndexed { lineIndex, line ->
-      line.trim().takeIf { it.isNotEmpty() }?.let { line ->
+      line.substringBefore(COMMENT_PREFIX).trim().takeIf { it.isNotEmpty() }?.let { line ->
         try {
           parseLine(dest, line, src)
         } catch (e: Throwable) {
@@ -47,10 +47,6 @@ object EzModeRcParser {
    * @throws LineParseError or another kind of exception.
    */
   fun parseLine(dest: EzModeConfig, line: String, src: EzModeConfig?) {
-    if (line[0] == COMMENT_PREFIX) {
-      return
-    }
-
     val scanner = Scanner(line)
     val keyword = scanner.next()
     when (keyword) {

@@ -15,6 +15,7 @@ fun resolveVar(varName: String, e: EzModeEvent, caretIndex: Int?, caret: Caret?)
     "space" -> " "
     "tab" -> "\t"
     "nl" -> "\n"
+    "doubleslash" -> "//"
     else -> e.config.vars[varName]
   }
 

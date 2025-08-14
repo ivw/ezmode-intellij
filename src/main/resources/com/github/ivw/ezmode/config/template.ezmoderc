@@ -1,21 +1,21 @@
-# Documentation: https://github.com/ivw/ezmode-intellij?tab=readme-ov-file#customization
-# Full base config: https://github.com/ivw/ezmode-intellij/blob/main/src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc
+// Documentation: https://github.com/ivw/ezmode-intellij?tab=readme-ov-file#customization
+// Full base config: https://github.com/ivw/ezmode-intellij/blob/main/src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc
 
-# Set default mode when starting up:
+// Set default mode when starting up:
 set defaultmode ez
 
-# Example: change the EzMode caret color:
-# set primarycolor #ff0000
-# set secondarycolor #00ff00
+// Example: change the EzMode caret color:
+// set primarycolor #ff0000
+// set secondarycolor #00ff00
 
-# Example: Do not unselect after copying:
-# map select c <idea $Copy>
+// Example: Do not unselect after copying:
+// map select c <idea $Copy>
 
-# Example: Delete selection before going to type mode:
-# map ez t <idea ezmode.DeleteSelection><mode type>
+// Example: Delete selection before going to type mode:
+// map ez t <idea ezmode.DeleteSelection><mode type>
 
-# Example: Use the space bar to type spaces in ez mode:
-# map ez <space> <native>
+// Example: Use the space bar to type spaces in ez mode:
+// map ez <space> <native>
 
-# Example: Use AceJump in "all words mode":
-# map ez <space> <idea AceWordAction>
+// Example: Use AceJump in "all words mode":
+// map ez <space> <idea AceWordAction>
