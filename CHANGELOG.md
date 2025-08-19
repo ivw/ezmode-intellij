@@ -22,7 +22,7 @@ map ez M <idea EditorDeleteLine><idea EditorUp>
 - Use `//` for comments instead of `#`. Not limited to the start of the line anymore.
 
 ### Other changes:
-- Add more variables: `projectname`, `mode`, `key`, `space`, `tab`, `nl`
+- Add more variables: `projectname`, `mode`, `key`, `clipboard`, `space`, `tab`, `nl`
 - `<write>` action: Support variables enclosed in `${}`
 - `<writevar>` action: Removed in favor of `<write>`
 - `E` (select line) will always switch to select mode, even if the line is empty

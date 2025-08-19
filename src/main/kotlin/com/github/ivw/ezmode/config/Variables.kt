@@ -1,5 +1,6 @@
 package com.github.ivw.ezmode.config
 
+import com.github.ivw.ezmode.*
 import com.github.ivw.ezmode.editor.*
 import com.intellij.openapi.editor.*
 
@@ -12,6 +13,7 @@ fun resolveVar(varName: String, e: EzModeEvent, caretIndex: Int?, caret: Caret?)
     "projectname" -> e.project?.name
     "mode" -> e.editor?.getMode()
     "key" -> if (e is EzModeKeyEvent) e.char.toString() else null
+    "clipboard" -> getClipboardString()
     "space" -> " "
     "tab" -> "\t"
     "nl" -> "\n"
@@ -27,7 +29,7 @@ val varRegex by lazy { """\$\{([A-Za-z_]\w*)\}""".toRegex() }
 fun String.resolveVars(e: EzModeEvent, caretIndex: Int?, caret: Caret?): String =
   replace(varRegex) { matchResult ->
     val varName = matchResult.groupValues[1]
-    resolveVar(varName, e, caretIndex, caret) ?: matchResult.value
+    resolveVar(varName, e, caretIndex, caret) ?: ""
   }
 
 fun CaretModel.runForEachCaretIndexed(action: (caret: Caret, caretIndex: Int) -> Unit) {
