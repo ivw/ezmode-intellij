@@ -1,4 +1,4 @@
-![Build](https://github.com/ivw/ezmode-intellij/workflows/Build/badge.svg)
+![Build](https://github.com/ivw/ezmode-intellij/workflows/Build/badge.svg?branch=main)
 [![Version](https://img.shields.io/jetbrains/plugin/v/27497.svg)](https://plugins.jetbrains.com/plugin/27497)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/27497.svg)](https://plugins.jetbrains.com/plugin/27497)
 
