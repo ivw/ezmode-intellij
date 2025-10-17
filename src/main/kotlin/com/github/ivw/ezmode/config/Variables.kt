@@ -9,6 +9,7 @@ fun resolveVar(varName: String, e: EzModeEvent, caretIndex: Int?, caret: Caret?)
     "caretindex" -> caretIndex?.toString()
     "line" -> caret?.let { (it.logicalPosition.line + 1).toString() }
     "column" -> caret?.let { (it.logicalPosition.column + 1).toString() }
+    "selection" -> caret?.selectedText
     "filename" -> e.editor?.virtualFile?.nameWithoutExtension
     "projectname" -> e.project?.name
     "mode" -> e.editor?.getMode()
