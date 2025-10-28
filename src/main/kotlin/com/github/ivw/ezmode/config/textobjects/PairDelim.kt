@@ -58,12 +58,12 @@ data class PairDelim(
   override fun getMatchingDelim(fromClosingDelim: Boolean, editor: Editor, caretOffset: Int): DelimRanges? {
     val chars = editor.document.charsSequence
     if (fromClosingDelim) {
-      if (caretOffset < chars.length && chars[caretOffset] != closeChar) return null
+      if (caretOffset >= chars.length || chars[caretOffset] != closeChar) return null
       return findOpeningDelim(editor, caretOffset, false)?.let {
         DelimRanges(TextRange(it, caretOffset))
       }
     } else {
-      if (caretOffset > 0 && chars[caretOffset - 1] != openChar) return null
+      if (caretOffset <= 0 || chars[caretOffset - 1] != openChar) return null
       return findClosingDelim(editor, caretOffset, false)?.let {
         DelimRanges(TextRange(caretOffset, it))
       }

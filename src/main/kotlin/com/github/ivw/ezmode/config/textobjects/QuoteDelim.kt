@@ -29,6 +29,7 @@ data class QuoteDelim(val char: Char) : Delim {
    * If the caret is at the opening quote, finds the closing quote, else finds the opening quote.
    */
   fun findAuto(editor: Editor, caretOffset: Int): Int? =
+    // TODO try closing quote by default!
     if (caretOffset > 1 && editor.document.charsSequence[caretOffset - 1] != char) {
       findOpeningDelim(editor, caretOffset, false)
     } else {
@@ -38,12 +39,12 @@ data class QuoteDelim(val char: Char) : Delim {
   override fun getMatchingDelim(fromClosingDelim: Boolean, editor: Editor, caretOffset: Int): DelimRanges? {
     val chars = editor.document.charsSequence
     return if (fromClosingDelim) {
-      if (caretOffset < chars.length && chars[caretOffset] != char) return null
+      if (caretOffset >= chars.length || chars[caretOffset] != char) return null
       findOpeningDelim(editor, caretOffset, false)?.let {
         DelimRanges(TextRange(it, caretOffset))
       }
     } else {
-      if (caretOffset > 0 && chars[caretOffset - 1] != char) return null
+      if (caretOffset <= 0 || chars[caretOffset - 1] != char) return null
       findClosingDelim(editor, caretOffset, false)?.let {
         DelimRanges(TextRange(caretOffset, it))
       }
